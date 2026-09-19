@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>野球場・ソフトボール場 空き状況自動閲覧システム | さいたま市 & 埼玉県営公園</title>
+  <meta name="description" content="さいたま市施設予約システム（少年野球場9グラウンド）および埼玉県営公園（秋ヶ瀬公園）の土日・祝日限定の最新空き状況（午前・午後別）を常時閲覧できるリアルタイムダッシュボードです。">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-body: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-card-subtle: #f1f5f9;
+      --border-color: #e2e8f0;
+      --border-darker: #cbd5e1;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-subtle: #94a3b8;
+      
+      --accent-green: #15803d;
+      --accent-green-bg: #dcfce7;
+      --accent-green-border: #86efac;
+      
+      --accent-yellow: #b45309;
+      --accent-yellow-bg: #fef3c7;
+      --accent-yellow-border: #fde047;
+      
+      --accent-red: #dc2626;
+      --accent-red-bg: #fee2e2;
+      
+      --accent-blue: #2563eb;
+      --accent-blue-bg: #eff6ff;
+      --accent-blue-border: #bfdbfe;
+      
+      --holiday-red: #e11d48;
+      --holiday-bg: #ffe4e6;
+      --holiday-tag: #be123c;
+      
+      --sat-blue: #1d4ed8;
+      --sat-bg: #eff6ff;
+      
+      --sun-red: #dc2626;
+      --sun-bg: #fef2f2;
+      
+      --radius-lg: 10px;
+      --radius-md: 6px;
+      --radius-sm: 4px;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.35;
+      min-height: 100vh;
+      padding: 8px 12px 24px;
+      font-size: 13px;
+    }
+
+    .container {
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    /* Ultra-Compact Header */
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+      padding: 8px 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-title-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #2563eb, #10b981);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      color: #ffffff;
+      flex-shrink: 0;
+    }
+
+    h1 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      font-size: 0.73rem;
+      color: var(--text-muted);
+      margin-top: 1px;
+      line-height: 1.2;
+    }
+
+    .header-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .update-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.74rem;
+      padding: 3px 10px;
+      background: var(--bg-card-subtle);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      color: var(--text-muted);
+    }
+
+    .update-badge i {
+      color: var(--accent-blue);
+    }
+
+    .btn-reserve {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      transition: all 0.15s ease;
+      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+    }
+
+    .btn-reserve:hover {
+      background: #1d4ed8;
+      box-shadow: 0 3px 8px rgba(37, 99, 235, 0.35);
+    }
+
+    /* System Tabs */
+    .system-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 6px;
+      background: #e2e8f0;
+      padding: 3px;
+      border-radius: var(--radius-md);
+      width: fit-content;
+    }
+
+    .system-tab {
+      padding: 5px 14px;
+      border-radius: 4px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .system-tab:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    .system-tab.active {
+      background: #ffffff;
+      color: var(--accent-blue);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .system-tab .badge-count {
+      font-size: 0.68rem;
+      padding: 1px 6px;
+      border-radius: 10px;
+      background: #eff6ff;
+      color: var(--accent-blue);
+      font-weight: 700;
+      border: 1px solid var(--accent-blue-border);
+    }
+
+    .system-tab.active .badge-count {
+      background: #2563eb;
+      color: #ffffff;
+      border-color: #2563eb;
+    }
+
+    /* Ultra-Compact Filter Toolbar */
+    .toolbar {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 6px 12px;
+      margin-bottom: 6px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px 12px;
+      width: 100%;
+    }
+
+    .filter-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .select-control {
+      background: #ffffff;
+      border: 1px solid var(--border-darker);
+      color: var(--text-main);
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+      font-size: 0.76rem;
+      font-family: inherit;
+      outline: none;
+      cursor: pointer;
+      height: 26px;
+      transition: border-color 0.15s ease;
+    }
+
+    .select-control:focus {
+      border-color: var(--accent-blue);
+    }
+
+    .toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      background: #ffffff;
+      border: 1px solid var(--border-darker);
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      font-size: 0.76rem;
+      cursor: pointer;
+      height: 26px;
+      transition: all 0.15s ease;
+      font-weight: 500;
+    }
+
+    .toggle-btn.active {
+      background: var(--accent-green-bg);
+      border-color: var(--accent-green);
+      color: var(--accent-green);
+      font-weight: 700;
+    }
+
+    /* Ultra-Compact Ground Chips */
+    .ground-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 5px;
+      padding-top: 5px;
+      border-top: 1px solid #f1f5f9;
+      width: 100%;
+    }
+
+    .ground-chip {
+      font-size: 0.7rem;
+      padding: 2px 7px;
+      border-radius: 12px;
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.12s ease;
+    }
+
+    .ground-chip:hover {
+      color: var(--text-main);
+      border-color: var(--accent-blue);
+      background: #f1f5f9;
+    }
+
+    .ground-chip.active {
+      background: var(--accent-blue-bg);
+      border-color: var(--accent-blue);
+      color: var(--accent-blue);
+      font-weight: 700;
+    }
+
+    /* Ultra-Compact Table Layout */
+    .table-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      overflow-x: auto;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 16px;
+      max-height: calc(100vh - 170px);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 0.75rem;
+      white-space: nowrap;
+    }
+
+    th, td {
+      padding: 2px 4px;
+      text-align: center;
+      border-bottom: 1px solid #f1f5f9;
+      border-right: 1px solid #f1f5f9;
+      height: 24px;
+      line-height: 1.15;
+    }
+
+    th {
+      background: #f8fafc;
+      color: var(--text-muted);
+      font-weight: 600;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      padding: 3px 4px;
+      border-bottom: 1px solid var(--border-darker);
+    }
+
+    /* Fixed Left Columns */
+    .ground-name-cell {
+      position: sticky;
+      left: 0;
+      background: #ffffff;
+      z-index: 5;
+      text-align: left;
+      font-weight: 700;
+      min-width: 105px;
+      max-width: 130px;
+      border-right: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding-left: 6px;
+      padding-right: 4px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .court-name-cell {
+      position: sticky;
+      left: 105px;
+      background: #fafbfd;
+      z-index: 5;
+      text-align: left;
+      font-weight: 600;
+      min-width: 125px;
+      max-width: 155px;
+      border-right: 1px solid var(--border-color);
+      color: #334155;
+      padding-left: 6px;
+      padding-right: 4px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    th.ground-name-cell {
+      left: 0;
+      z-index: 12;
+      background: #f1f5f9;
+    }
+
+    th.court-name-cell {
+      left: 105px;
+      z-index: 12;
+      background: #f1f5f9;
+    }
+
+    .time-type-cell {
+      position: sticky;
+      left: 230px;
+      background: #ffffff;
+      z-index: 5;
+      min-width: 48px;
+      border-right: 2px solid var(--border-darker);
+      padding: 1px 2px;
+    }
+
+    th.time-type-cell {
+      left: 230px;
+      z-index: 12;
+      background: #f1f5f9;
+    }
+
+    .time-pill {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 1px 4px;
+      border-radius: 3px;
+      line-height: 1.1;
+    }
+
+    .time-pill.morning {
+      background: var(--accent-blue-bg);
+      color: var(--accent-blue);
+      border: 1px solid var(--accent-blue-border);
+    }
+
+    .time-pill.afternoon {
+      background: #fffbeb;
+      color: #b45309;
+      border: 1px solid #fde68a;
+    }
+
+    /* Date Header Colors */
+    th.sat {
+      color: var(--sat-blue);
+      background: var(--sat-bg);
+      border-bottom: 2px solid #93c5fd;
+    }
+
+    th.sun {
+      color: var(--sun-red);
+      background: var(--sun-bg);
+      border-bottom: 2px solid #fca5a5;
+    }
+
+    th.holiday {
+      color: var(--holiday-red);
+      background: var(--holiday-bg);
+      border-bottom: 2px solid #f43f5e;
+    }
+
+    .holiday-tag {
+      display: block;
+      font-size: 0.58rem;
+      font-weight: 700;
+      color: var(--holiday-tag);
+      margin-top: 1px;
+      white-space: normal;
+      max-width: 65px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1;
+    }
+
+    /* Ultra-Compact Status Badges */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 3px;
+      font-weight: 700;
+      font-size: 0.74rem;
+      cursor: pointer;
+      transition: transform 0.1s ease;
+      user-select: none;
+      line-height: 1;
+    }
+
+    .status-badge:hover {
+      transform: scale(1.25);
+      z-index: 3;
+    }
+
+    .badge-open {
+      background: var(--accent-green-bg);
+      color: var(--accent-green);
+      border: 1px solid var(--accent-green);
+      font-weight: 800;
+    }
+
+    .badge-lottery {
+      background: var(--accent-yellow-bg);
+      color: var(--accent-yellow);
+      border: 1px solid var(--accent-yellow-border);
+      font-weight: 800;
+    }
+
+    .badge-closed {
+      background: #f8fafc;
+      color: #94a3b8;
+      border: 1px solid #f1f5f9;
+    }
+
+    .badge-none {
+      color: #cbd5e1;
+    }
+
+    /* Hover effect on table rows */
+    tbody tr:hover td {
+      background-color: #f8fafc;
+    }
+    tbody tr:hover .ground-name-cell {
+      background-color: #f1f5f9;
+    }
+    tbody tr:hover .court-name-cell {
+      background-color: #f1f5f9;
+    }
+    tbody tr:hover .time-type-cell {
+      background-color: #f1f5f9;
+    }
+
+    /* Ultra-Compact Legend Bar */
+    .legend-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 5px;
+      padding: 0 4px;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Loading Spinner */
+    .loading-spinner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 0;
+      color: var(--text-muted);
+      gap: 10px;
+    }
+
+    .spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid #e2e8f0;
+      border-top-color: var(--accent-blue);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.45);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 16px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-box {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      max-width: 440px;
+      width: 100%;
+      box-shadow: var(--shadow-md);
+      animation: modalFadeIn 0.15s ease-out;
+    }
+
+    @keyframes modalFadeIn {
+      from { transform: scale(0.96); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .modal-close {
+      margin-top: 14px;
+      width: 100%;
+      padding: 7px;
+      background: #f1f5f9;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.8rem;
+      font-family: inherit;
+      transition: background 0.15s;
+    }
+
+    .modal-close:hover {
+      background: #e2e8f0;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="header-title-group">
+        <div class="header-icon">
+          <i class="fa-solid fa-baseball-bat-ball"></i>
+        </div>
+        <div>
+          <h1 id="mainTitle">さいたま市 少年野球場 空き状況自動閲覧システム</h1>
+          <div class="subtitle" id="mainSubtitle">荒川総合・八王子・見沼臨時・大間木・浦和総合・さくら草・宝来・西遊馬・三橋（土日・祝日限定）</div>
+        </div>
+      </div>
+      <div class="header-meta">
+        <div class="update-badge">
+          <i class="fa-regular fa-clock"></i>
+          <span>最終更新: <strong id="updateTime">読み込み中...</strong></span>
+        </div>
+        <a id="reserveButton" href="https://saitama.rsv.ws-scs.jp/web/" target="_blank" rel="noopener" class="btn-reserve">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> <span id="reserveButtonText">さいたま市予約システム</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Source Tabs -->
+    <div class="system-tabs">
+      <button class="system-tab active" id="tabCity" onclick="switchSource('city')">
+        <i class="fa-solid fa-city"></i> さいたま市（少年野球場 9グラウンド）
+        <span class="badge-count" id="cityAvailBadge">8空き</span>
+      </button>
+      <button class="system-tab" id="tabPref" onclick="switchSource('pref')">
+        <i class="fa-solid fa-tree"></i> 埼玉県営公園（秋ヶ瀬公園）
+        <span class="badge-count" id="prefAvailBadge">45空き</span>
+      </button>
+    </div>
+
+    <!-- Filter Toolbar -->
+    <div class="toolbar">
+      <div class="filter-group">
+        <!-- Ground filter (for Saitama City) -->
+        <div id="groundSelectContainer" style="display:flex; align-items:center; gap:4px;">
+          <label style="font-size:0.75rem; color:var(--text-muted); font-weight:600;"><i class="fa-solid fa-location-dot"></i> グラウンド:</label>
+          <select id="groundSelect" class="select-control">
+            <option value="ALL">すべてのグラウンド (9箇所)</option>
+            <option value="荒川総合運動公園">荒川総合運動公園 (5面)</option>
+            <option value="八王子公園">八王子公園 (1面)</option>
+            <option value="見沼臨時グラウンド">見沼臨時グラウンド (2面)</option>
+            <option value="大間木公園">大間木公園 (4面)</option>
+            <option value="浦和総合運動場">浦和総合運動場 (2面)</option>
+            <option value="さくら草公園">さくら草公園 (1面)</option>
+            <option value="宝来運動公園">宝来運動公園 (2面)</option>
+            <option value="西遊馬公園">西遊馬公園 (2面)</option>
+            <option value="三橋総合公園">三橋総合公園 (1面)</option>
+          </select>
+        </div>
+
+        <!-- Month Filter -->
+        <div style="display:flex; align-items:center; gap:4px;">
+          <label style="font-size:0.75rem; color:var(--text-muted); font-weight:600;"><i class="fa-regular fa-calendar"></i> 月:</label>
+          <select id="monthSelect" class="select-control">
+            <option value="ALL">すべての月</option>
+          </select>
+        </div>
+
+        <!-- Day Filter -->
+        <div style="display:flex; align-items:center; gap:4px;">
+          <label style="font-size:0.75rem; color:var(--text-muted); font-weight:600;"><i class="fa-solid fa-calendar-week"></i> 日程:</label>
+          <select id="dayTypeSelect" class="select-control">
+            <option value="WEEKEND_HOLIDAY" selected>土日・祝日のみ (推奨)</option>
+            <option value="ALL">平日含むすべての日程</option>
+          </select>
+        </div>
+
+        <!-- Time Slot Filter (午前 / 午後) -->
+        <div style="display:flex; align-items:center; gap:4px;">
+          <label style="font-size:0.75rem; color:var(--text-muted); font-weight:600;"><i class="fa-regular fa-clock"></i> 時間帯:</label>
+          <select id="timeSlotSelect" class="select-control">
+            <option value="ALL" selected>午前・午後 両方</option>
+            <option value="午前">午前のみ</option>
+            <option value="午後">午後のみ</option>
+          </select>
+        </div>
+
+        <!-- Court Filter for Akigase -->
+        <div id="prefCourtSelectContainer" style="display:none; align-items:center; gap:4px;">
+          <label style="font-size:0.75rem; color:var(--text-muted); font-weight:600;"><i class="fa-solid fa-filter"></i> 種目:</label>
+          <select id="prefCourtSelect" class="select-control">
+            <option value="ALL">野球場・ソフトボール場 全て</option>
+            <option value="BASEBALL">軟式野球場のみ</option>
+            <option value="SOFTBALL">ソフトボール場のみ</option>
+          </select>
+        </div>
+
+        <!-- Available Only Toggle -->
+        <button id="toggleAvailableOnly" class="toggle-btn" type="button">
+          <i class="fa-solid fa-circle-check"></i> 空き枠のみ表示 (○ / △)
+        </button>
+      </div>
+
+      <!-- Quick chips for grounds when city tab is active -->
+      <div class="ground-chips" id="groundChips">
+        <span class="ground-chip active" onclick="setGroundFilter('ALL')">全て (9)</span>
+        <span class="ground-chip" onclick="setGroundFilter('荒川総合運動公園')">荒川総合</span>
+        <span class="ground-chip" onclick="setGroundFilter('八王子公園')">八王子</span>
+        <span class="ground-chip" onclick="setGroundFilter('見沼臨時グラウンド')">見沼臨時</span>
+        <span class="ground-chip" onclick="setGroundFilter('大間木公園')">大間木</span>
+        <span class="ground-chip" onclick="setGroundFilter('浦和総合運動場')">浦和総合</span>
+        <span class="ground-chip" onclick="setGroundFilter('さくら草公園')">さくら草</span>
+        <span class="ground-chip" onclick="setGroundFilter('宝来運動公園')">宝来</span>
+        <span class="ground-chip" onclick="setGroundFilter('西遊馬公園')">西遊馬</span>
+        <span class="ground-chip" onclick="setGroundFilter('三橋総合公園')">三橋総合</span>
+      </div>
+    </div>
+
+    <!-- Legend -->
+    <div class="legend-bar">
+      <span>凡例:</span>
+      <div class="legend-item"><span class="status-badge badge-open">○</span> 予約可能 (空き)</div>
+      <div class="legend-item"><span class="status-badge badge-lottery">△</span> 一部空き・抽選</div>
+      <div class="legend-item"><span class="status-badge badge-closed">×</span> 予約済・不可</div>
+      <div class="legend-item"><span class="status-badge badge-none">-</span> 期間外・休止</div>
+    </div>
+
+
+    <!-- Main Content Area -->
+    <div id="loadingArea" class="loading-spinner">
+      <div class="spinner"></div>
+      <p id="loadingMessage">最新の空き状況データを読み込んでいます...</p>
+    </div>
+
+    <div id="matrixViewContainer" class="table-container" style="display: none;">
+      <table id="matrixTable">
+        <thead>
+          <tr id="matrixHeaderRow">
+            <th class="ground-name-cell" id="thGround">グラウンド</th>
+            <th class="court-name-cell" id="thCourt">面名</th>
+            <th class="time-type-cell" style="top:0; z-index:12;">区分</th>
+          </tr>
+        </thead>
+        <tbody id="matrixTableBody">
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Detail Modal -->
+  <div id="detailModal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-title" id="modalTitle">スロット詳細情報</div>
+      <div id="modalBody" style="font-size:0.9rem; color:var(--text-muted);"></div>
+      <a id="modalReserveLink" href="https://saitama.rsv.ws-scs.jp/web/" target="_blank" rel="noopener" class="btn-reserve" style="width:100%; justify-content:center; margin-top:16px;">
+        <i class="fa-solid fa-arrow-up-right-from-square"></i> 予約システムで予約・申請
+      </a>
+      <button class="modal-close" onclick="closeModal()">閉じる</button>
+    </div>
+  </div>
+
+  <script>
+    // Japanese National Holidays Dictionary (2025 - 2028)
+    const JP_HOLIDAYS = {
+      // 2025
+      "2025-01-01": "元日", "2025-01-13": "成人の日", "2025-02-11": "建国記念の日", "2025-02-23": "天皇誕生日", "2025-02-24": "振替休日",
+      "2025-03-20": "春分の日", "2025-04-29": "昭和の日", "2025-05-03": "憲法記念日", "2025-05-04": "みどりの日", "2025-05-05": "こどもの日", "2025-05-06": "振替休日",
+      "2025-07-21": "海の日", "2025-08-11": "山の日", "2025-09-15": "敬老の日", "2025-09-23": "秋分の日", "2025-10-13": "スポーツの日",
+      "2025-11-03": "文化の日", "2025-11-23": "勤労感謝の日", "2025-11-24": "振替休日",
+
+      // 2026
+      "2026-01-01": "元日", "2026-01-12": "成人の日", "2026-02-11": "建国記念の日", "2026-02-23": "天皇誕生日",
+      "2026-03-20": "春分の日", "2026-04-29": "昭和の日", "2026-05-03": "憲法記念日", "2026-05-04": "みどりの日", "2026-05-05": "こどもの日", "2026-05-06": "振替休日",
+      "2026-07-20": "海の日", "2026-08-11": "山の日", "2026-09-21": "敬老の日", "2026-09-22": "国民の休日", "2026-09-23": "秋分の日",
+      "2026-10-12": "スポーツの日", "2026-11-03": "文化の日", "2026-11-23": "勤労感謝の日",
+
+      // 2027
+      "2027-01-01": "元日", "2027-01-11": "成人の日", "2027-02-11": "建国記念の日", "2027-02-23": "天皇誕生日",
+      "2027-03-21": "春分の日", "2027-03-22": "振替休日", "2027-04-29": "昭和の日", "2027-05-03": "憲法記念日", "2027-05-04": "みどりの日", "2027-05-05": "こどもの日",
+      "2027-07-19": "海の日", "2027-08-11": "山の日", "2027-09-20": "敬老の日", "2027-09-23": "秋分の日", "2027-10-11": "スポーツの日",
+      "2027-11-03": "文化の日", "2027-11-23": "勤労感謝の日",
+
+      // 2028
+      "2028-01-01": "元日", "2028-01-10": "成人の日", "2028-02-11": "建国記念の日", "2028-02-23": "天皇誕生日",
+      "2028-03-20": "春分の日", "2028-04-29": "昭和の日", "2028-05-03": "憲法記念日", "2028-05-04": "みどりの日", "2028-05-05": "こどもの日",
+      "2028-07-17": "海の日", "2028-08-11": "山の日", "2028-09-18": "敬老の日", "2028-09-22": "秋分の日", "2028-10-09": "スポーツの日",
+      "2028-11-03": "文化の日", "2028-11-23": "勤労感謝の日"
+    };
+
+    function getJapaneseHoliday(dateStr) {
+      return JP_HOLIDAYS[dateStr] || null;
+    }
+
+    function isWeekendOrHoliday(dateStr) {
+      const dt = new Date(dateStr);
+      const day = dt.getDay(); // 0: Sun, 6: Sat
+      if (day === 0 || day === 6) return true;
+      return getJapaneseHoliday(dateStr) !== null;
+    }
+
+    let currentSource = 'city'; // 'city' | 'pref'
+    let cityData = null;
+    let prefData = null;
+    let filterAvailableOnly = false;
+
+    // Switch between Saitama City and Saitama Prefecture
+    async function switchSource(source) {
+      if (currentSource === source && (source === 'city' ? cityData : prefData)) return;
+      currentSource = source;
+
+      document.getElementById('tabCity').classList.toggle('active', source === 'city');
+      document.getElementById('tabPref').classList.toggle('active', source === 'pref');
+
+      const groundContainer = document.getElementById('groundSelectContainer');
+      const groundChips = document.getElementById('groundChips');
+      const prefCourtContainer = document.getElementById('prefCourtSelectContainer');
+
+      if (source === 'city') {
+        document.getElementById('mainTitle').textContent = 'さいたま市 少年野球場 空き状況自動閲覧システム';
+        document.getElementById('mainSubtitle').textContent = '荒川総合・八王子・見沼臨時・大間木・浦和総合・さくら草・宝来・西遊馬・三橋（土日・祝日限定）';
+        document.getElementById('reserveButton').href = 'https://saitama.rsv.ws-scs.jp/web/';
+        document.getElementById('reserveButtonText').textContent = 'さいたま市予約システム';
+        groundContainer.style.display = 'flex';
+        groundChips.style.display = 'flex';
+        prefCourtContainer.style.display = 'none';
+        if (!cityData) {
+          await loadCityData();
+        } else {
+          initDashboard(cityData);
+        }
+      } else {
+        document.getElementById('mainTitle').textContent = '秋ヶ瀬公園 野球場・ソフトボール場 空き状況自動閲覧システム';
+        document.getElementById('mainSubtitle').textContent = '埼玉県県営公園施設予約サービス（秋ヶ瀬公園 野球場・ソフトボール場）土日・祝日限定';
+        document.getElementById('reserveButton').href = 'https://saitama-pref-reserve.michi-shiru.jp/facilitysearchcondition';
+        document.getElementById('reserveButtonText').textContent = '埼玉県営予約システム';
+        groundContainer.style.display = 'none';
+        groundChips.style.display = 'none';
+        prefCourtContainer.style.display = 'flex';
+        if (!prefData) {
+          await loadPrefData();
+        } else {
+          initDashboard(prefData);
+        }
+      }
+    }
+
+    async function loadCityData() {
+      if (currentSource === 'city') {
+        showLoading('さいたま市の最新空き状況データを読み込んでいます...');
+      }
+      try {
+        const response = await fetch('./data_city.json?t=' + Date.now());
+        if (!response.ok) throw new Error('data_city.json fetch failed');
+        cityData = await response.json();
+        
+        // Update badge
+        const avail = cityData.weekendHolidayAvailable !== undefined ? cityData.weekendHolidayAvailable : cityData.availableSlotsCount;
+        document.getElementById('cityAvailBadge').textContent = `${avail}空き`;
+        
+        if (currentSource === 'city') {
+          initDashboard(cityData);
+        }
+      } catch (err) {
+        if (currentSource === 'city') {
+          showError('さいたま市データの読み込みに失敗しました。');
+        }
+      }
+    }
+
+    async function loadPrefData() {
+      if (currentSource === 'pref') {
+        showLoading('埼玉県営公園（秋ヶ瀬公園）のデータを読み込んでいます...');
+      }
+      try {
+        const response = await fetch('./data.json?t=' + Date.now());
+        if (!response.ok) throw new Error('data.json fetch failed');
+        prefData = await response.json();
+
+        // Calculate available count
+        const avail = (prefData.data || []).filter(s => s.available && isWeekendOrHoliday(s.date)).length;
+        document.getElementById('prefAvailBadge').textContent = `${avail}空き`;
+
+        if (currentSource === 'pref') {
+          initDashboard(prefData);
+        }
+      } catch (err) {
+        if (currentSource === 'pref') {
+          showError('秋ヶ瀬公園データの読み込みに失敗しました。');
+        }
+      }
+    }
+
+    function showLoading(msg) {
+      document.getElementById('loadingArea').style.display = 'flex';
+      document.getElementById('loadingMessage').textContent = msg;
+      document.getElementById('matrixViewContainer').style.display = 'none';
+    }
+
+    function showError(msg) {
+      document.getElementById('loadingArea').innerHTML = `
+        <p style="color:var(--accent-red); font-weight:600;">
+          <i class="fa-solid fa-triangle-exclamation"></i> ${msg}
+        </p>
+        <p style="font-size:0.85rem; margin-top:8px;">スクレイパーの実行完了をお待ちください。</p>
+      `;
+    }
+
+    function setGroundFilter(groundName) {
+      document.getElementById('groundSelect').value = groundName;
+      document.querySelectorAll('.ground-chip').forEach(c => {
+        c.classList.toggle('active', c.textContent.includes(groundName === 'ALL' ? '全て' : groundName.substring(0, 4)));
+      });
+      render();
+    }
+
+    function initDashboard(rawData) {
+      document.getElementById('loadingArea').style.display = 'none';
+      document.getElementById('updateTime').textContent = rawData.updatedAt || '不明';
+
+      // Populate Month Selector Options
+      const monthSet = new Set();
+      (rawData.data || []).forEach(item => {
+        if (item.date) monthSet.add(item.date.substring(0, 7));
+      });
+      const monthSelect = document.getElementById('monthSelect');
+      const curMonthVal = monthSelect.value;
+      monthSelect.innerHTML = '<option value="ALL">すべての月</option>';
+      Array.from(monthSet).sort().forEach(m => {
+        const opt = document.createElement('option');
+        opt.value = m;
+        opt.textContent = m.replace('-', '年') + '月';
+        monthSelect.appendChild(opt);
+      });
+      if (Array.from(monthSet).includes(curMonthVal)) {
+        monthSelect.value = curMonthVal;
+      }
+
+      render();
+    }
+
+    // Attach control listeners once
+    function setupEventListeners() {
+      document.getElementById('groundSelect').addEventListener('change', (e) => {
+        const val = e.target.value;
+        document.querySelectorAll('.ground-chip').forEach(c => {
+          c.classList.toggle('active', c.textContent.includes(val === 'ALL' ? '全て' : val.substring(0, 4)));
+        });
+        render();
+      });
+      document.getElementById('monthSelect').addEventListener('change', render);
+      document.getElementById('dayTypeSelect').addEventListener('change', render);
+      document.getElementById('timeSlotSelect').addEventListener('change', render);
+      document.getElementById('prefCourtSelect').addEventListener('change', render);
+
+      const toggleBtn = document.getElementById('toggleAvailableOnly');
+      toggleBtn.addEventListener('click', () => {
+        filterAvailableOnly = !filterAvailableOnly;
+        toggleBtn.classList.toggle('active', filterAvailableOnly);
+        render();
+      });
+    }
+
+    function getFilteredData() {
+      const activeData = currentSource === 'city' ? cityData : prefData;
+      if (!activeData || !activeData.data) return [];
+
+      const groundVal = document.getElementById('groundSelect').value;
+      const monthVal = document.getElementById('monthSelect').value;
+      const dayTypeVal = document.getElementById('dayTypeSelect').value;
+      const timeSlotVal = document.getElementById('timeSlotSelect').value;
+      const prefCourtVal = document.getElementById('prefCourtSelect').value;
+
+      return activeData.data.filter(item => {
+        // Ground Filter (City mode)
+        if (currentSource === 'city' && groundVal !== 'ALL') {
+          if (item.groundName !== groundVal) return false;
+        }
+
+        // Court Filter (Pref mode)
+        if (currentSource === 'pref') {
+          if (prefCourtVal === 'BASEBALL' && !item.subFacilityName.includes('野球')) return false;
+          if (prefCourtVal === 'SOFTBALL' && !item.subFacilityName.includes('ソフト')) return false;
+        }
+
+        // Month Filter
+        if (monthVal !== 'ALL' && !item.date.startsWith(monthVal)) return false;
+
+        // Day Type Filter: Default is WEEKEND_HOLIDAY (土日・祝日のみ)
+        if (dayTypeVal === 'WEEKEND_HOLIDAY') {
+          if (!isWeekendOrHoliday(item.date)) return false;
+        }
+
+        // Time Slot Filter (午前 / 午後)
+        if (timeSlotVal !== 'ALL') {
+          if (item.timeSlotType !== timeSlotVal) return false;
+        }
+
+        // Available Only Toggle (○ or △)
+        if (filterAvailableOnly && !item.available) return false;
+
+        return true;
+      });
+    }
+
+    function render() {
+      const items = getFilteredData();
+      document.getElementById('matrixViewContainer').style.display = 'block';
+      renderMatrix(items);
+    }
+
+    function renderMatrix(items) {
+      const headerRow = document.getElementById('matrixHeaderRow');
+      const tbody = document.getElementById('matrixTableBody');
+
+      if (currentSource === 'city') {
+        headerRow.innerHTML = `
+          <th class="ground-name-cell">グラウンド</th>
+          <th class="court-name-cell">面名</th>
+          <th class="time-type-cell">区分</th>
+        `;
+      } else {
+        headerRow.innerHTML = `
+          <th class="court-name-cell" style="left:0;">面名</th>
+          <th class="time-type-cell" style="left:170px;">区分</th>
+        `;
+      }
+      tbody.innerHTML = '';
+
+      if (items.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="100" style="text-align:center; padding:30px; color:var(--text-muted);">条件に一致するデータが見つかりませんでした。</td></tr>';
+        return;
+      }
+
+      // Unique Dates
+      const dates = Array.from(new Set(items.map(i => i.date))).sort();
+      const timeSlotVal = document.getElementById('timeSlotSelect').value;
+
+      // Build Date Column Headers with Holiday detection
+      dates.forEach(dStr => {
+        const th = document.createElement('th');
+        const dt = new Date(dStr);
+        const dayNames = ['日', '月', '火', '水', '木', '金', '土'];
+        const dayOfWeek = dayNames[dt.getDay()];
+        const holidayName = getJapaneseHoliday(dStr);
+
+        if (holidayName) {
+          th.className = 'holiday';
+          th.innerHTML = `${dStr.substring(5).replace('-', '/')}<br>(${dayOfWeek})<span class="holiday-tag">${holidayName}</span>`;
+        } else if (dt.getDay() === 6) {
+          th.className = 'sat';
+          th.innerHTML = `${dStr.substring(5).replace('-', '/')}<br>(${dayOfWeek})`;
+        } else if (dt.getDay() === 0) {
+          th.className = 'sun';
+          th.innerHTML = `${dStr.substring(5).replace('-', '/')}<br>(${dayOfWeek})`;
+        } else {
+          th.innerHTML = `${dStr.substring(5).replace('-', '/')}<br>(${dayOfWeek})`;
+        }
+
+        headerRow.appendChild(th);
+      });
+
+      // Quick Lookup Map
+      const map = new Map();
+      items.forEach(i => {
+        const courtId = i.courtName || i.subFacilityName;
+        const gName = i.groundName || '秋ヶ瀬公園';
+        map.set(`${gName}_${courtId}_${i.timeSlotType}_${i.date}`, i);
+      });
+
+      // Determine which time slot rows to show per court
+      let slotsToShow = ['午前', '午後'];
+      if (timeSlotVal === '午前') slotsToShow = ['午前'];
+      if (timeSlotVal === '午後') slotsToShow = ['午後'];
+
+      if (currentSource === 'city') {
+        // Group by Ground -> Courts
+        const groundCourtMap = new Map();
+        items.forEach(i => {
+          if (!groundCourtMap.has(i.groundName)) {
+            groundCourtMap.set(i.groundName, new Set());
+          }
+          groundCourtMap.get(i.groundName).add(i.courtName || i.subFacilityName);
+        });
+
+        groundCourtMap.forEach((courtSet, gName) => {
+          const courts = Array.from(courtSet).sort();
+          const groundTotalRows = courts.length * slotsToShow.length;
+          let isFirstCourtOfGround = true;
+
+          courts.forEach((court, cIdx) => {
+            slotsToShow.forEach((timeSlotType, tIdx) => {
+              const tr = document.createElement('tr');
+
+              // Ground Name Cell (Rowspan for all courts and slots of this ground)
+              if (isFirstCourtOfGround && tIdx === 0) {
+                const tdGround = document.createElement('td');
+                tdGround.className = 'ground-name-cell';
+                tdGround.textContent = gName;
+                tdGround.rowSpan = groundTotalRows;
+                tr.appendChild(tdGround);
+                isFirstCourtOfGround = false;
+              }
+
+              // Court Name Cell (Rowspan for morning & afternoon)
+              if (tIdx === 0) {
+                const tdCourt = document.createElement('td');
+                tdCourt.className = 'court-name-cell';
+                tdCourt.textContent = court;
+                if (slotsToShow.length > 1) {
+                  tdCourt.rowSpan = slotsToShow.length;
+                }
+                tr.appendChild(tdCourt);
+              }
+
+              // Time Slot Pill Cell
+              const tdTime = document.createElement('td');
+              tdTime.className = 'time-type-cell';
+              const pillClass = timeSlotType === '午前' ? 'morning' : 'afternoon';
+              tdTime.innerHTML = `<span class="time-pill ${pillClass}">${timeSlotType}</span>`;
+              tr.appendChild(tdTime);
+
+              // Date Cells
+              dates.forEach(date => {
+                const td = document.createElement('td');
+                const slot = map.get(`${gName}_${court}_${timeSlotType}_${date}`);
+
+                if (slot) {
+                  let badgeClass = 'badge-none';
+                  if (slot.status === 'available' || slot.status === '1' || slot.status === '7') badgeClass = 'badge-open';
+                  else if (slot.status === 'partial' || slot.status === '4') badgeClass = 'badge-lottery';
+                  else if (slot.status === 'full' || slot.status === '8' || slot.status === '0' || slot.status === '6') badgeClass = 'badge-closed';
+
+                  const badge = document.createElement('span');
+                  badge.className = `status-badge ${badgeClass}`;
+                  badge.textContent = slot.symbol;
+                  const hol = getJapaneseHoliday(slot.date);
+                  badge.title = `${gName} ${court} [${slot.timeSlotType}] ${slot.date}${hol ? ' (' + hol + ')' : ''} : ${slot.statusText}`;
+                  badge.onclick = () => openModal(slot);
+                  td.appendChild(badge);
+                } else {
+                  td.textContent = '-';
+                  td.style.color = '#334155';
+                }
+                tr.appendChild(td);
+              });
+
+              tbody.appendChild(tr);
+            });
+          });
+        });
+      } else {
+        // Pref mode (Akigase Park)
+        const courts = Array.from(new Set(items.map(i => i.subFacilityName))).sort();
+
+        courts.forEach(court => {
+          slotsToShow.forEach((timeSlotType, index) => {
+            const tr = document.createElement('tr');
+
+            if (index === 0) {
+              const tdName = document.createElement('td');
+              tdName.className = 'court-name-cell';
+              tdName.style.left = '0';
+              tdName.textContent = court;
+              if (slotsToShow.length > 1) {
+                tdName.rowSpan = slotsToShow.length;
+              }
+              tr.appendChild(tdName);
+            }
+
+            const tdTime = document.createElement('td');
+            tdTime.className = 'time-type-cell';
+            tdTime.style.left = '170px';
+            const pillClass = timeSlotType === '午前' ? 'morning' : 'afternoon';
+            tdTime.innerHTML = `<span class="time-pill ${pillClass}">${timeSlotType}</span>`;
+            tr.appendChild(tdTime);
+
+            dates.forEach(date => {
+              const td = document.createElement('td');
+              const slot = map.get(`秋ヶ瀬公園_${court}_${timeSlotType}_${date}`);
+
+              if (slot) {
+                let badgeClass = 'badge-none';
+                if (slot.status === '1' || slot.status === '7') badgeClass = 'badge-open';
+                else if (slot.status === '4') badgeClass = 'badge-lottery';
+                else if (slot.status === '8' || slot.status === '0' || slot.status === '6') badgeClass = 'badge-closed';
+
+                const badge = document.createElement('span');
+                badge.className = `status-badge ${badgeClass}`;
+                badge.textContent = slot.symbol;
+                const hol = getJapaneseHoliday(slot.date);
+                badge.title = `${slot.subFacilityName} [${slot.timeSlotType}] ${slot.date}${hol ? ' (' + hol + ')' : ''} : ${slot.statusText}`;
+                badge.onclick = () => openModal(slot);
+                td.appendChild(badge);
+              } else {
+                td.textContent = '-';
+                td.style.color = '#334155';
+              }
+              tr.appendChild(td);
+            });
+
+            tbody.appendChild(tr);
+          });
+        });
+      }
+    }
+
+    function openModal(slot) {
+      const modal = document.getElementById('detailModal');
+      const titleName = slot.groundName ? `${slot.groundName} ${slot.courtName || slot.subFacilityName}` : slot.subFacilityName;
+      document.getElementById('modalTitle').textContent = `${titleName} の空き詳細`;
+      
+      const dayNames = ['日', '月', '火', '水', '木', '金', '土'];
+      const dt = new Date(slot.date);
+      const dayOfWeek = dayNames[dt.getDay()];
+      const holidayName = getJapaneseHoliday(slot.date);
+      const dayLabel = holidayName ? `${dayOfWeek}・祝 (${holidayName})` : dayOfWeek;
+
+      const timeSlotBadge = slot.timeSlotType === '午前' 
+        ? '<span class="time-pill morning">午前</span>' 
+        : '<span class="time-pill afternoon">午後</span>';
+
+      const timeRange = slot.startTime && slot.endTime 
+        ? `${slot.startTime.substring(0, 5)} ～ ${slot.endTime.substring(0, 5)}`
+        : (slot.timeSlotType === '午前' ? '09:00 ～ 13:00' : '13:00 ～ 17:00');
+
+      const isCity = currentSource === 'city';
+      document.getElementById('modalReserveLink').href = isCity 
+        ? 'https://saitama.rsv.ws-scs.jp/web/' 
+        : 'https://saitama-pref-reserve.michi-shiru.jp/facilitysearchcondition';
+      document.getElementById('modalReserveLink').innerHTML = isCity
+        ? '<i class="fa-solid fa-arrow-up-right-from-square"></i> さいたま市公共施設予約システムで予約'
+        : '<i class="fa-solid fa-arrow-up-right-from-square"></i> 埼玉県営予約システムで予約・申請';
+
+      document.getElementById('modalBody').innerHTML = `
+        <p style="margin-bottom:8px;"><strong>グラウンド/施設:</strong> ${titleName}</p>
+        <p style="margin-bottom:8px;"><strong>利用日:</strong> ${slot.date.replace(/-/g, '/')} (${dayLabel})</p>
+        <p style="margin-bottom:8px;"><strong>時間区分:</strong> ${timeSlotBadge} ${timeRange}</p>
+        <p style="margin-bottom:8px;"><strong>ステータス:</strong> ${slot.statusText} (${slot.symbol})</p>
+        ${slot.lotteryAppNum ? `<p style="margin-bottom:8px;"><strong>抽選応募件数:</strong> ${slot.lotteryAppNum}件</p>` : ''}
+        <p style="margin-top:12px; font-size:0.82rem; color:var(--text-muted);">
+          ※予約を行うには、各予約システムの利用者登録カードが必要です。
+        </p>
+      `;
+      modal.classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('detailModal').classList.remove('active');
+    }
+
+    // Initialize on page load
+    setupEventListeners();
+    // Load city data first, and preload pref data in background
+    loadCityData().then(() => {
+      loadPrefData();
+    });
+  </script>
+</body>
+</html>
