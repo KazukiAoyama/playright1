@@ -721,6 +721,33 @@
         justify-content: flex-start;
       }
     }
+
+    /* Toast Notification */
+    .toast-notice {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #0f172a;
+      color: #ffffff;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      border-left: 4px solid var(--accent-green);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 10000;
+      opacity: 0;
+      transform: translateY(15px);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+    .toast-notice.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 
 </head>
@@ -1254,19 +1281,34 @@
     let isScrapingActive = false;
     let cooldownTimerId = null;
 
+    function showToast(message, icon = 'fa-circle-check', color = 'var(--accent-green)') {
+      let toast = document.getElementById('toastNotice');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'toastNotice';
+        toast.className = 'toast-notice';
+        document.body.appendChild(toast);
+      }
+      toast.innerHTML = `<i class="fa-solid ${icon}" style="color:${color};"></i> <span>${message}</span>`;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+
     async function checkRefreshStatus() {
       if (!isLocalEnvironment) {
-        // GitHub Pages環境
+        // GitHub Pages環境: クラウド自動更新の最新状態を再読み込みするボタンとして機能
         const btn = document.getElementById('btnRefresh');
         const text = document.getElementById('refreshBtnText');
         if (btn && text) {
           btn.disabled = false;
           btn.className = 'btn-refresh';
           btn.style.background = 'linear-gradient(135deg, #0284c7, #0369a1)';
-          btn.title = 'GitHub Pagesは3時間おきにクラウド自動更新中（クリックで今すぐ手動実行画面を開く）';
+          btn.title = 'サーバー上の最新データを再取得して表示を更新します（自動更新: 平日2時間毎 / 土日祝前日30分毎 / 夜間停止）';
           const icon = btn.querySelector('i');
-          if (icon) icon.className = 'fa-solid fa-cloud-arrow-up';
-          text.textContent = 'データ更新 (GitHub)';
+          if (icon) icon.className = 'fa-solid fa-rotate';
+          text.textContent = '最新データ再読込';
         }
         return;
       }
@@ -1334,16 +1376,28 @@
     }
 
     async function triggerRefreshScraper() {
-      // 1. GitHub Pages (Web公開環境) の場合
+      // 1. GitHub Pages (Web公開環境) の場合: キャッシュを破棄して最新データを即座にリロード
       if (!isLocalEnvironment) {
-        const confirmed = confirm(
-          '【予約状況データの更新について】\n\n' +
-          '本Webサイト（GitHub Pages）は、3時間おきにクラウド（GitHub Actions）で全施設を自動スクレイピング・更新しています。\n\n' +
-          '今すぐ最新データを取得したい場合は、GitHubの実行画面を開いて「Run workflow」ボタンを押してください。\n\n' +
-          'GitHub Actionsの実行画面を開きますか？'
-        );
-        if (confirmed) {
-          window.open('https://github.com/KazukiAoyama/playright1/actions/workflows/scrape.yml', '_blank');
+        const btn = document.getElementById('btnRefresh');
+        const text = document.getElementById('refreshBtnText');
+        const icon = btn?.querySelector('i');
+        if (btn) {
+          btn.disabled = true;
+          if (icon) icon.className = 'fa-solid fa-rotate fa-spin';
+          if (text) text.textContent = '読込中...';
+        }
+        try {
+          await loadAllData();
+          showToast('最新の予約状況データを再読み込みしました');
+        } catch (err) {
+          console.error(err);
+          showToast('データの再読込に失敗しました', 'fa-circle-exclamation', 'var(--accent-red)');
+        } finally {
+          if (btn) {
+            btn.disabled = false;
+            if (icon) icon.className = 'fa-solid fa-rotate';
+            if (text) text.textContent = '最新データ再読込';
+          }
         }
         return;
       }

@@ -2,8 +2,9 @@ name: Scrape Saitama Park Reservation
 
 on:
   schedule:
-    # Run every 3 hours (at minute 0)
-    - cron: '0 */3 * * *'
+    # JST 06:00 - 22:30, every 30 minutes
+    # UTC 21:00 - 23:30 (previous day) and UTC 00:00 - 13:30 (current day)
+    - cron: '0,30 21-23,0-13 * * *'
   workflow_dispatch:
 
 permissions:
@@ -29,15 +30,23 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r scraper/requirements.txt
 
+      - name: Check Schedule
+        id: check_schedule
+        run: |
+          python scraper/check_schedule.py
+
       - name: Install Playwright Chromium
+        if: github.event_name == 'workflow_dispatch' || steps.check_schedule.outputs.should_run == 'true'
         run: |
           python -m playwright install chromium --with-deps
 
       - name: Run Scraper
+        if: github.event_name == 'workflow_dispatch' || steps.check_schedule.outputs.should_run == 'true'
         run: |
           python scraper/scrape.py
 
       - name: Commit and Push updated data
+        if: github.event_name == 'workflow_dispatch' || steps.check_schedule.outputs.should_run == 'true'
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: 'auto: update availability data (pref & city)'
