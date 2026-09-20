@@ -150,8 +150,9 @@ class CustomAppHandler(SimpleHTTPRequestHandler):
 
     def log_message(self, format, *args):
         # Suppress standard access logging to keep terminal clean, or print concise log
-        if "/api/" in args[0]:
-            print(f"[{datetime.now().strftime('%H:%M:%S')}] API Request: {args[0]} -> {args[1]}")
+        if args and isinstance(args[0], str) and "/api/" in args[0]:
+            status = args[1] if len(args) > 1 else ""
+            print(f"[{datetime.now().strftime('%H:%M:%S')}] API Request: {args[0]} -> {status}")
         else:
             pass
 
