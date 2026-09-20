@@ -36,7 +36,11 @@ jobs:
       - name: Check Schedule
         id: check_schedule
         run: |
-          python scraper/check_schedule.py
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            python scraper/check_schedule.py --force
+          else
+            python scraper/check_schedule.py
+          fi
 
       - name: Install Playwright Chromium
         if: github.event_name == 'workflow_dispatch' || steps.check_schedule.outputs.should_run == 'true'
