@@ -828,13 +828,23 @@
       return getJapaneseHoliday(dateStr) !== null;
     }
 
-    // Format table cell text: wrap every maxChars and shorten ソフトボール場 -> ソフト
+    // Format table cell text: wrap every maxChars and shorten names
     function formatCellText(text, maxChars = 4, shortenSoftball = true) {
       if (!text) return '';
       let s = String(text);
       if (shortenSoftball) {
         s = s.replace(/ソフトボール場/g, 'ソフト');
+        s = s.replace(/グラウンド/g, '');
       }
+
+      // 「ソフト第〇」「第〇野球場第〇」は意味の区切りで改行
+      if (s.startsWith('ソフト第')) {
+        return s.replace('ソフト第', 'ソフト<br>第');
+      }
+      if (s.includes('野球場第')) {
+        return s.replace('野球場第', '野球場<br>第');
+      }
+
       const chunks = [];
       for (let i = 0; i < s.length; i += maxChars) {
         chunks.push(s.substring(i, i + maxChars));
