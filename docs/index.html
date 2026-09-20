@@ -1248,12 +1248,30 @@
       document.getElementById('detailModal').classList.remove('active');
     }
 
-    // Refresh & Cooldown Management (30分制限)
+    // Refresh & Cooldown Management
+    const isLocalEnvironment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
     let refreshCooldownRemaining = 0;
     let isScrapingActive = false;
     let cooldownTimerId = null;
 
     async function checkRefreshStatus() {
+      if (!isLocalEnvironment) {
+        // GitHub Pages環境
+        const btn = document.getElementById('btnRefresh');
+        const text = document.getElementById('refreshBtnText');
+        if (btn && text) {
+          btn.disabled = false;
+          btn.className = 'btn-refresh';
+          btn.style.background = 'linear-gradient(135deg, #0284c7, #0369a1)';
+          btn.title = 'GitHub Pagesは3時間おきにクラウド自動更新中（クリックで今すぐ手動実行画面を開く）';
+          const icon = btn.querySelector('i');
+          if (icon) icon.className = 'fa-solid fa-cloud-arrow-up';
+          text.textContent = 'データ更新 (GitHub)';
+        }
+        return;
+      }
+
+      // ローカル環境 (server.py と通信)
       try {
         const res = await fetch('/api/status', { cache: 'no-store' });
         if (!res.ok) return;
@@ -1265,6 +1283,8 @@
     }
 
     function updateRefreshButtonUI(status) {
+      if (!isLocalEnvironment) return;
+
       const btn = document.getElementById('btnRefresh');
       const text = document.getElementById('refreshBtnText');
       if (!btn || !text) return;
@@ -1296,6 +1316,7 @@
     }
 
     function startCooldownLocalTimer() {
+      if (!isLocalEnvironment) return;
       if (cooldownTimerId) clearInterval(cooldownTimerId);
       cooldownTimerId = setInterval(() => {
         if (!isScrapingActive && refreshCooldownRemaining > 0) {
@@ -1313,6 +1334,21 @@
     }
 
     async function triggerRefreshScraper() {
+      // 1. GitHub Pages (Web公開環境) の場合
+      if (!isLocalEnvironment) {
+        const confirmed = confirm(
+          '【予約状況データの更新について】\n\n' +
+          '本Webサイト（GitHub Pages）は、3時間おきにクラウド（GitHub Actions）で全施設を自動スクレイピング・更新しています。\n\n' +
+          '今すぐ最新データを取得したい場合は、GitHubの実行画面を開いて「Run workflow」ボタンを押してください。\n\n' +
+          'GitHub Actionsの実行画面を開きますか？'
+        );
+        if (confirmed) {
+          window.open('https://github.com/KazukiAoyama/playright1/actions/workflows/scrape.yml', '_blank');
+        }
+        return;
+      }
+
+      // 2. ローカル環境（localhost / server.py）の場合
       if (isScrapingActive) return;
       if (refreshCooldownRemaining > 0) {
         const min = Math.ceil(refreshCooldownRemaining / 60);
@@ -1339,7 +1375,12 @@
 
       try {
         const res = await fetch('/api/refresh', { method: 'POST' });
-        const data = await res.json();
+        let data = {};
+        try {
+          data = await res.json();
+        } catch (jsonErr) {
+          throw new Error(`サーバー応答形式エラー (${res.status} ${res.statusText})`);
+        }
 
         if (res.status === 429) {
           alert(data.error || '前回更新から30分経過していません。');
