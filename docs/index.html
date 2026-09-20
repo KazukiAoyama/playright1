@@ -174,45 +174,6 @@
       box-shadow: 0 3px 8px rgba(37, 99, 235, 0.35);
     }
 
-    /* Refresh Button */
-    .btn-refresh {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 5px 11px;
-      background: #0284c7;
-      color: #fff;
-      border: none;
-      font-size: 0.76rem;
-      font-weight: 600;
-      font-family: inherit;
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      transition: all 0.15s ease;
-      box-shadow: 0 2px 5px rgba(2, 132, 199, 0.25);
-      white-space: nowrap;
-    }
-
-    .btn-refresh:hover:not(:disabled) {
-      background: #0369a1;
-      box-shadow: 0 3px 8px rgba(2, 132, 199, 0.35);
-    }
-
-    .btn-refresh.cooldown {
-      background: #f1f5f9;
-      color: #64748b;
-      border: 1px solid #cbd5e1;
-      cursor: not-allowed;
-      box-shadow: none;
-    }
-
-    .btn-refresh.running {
-      background: #d97706;
-      color: #fff;
-      cursor: wait;
-      box-shadow: none;
-    }
-
     /* System Tabs */
     .system-tabs {
       display: flex;
@@ -721,33 +682,6 @@
         justify-content: flex-start;
       }
     }
-
-    /* Toast Notification */
-    .toast-notice {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      background: #0f172a;
-      color: #ffffff;
-      padding: 10px 18px;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-      border-left: 4px solid var(--accent-green);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      z-index: 10000;
-      opacity: 0;
-      transform: translateY(15px);
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      pointer-events: none;
-    }
-    .toast-notice.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
   </style>
 
 </head>
@@ -770,10 +704,6 @@
           <i class="fa-regular fa-clock"></i>
           <span>更新: <strong id="updateTime">読み込み中...</strong></span>
         </div>
-        <!-- Refresh Button with 30-min cooldown -->
-        <button id="btnRefresh" class="btn-refresh" type="button" onclick="triggerRefreshScraper()" title="最新の空き状況データを取得します">
-          <i class="fa-solid fa-rotate"></i> <span id="refreshBtnText">最新データ更新</span>
-        </button>
         <div style="display:flex; gap:6px;">
           <a href="https://saitama.rsv.ws-scs.jp/web/" target="_blank" rel="noopener" class="btn-reserve"
             title="さいたま市公共施設予約システムを開く">
@@ -1275,215 +1205,9 @@
       document.getElementById('detailModal').classList.remove('active');
     }
 
-    // Refresh & Cooldown Management
-    const isLocalEnvironment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-    let refreshCooldownRemaining = 0;
-    let isScrapingActive = false;
-    let cooldownTimerId = null;
-
-    function showToast(message, icon = 'fa-circle-check', color = 'var(--accent-green)') {
-      let toast = document.getElementById('toastNotice');
-      if (!toast) {
-        toast = document.createElement('div');
-        toast.id = 'toastNotice';
-        toast.className = 'toast-notice';
-        document.body.appendChild(toast);
-      }
-      toast.innerHTML = `<i class="fa-solid ${icon}" style="color:${color};"></i> <span>${message}</span>`;
-      toast.classList.add('show');
-      setTimeout(() => {
-        toast.classList.remove('show');
-      }, 2500);
-    }
-
-    async function checkRefreshStatus() {
-      if (!isLocalEnvironment) {
-        // GitHub Pages環境: クラウド自動更新の最新状態を再読み込みするボタンとして機能
-        const btn = document.getElementById('btnRefresh');
-        const text = document.getElementById('refreshBtnText');
-        if (btn && text) {
-          btn.disabled = false;
-          btn.className = 'btn-refresh';
-          btn.style.background = 'linear-gradient(135deg, #0284c7, #0369a1)';
-          btn.title = 'サーバー上の最新データを再取得して表示を更新します（自動更新: 平日2時間毎 / 土日祝前日30分毎 / 夜間停止）';
-          const icon = btn.querySelector('i');
-          if (icon) icon.className = 'fa-solid fa-rotate';
-          text.textContent = '最新データ再読込';
-        }
-        return;
-      }
-
-      // ローカル環境 (server.py と通信)
-      try {
-        const res = await fetch('/api/status', { cache: 'no-store' });
-        if (!res.ok) return;
-        const status = await res.json();
-        updateRefreshButtonUI(status);
-      } catch (e) {
-        console.warn('Refresh API status not available:', e);
-      }
-    }
-
-    function updateRefreshButtonUI(status) {
-      if (!isLocalEnvironment) return;
-
-      const btn = document.getElementById('btnRefresh');
-      const text = document.getElementById('refreshBtnText');
-      if (!btn || !text) return;
-      const icon = btn.querySelector('i');
-
-      isScrapingActive = status.is_running;
-      refreshCooldownRemaining = status.remaining_seconds;
-
-      if (isScrapingActive) {
-        btn.disabled = true;
-        btn.className = 'btn-refresh running';
-        if (icon) icon.className = 'fa-solid fa-rotate fa-spin';
-        text.textContent = '更新中... (約1〜2分)';
-        btn.title = '現在スクレイピングを実行中です。完了までお待ちください。';
-      } else if (refreshCooldownRemaining > 0) {
-        btn.disabled = true;
-        btn.className = 'btn-refresh cooldown';
-        if (icon) icon.className = 'fa-regular fa-clock';
-        const min = Math.ceil(refreshCooldownRemaining / 60);
-        text.textContent = `あと${min}分で更新可`;
-        btn.title = `前回更新から30分経過するまで更新できません（残り約${min}分）。`;
-      } else {
-        btn.disabled = false;
-        btn.className = 'btn-refresh';
-        if (icon) icon.className = 'fa-solid fa-rotate';
-        text.textContent = '最新データ更新';
-        btn.title = 'スクレイパーを実行して最新の空き状況を取得します';
-      }
-    }
-
-    function startCooldownLocalTimer() {
-      if (!isLocalEnvironment) return;
-      if (cooldownTimerId) clearInterval(cooldownTimerId);
-      cooldownTimerId = setInterval(() => {
-        if (!isScrapingActive && refreshCooldownRemaining > 0) {
-          refreshCooldownRemaining--;
-          const btn = document.getElementById('btnRefresh');
-          const text = document.getElementById('refreshBtnText');
-          if (refreshCooldownRemaining <= 0) {
-            checkRefreshStatus();
-          } else if (btn && text) {
-            const min = Math.ceil(refreshCooldownRemaining / 60);
-            text.textContent = `あと${min}分で更新可`;
-          }
-        }
-      }, 1000);
-    }
-
-    async function triggerRefreshScraper() {
-      // 1. GitHub Pages (Web公開環境) の場合: キャッシュを破棄して最新データを即座にリロード
-      if (!isLocalEnvironment) {
-        const btn = document.getElementById('btnRefresh');
-        const text = document.getElementById('refreshBtnText');
-        const icon = btn?.querySelector('i');
-        if (btn) {
-          btn.disabled = true;
-          if (icon) icon.className = 'fa-solid fa-rotate fa-spin';
-          if (text) text.textContent = '読込中...';
-        }
-        try {
-          await loadAllData();
-          showToast('最新の予約状況データを再読み込みしました');
-        } catch (err) {
-          console.error(err);
-          showToast('データの再読込に失敗しました', 'fa-circle-exclamation', 'var(--accent-red)');
-        } finally {
-          if (btn) {
-            btn.disabled = false;
-            if (icon) icon.className = 'fa-solid fa-rotate';
-            if (text) text.textContent = '最新データ再読込';
-          }
-        }
-        return;
-      }
-
-      // 2. ローカル環境（localhost / server.py）の場合
-      if (isScrapingActive) return;
-      if (refreshCooldownRemaining > 0) {
-        const min = Math.ceil(refreshCooldownRemaining / 60);
-        alert(`前回更新から30分経過するまで更新できません。\n（次回更新可能まで あと約${min}分です）`);
-        return;
-      }
-
-      const confirmed = confirm(
-        '最新の空き状況をスクレイピングで取得しますか？\n\n' +
-        '※ 秋ヶ瀬公園およびさいたま市全施設の巡回に約1〜2分かかります。\n' +
-        '※ 取得完了後、画面は自動的に最新情報に更新されます。'
-      );
-      if (!confirmed) return;
-
-      const btn = document.getElementById('btnRefresh');
-      const text = document.getElementById('refreshBtnText');
-      const icon = btn?.querySelector('i');
-      if (btn) {
-        btn.disabled = true;
-        btn.className = 'btn-refresh running';
-        if (icon) icon.className = 'fa-solid fa-rotate fa-spin';
-        if (text) text.textContent = '更新中... (約1〜2分)';
-      }
-
-      try {
-        const res = await fetch('/api/refresh', { method: 'POST' });
-        let data = {};
-        try {
-          data = await res.json();
-        } catch (jsonErr) {
-          throw new Error(`サーバー応答形式エラー (${res.status} ${res.statusText})`);
-        }
-
-        if (res.status === 429) {
-          alert(data.error || '前回更新から30分経過していません。');
-          checkRefreshStatus();
-          return;
-        }
-
-        if (!res.ok) {
-          alert('エラーが発生しました: ' + (data.error || 'サーバーエラー'));
-          checkRefreshStatus();
-          return;
-        }
-
-        // Poll /api/status until completed
-        isScrapingActive = true;
-        const pollInterval = setInterval(async () => {
-          try {
-            const pollRes = await fetch('/api/status', { cache: 'no-store' });
-            if (!pollRes.ok) return;
-            const pollData = await pollRes.json();
-            if (!pollData.is_running) {
-              clearInterval(pollInterval);
-              isScrapingActive = false;
-              updateRefreshButtonUI(pollData);
-
-              if (pollData.last_scrape_result && pollData.last_scrape_result.status === 'success') {
-                alert('最新データの取得が完了しました！画面を最新表示に更新します。');
-                await loadAllData();
-              } else {
-                alert('スクレイピングでエラーが発生した可能性があります。\n' + (pollData.last_scrape_result?.message || ''));
-                await loadAllData();
-              }
-            }
-          } catch (err) {
-            console.error('Polling error:', err);
-          }
-        }, 3000);
-
-      } catch (err) {
-        alert('更新リクエストの送信に失敗しました: ' + err.message);
-        checkRefreshStatus();
-      }
-    }
-
     // Initialize on page load
     setupEventListeners();
     loadAllData();
-    checkRefreshStatus();
-    startCooldownLocalTimer();
   </script>
 </body>
 
