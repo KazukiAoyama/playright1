@@ -34,20 +34,29 @@ async def run_scraper():
     async with async_playwright() as p:
         browser = await p.chromium.launch(
             headless=True,
-            args=["--no-sandbox", "--disable-setuid-sandbox"]
+            args=[
+                "--no-sandbox",
+                "--disable-setuid-sandbox",
+                "--disable-dev-shm-usage",
+                "--disable-gpu",
+            ]
         )
         context = await browser.new_context(
             user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Gecko) Chrome/122.0.0.0 Safari/537.36",
+            locale="ja-JP",
+            timezone_id="Asia/Tokyo",
             viewport={"width": 1280, "height": 900}
         )
         page = await context.new_page()
 
         print("Navigating to target site:", TARGET_URL)
-        await page.goto(TARGET_URL, wait_until="networkidle", timeout=60000)
+        await page.goto(TARGET_URL, wait_until="domcontentloaded", timeout=60000)
 
         # 1. 音声読み上げ予約: 「利用しない」を選択
         print("Selecting '音声読み上げ予約: 利用しない'...")
-        await page.locator("input[name='useAcsMode'][value='0']").check()
+        acs_radio = page.locator("input[name='useAcsMode'][value='0']")
+        await acs_radio.wait_for(state="attached", timeout=30000)
+        await acs_radio.check()
         await page.wait_for_timeout(300)
 
         # 2. 利用日: 「日」または「月」選択（セッション確立用）
@@ -57,13 +66,19 @@ async def run_scraper():
         # 3. 施設: 「秋ヶ瀬公園」を選択
         print("Selecting '施設: 秋ヶ瀬公園'...")
         fac_input = page.locator("input[name='facilityName']")
+        await fac_input.wait_for(state="visible", timeout=10000)
         await fac_input.fill("秋ヶ瀬公園")
-        await page.wait_for_timeout(1000)
-        options = await page.locator("li[role='option'], .MuiAutocomplete-option").all()
-        for opt in options:
-            if "秋ヶ瀬公園" in await opt.inner_text():
-                await opt.click()
-                break
+        await page.wait_for_timeout(800)
+        opt_fac = page.locator("li[role='option']:has-text('秋ヶ瀬公園'), .MuiAutocomplete-option:has-text('秋ヶ瀬公園')")
+        try:
+            await opt_fac.first.wait_for(state="visible", timeout=5000)
+            await opt_fac.first.click()
+        except Exception:
+            options = await page.locator("li[role='option'], .MuiAutocomplete-option").all()
+            for opt in options:
+                if "秋ヶ瀬公園" in await opt.inner_text():
+                    await opt.click()
+                    break
         await page.wait_for_timeout(300)
 
         # 4. 利用目的: 「軟式野球」「ソフトボール」を選択
@@ -72,26 +87,39 @@ async def run_scraper():
         
         # 軟式野球
         await purp_input.fill("軟式野球")
-        await page.wait_for_timeout(1000)
-        options = await page.locator("li[role='option'], .MuiAutocomplete-option").all()
-        for opt in options:
-            if "軟式野球" in await opt.inner_text():
-                await opt.click()
-                break
+        await page.wait_for_timeout(800)
+        opt_bb = page.locator("li[role='option']:has-text('軟式野球'), .MuiAutocomplete-option:has-text('軟式野球')")
+        try:
+            await opt_bb.first.wait_for(state="visible", timeout=5000)
+            await opt_bb.first.click()
+        except Exception:
+            options = await page.locator("li[role='option'], .MuiAutocomplete-option").all()
+            for opt in options:
+                if "軟式野球" in await opt.inner_text():
+                    await opt.click()
+                    break
 
         # ソフトボール
         await purp_input.fill("ソフトボール")
-        await page.wait_for_timeout(1000)
-        options = await page.locator("li[role='option'], .MuiAutocomplete-option").all()
-        for opt in options:
-            if "ソフトボール" in await opt.inner_text():
-                await opt.click()
-                break
+        await page.wait_for_timeout(800)
+        opt_sb = page.locator("li[role='option']:has-text('ソフトボール'), .MuiAutocomplete-option:has-text('ソフトボール')")
+        try:
+            await opt_sb.first.wait_for(state="visible", timeout=5000)
+            await opt_sb.first.click()
+        except Exception:
+            options = await page.locator("li[role='option'], .MuiAutocomplete-option").all()
+            for opt in options:
+                if "ソフトボール" in await opt.inner_text():
+                    await opt.click()
+                    break
 
         # 5. 検索実行
         print("Submitting search condition form...")
         await page.locator("button[type='submit']").click()
-        await page.wait_for_load_state("networkidle")
+        try:
+            await page.wait_for_load_state("networkidle", timeout=15000)
+        except Exception:
+            pass
         await page.wait_for_timeout(3000)
 
         print("Fetching full availability data (Morning & Afternoon) across date range...")
@@ -143,6 +171,9 @@ async def run_scraper():
         }""")
 
         await browser.close()
+
+    if not raw_slots:
+        raise RuntimeError("秋ヶ瀬公園の空き状況データが0件でした（セッション確立失敗またはアクセス制限の可能性があります）。")
 
     # Deduplicate and format dataset with morning (午前) and afternoon (午後)
     seen_keys = set()

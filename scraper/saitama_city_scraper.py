@@ -3,7 +3,7 @@ import os
 import sys
 import re
 import json
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 from bs4 import BeautifulSoup
 from playwright.async_api import async_playwright
 
@@ -444,7 +444,8 @@ async def scrape_saitama_city():
     weekend_hol_slots = [s for s in final_slots if s["isWeekendOrHoliday"]]
     weekend_hol_avail = sum(1 for s in weekend_hol_slots if s["available"])
 
-    now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S JST")
+    jst = timezone(timedelta(hours=9))
+    now_str = datetime.now(jst).strftime("%Y-%m-%d %H:%M:%S JST")
     output_data = {
         "updatedAt": now_str,
         "facilityCategory": "さいたま市公共施設予約システム（少年野球場）",
