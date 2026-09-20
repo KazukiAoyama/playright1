@@ -214,34 +214,62 @@ async def run_scraper():
 async def main():
     target = sys.argv[1] if len(sys.argv) > 1 else "all"
     errors = []
+    successes = []
 
     if target in ("pref", "all"):
         print("\n==========================================")
         print(">>> 1. 埼玉県営公園（秋ヶ瀬公園）スクレイピング")
         print("==========================================")
-        try:
-            await run_scraper()
-        except Exception as e:
-            print(f"[ERROR] 埼玉県営公園スクレイピング失敗: {e}")
-            errors.append(("pref", e))
+        pref_success = False
+        for attempt in range(1, 3):
+            try:
+                print(f"[Prefecture] 試行 {attempt}/2 開始...")
+                await run_scraper()
+                pref_success = True
+                successes.append("pref")
+                break
+            except Exception as e:
+                print(f"[WARN] 埼玉県営公園スクレイピング試行 {attempt} 失敗: {e}")
+                if attempt < 2:
+                    print("5秒後に再試行します...")
+                    await asyncio.sleep(5)
+                else:
+                    errors.append(("pref", e))
 
     if target in ("city", "all"):
         print("\n==========================================")
         print(">>> 2. さいたま市公共施設（少年野球場9箇所）スクレイピング")
         print("==========================================")
-        try:
+        city_success = False
+        for attempt in range(1, 3):
             try:
-                from scraper.saitama_city_scraper import scrape_saitama_city
-            except ImportError:
-                from saitama_city_scraper import scrape_saitama_city
-            await scrape_saitama_city()
-        except Exception as e:
-            print(f"[ERROR] さいたま市スクレイピング失敗: {e}")
-            errors.append(("city", e))
+                print(f"[City] 試行 {attempt}/2 開始...")
+                try:
+                    from scraper.saitama_city_scraper import scrape_saitama_city
+                except ImportError:
+                    from saitama_city_scraper import scrape_saitama_city
+                await scrape_saitama_city()
+                city_success = True
+                successes.append("city")
+                break
+            except Exception as e:
+                print(f"[WARN] さいたま市スクレイピング試行 {attempt} 失敗: {e}")
+                if attempt < 2:
+                    print("5秒後に再試行します...")
+                    await asyncio.sleep(5)
+                else:
+                    errors.append(("city", e))
 
-    if errors:
-        print(f"\n[ERROR] {len(errors)} 件のスクレイピングでエラーが発生しました。")
+    print("\n==========================================")
+    print(f"[Result] 成功: {len(successes)} 件, 失敗: {len(errors)} 件")
+    print("==========================================")
+
+    # If all attempted targets failed, exit with 1 to notify GitHub Actions
+    if errors and not successes:
+        print(f"\n[CRITICAL] すべてのスクレイピング対象でエラーが発生しました。")
         sys.exit(1)
+    elif errors:
+        print(f"\n[PARTIAL] 一部対象でエラーが発生しましたが、取得できた最新データは保持されます。")
 
 if __name__ == "__main__":
     asyncio.run(main())

@@ -61,12 +61,13 @@ def check_schedule(dt_jst, force=False):
         return True, reason
     else:
         # Regular weekday: Run every 2 hours (06:00, 08:00, 10:00, 12:00, 14:00, 16:00, 18:00, 20:00, 22:00 JST)
-        # Cron runs every 30 minutes. Run when hour is even and minute is around 00 (minute < 20 to allow for GitHub Actions delay)
-        if hour % 2 == 0 and minute < 20:
+        # Cron runs every 30 minutes (around :08 and :38).
+        # Run during the first slot of even hours (minute < 30) to achieve 2-hour interval.
+        if hour % 2 == 0 and minute < 30:
             reason = f"平日日中 2時間間隔更新 ({hour:02d}:00枠, 現在 {hour:02d}:{minute:02d} JST)"
             return True, reason
         else:
-            reason = f"平日日中 2時間間隔スキップ (次回更新は偶数時00分, 現在 {hour:02d}:{minute:02d} JST)"
+            reason = f"平日日中 2時間間隔スキップ (次回更新は偶数時前半枠, 現在 {hour:02d}:{minute:02d} JST)"
             return False, reason
 
 def main():
