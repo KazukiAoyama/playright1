@@ -54,33 +54,40 @@ def parse_updated_at(raw_str):
             continue
     return None
 
-def get_latest_data_timestamp(project_root):
+def get_all_data_timestamps(project_root):
     """
-    Check docs/data.json and docs/data_city.json to find the latest updatedAt.
-    Returns (datetime or None, source_filename or None)
+    Check docs/data.json and docs/data_city.json and return a dictionary:
+    { "data.json": datetime or None, "data_city.json": datetime or None }
     """
-    candidates = [
-        os.path.join(project_root, "docs", "data.json"),
-        os.path.join(project_root, "docs", "data_city.json")
-    ]
-    latest_dt = None
-    latest_src = None
-
-    for file_path in candidates:
+    candidates = ["data.json", "data_city.json"]
+    results = {}
+    for filename in candidates:
+        file_path = os.path.join(project_root, "docs", filename)
         if not os.path.exists(file_path):
+            results[filename] = None
             continue
         try:
             with open(file_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
             updated_at_str = data.get("updatedAt")
-            parsed_dt = parse_updated_at(updated_at_str)
-            if parsed_dt:
-                if latest_dt is None or parsed_dt > latest_dt:
-                    latest_dt = parsed_dt
-                    latest_src = os.path.basename(file_path)
+            results[filename] = parse_updated_at(updated_at_str)
         except Exception as e:
             print(f"[WARN] Failed to read timestamp from {file_path}: {e}")
+            results[filename] = None
+    return results
 
+def get_latest_data_timestamp(project_root):
+    """
+    Find the latest updatedAt across docs/data.json and docs/data_city.json.
+    Returns (datetime or None, source_filename or None)
+    """
+    timestamps = get_all_data_timestamps(project_root)
+    latest_dt = None
+    latest_src = None
+    for src, dt in timestamps.items():
+        if dt and (latest_dt is None or dt > latest_dt):
+            latest_dt = dt
+            latest_src = src
     return latest_dt, latest_src
 
 def check_schedule(dt_jst, project_root=None, force=False):
@@ -125,35 +132,34 @@ def check_schedule(dt_jst, project_root=None, force=False):
         status_reasons.append(f"翌日が祝日({h_name})")
 
     is_high_frequency = bool(status_reasons)
+    threshold = 20.0 if is_high_frequency else 90.0
+    category_label = f"土日祝・祝前日 ({', '.join(status_reasons)}) [目標: 30分間隔]" if is_high_frequency else "平日日中 [目標: 2時間間隔]"
 
-    # 3. Retrieve latest update timestamp
+    # 3. Retrieve update timestamps for each data file
     if project_root is None:
         project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
-    latest_dt, latest_src = get_latest_data_timestamp(project_root)
+    timestamps = get_all_data_timestamps(project_root)
 
-    # If no valid timestamp is found, run to generate fresh data
-    if latest_dt is None:
-        return True, f"前回の更新記録が見つからないため、初回または強制実行します (現在 {hour:02d}:{minute:02d} JST)"
+    # If any target file is missing or has no timestamp, run to generate fresh data
+    for fname, dt in timestamps.items():
+        if dt is None:
+            return True, f"{fname} の更新記録が見つからないため、初回または強制実行します (現在 {hour:02d}:{minute:02d} JST)"
 
-    elapsed = (dt_jst - latest_dt).total_seconds() / 60.0
-    elapsed_str = f"前回更新から {elapsed:.1f}分経過 (最終: {latest_dt.strftime('%H:%M:%S')} [{latest_src}])"
+    # 4. Check elapsed time for each file individually
+    details = []
+    needs_run = False
+    for fname, dt in timestamps.items():
+        elapsed = (dt_jst - dt).total_seconds() / 60.0
+        details.append(f"{fname}: {elapsed:.1f}分経過 (最終: {dt.strftime('%H:%M:%S')})")
+        if elapsed >= threshold:
+            needs_run = True
 
-    # 4. Frequency Decision based on elapsed time
-    if is_high_frequency:
-        category_label = f"土日祝・祝前日 ({', '.join(status_reasons)}) [目標: 30分間隔]"
-        # Threshold: 20 minutes (allows slight early triggers while preventing redundant back-to-back runs)
-        if elapsed >= 20.0:
-            return True, f"{category_label}: 更新対象 - {elapsed_str} (閾値 20分以上)"
-        else:
-            return False, f"{category_label}: スキップ - {elapsed_str} (閾値 20分未満のため待機)"
+    details_str = ", ".join(details)
+    if needs_run:
+        return True, f"{category_label}: 更新対象 - {details_str} (閾値 {threshold:.0f}分以上)"
     else:
-        category_label = f"平日日中 [目標: 2時間間隔]"
-        # Threshold: 90 minutes (1.5 hours) ensures delay-tolerant 2-hour cycles
-        if elapsed >= 90.0:
-            return True, f"{category_label}: 更新対象 - {elapsed_str} (閾値 90分以上)"
-        else:
-            return False, f"{category_label}: スキップ - {elapsed_str} (閾値 90分未満のため待機)"
+        return False, f"{category_label}: スキップ - {details_str} (閾値 {threshold:.0f}分未満のため待機)"
 
 def main():
     parser = argparse.ArgumentParser(description="Check if scraper should run according to schedule rules.")

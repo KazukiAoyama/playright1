@@ -28,152 +28,66 @@ STATUS_MAP = {
 
 TARGET_URL = "https://saitama-pref-reserve.michi-shiru.jp/facilitysearchcondition"
 
+def fetch_date_slots(target_date, facility_id=8, sub_facility_ids=None):
+    """Fetch time slots for a single date directly from the backend reservation API."""
+    import urllib.request
+    if sub_facility_ids is None:
+        sub_facility_ids = [268, 269, 270, 273, 274, 303, 304]
+
+    url = "https://zdjn8hpyod.execute-api.ap-northeast-1.amazonaws.com/prd/us-reservation/reservation-application/facility-list/availability"
+    headers = {
+        "Content-Type": "application/json",
+        "Referer": "https://saitama-pref-reserve.michi-shiru.jp/",
+        "Origin": "https://saitama-pref-reserve.michi-shiru.jp",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+    }
+    payload = {
+        "facilityId": facility_id,
+        "subFacilityIds": sub_facility_ids,
+        "periodRange": "1",
+        "usageDate": target_date
+    }
+    req = urllib.request.Request(url, data=json.dumps(payload).encode("utf-8"), headers=headers, method="POST")
+    try:
+        with urllib.request.urlopen(req, timeout=15) as res:
+            if res.status == 200:
+                data = json.loads(res.read().decode("utf-8"))
+                return data.get("result", {}).get("slots", [])
+            else:
+                print(f"[WARN] API returned HTTP {res.status} for date {target_date}")
+                return []
+    except Exception as e:
+        print(f"[WARN] Failed to fetch slots for date {target_date}: {e}")
+        return []
+
 async def run_scraper():
-    print(f"[{datetime.now().strftime('%H:%M:%S')}] Starting Saitama Park Reservation Scraper (Morning & Afternoon)...")
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] Starting Saitama Park Reservation Scraper (Direct API Mode)...")
+    from concurrent.futures import ThreadPoolExecutor
 
-    async with async_playwright() as p:
-        browser = await p.chromium.launch(
-            headless=True,
-            args=[
-                "--no-sandbox",
-                "--disable-setuid-sandbox",
-                "--disable-dev-shm-usage",
-                "--disable-gpu",
-            ]
-        )
-        context = await browser.new_context(
-            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Gecko) Chrome/122.0.0.0 Safari/537.36",
-            locale="ja-JP",
-            timezone_id="Asia/Tokyo",
-            viewport={"width": 1280, "height": 900}
-        )
-        page = await context.new_page()
+    facility_id = 8
+    # 7 courts: 第2野球場 (1, 2, 3, 6, 7), ソフトボール場 (5, 6)
+    sub_facility_ids = [268, 269, 270, 273, 274, 303, 304]
 
-        print("Navigating to target site:", TARGET_URL)
-        await page.goto(TARGET_URL, wait_until="domcontentloaded", timeout=60000)
+    # Build date list: today + next 60 days
+    jst = timezone(timedelta(hours=9))
+    now_jst = datetime.now(jst)
+    dates = [(now_jst + timedelta(days=i)).strftime("%Y-%m-%d") for i in range(60)]
 
-        # 1. 音声読み上げ予約: 「利用しない」を選択
-        print("Selecting '音声読み上げ予約: 利用しない'...")
-        acs_radio = page.locator("input[name='useAcsMode'][value='0']")
-        await acs_radio.wait_for(state="attached", timeout=30000)
-        await acs_radio.check()
-        await page.wait_for_timeout(300)
+    print(f"Fetching availability across 60 days ({dates[0]} to {dates[-1]}) via backend API...")
+    loop = asyncio.get_running_loop()
 
-        # 2. 利用日: 「日」または「月」選択（セッション確立用）
-        await page.locator("input[name='periodRange'][value='1']").check()
-        await page.wait_for_timeout(300)
+    def fetch_all():
+        with ThreadPoolExecutor(max_workers=8) as executor:
+            futures = [executor.submit(fetch_date_slots, d, facility_id, sub_facility_ids) for d in dates]
+            all_slots = []
+            for f in futures:
+                all_slots.extend(f.result())
+            return all_slots
 
-        # 3. 施設: 「秋ヶ瀬公園」を選択
-        print("Selecting '施設: 秋ヶ瀬公園'...")
-        fac_input = page.locator("input[name='facilityName']")
-        await fac_input.wait_for(state="visible", timeout=10000)
-        await fac_input.fill("秋ヶ瀬公園")
-        await page.wait_for_timeout(800)
-        opt_fac = page.locator("li[role='option']:has-text('秋ヶ瀬公園'), .MuiAutocomplete-option:has-text('秋ヶ瀬公園')")
-        try:
-            await opt_fac.first.wait_for(state="visible", timeout=5000)
-            await opt_fac.first.click()
-        except Exception:
-            options = await page.locator("li[role='option'], .MuiAutocomplete-option").all()
-            for opt in options:
-                if "秋ヶ瀬公園" in await opt.inner_text():
-                    await opt.click()
-                    break
-        await page.wait_for_timeout(300)
-
-        # 4. 利用目的: 「軟式野球」「ソフトボール」を選択
-        print("Selecting '利用目的: 軟式野球' & 'ソフトボール'...")
-        purp_input = page.locator("input[name='usagePurpose']")
-        
-        # 軟式野球
-        await purp_input.fill("軟式野球")
-        await page.wait_for_timeout(800)
-        opt_bb = page.locator("li[role='option']:has-text('軟式野球'), .MuiAutocomplete-option:has-text('軟式野球')")
-        try:
-            await opt_bb.first.wait_for(state="visible", timeout=5000)
-            await opt_bb.first.click()
-        except Exception:
-            options = await page.locator("li[role='option'], .MuiAutocomplete-option").all()
-            for opt in options:
-                if "軟式野球" in await opt.inner_text():
-                    await opt.click()
-                    break
-
-        # ソフトボール
-        await purp_input.fill("ソフトボール")
-        await page.wait_for_timeout(800)
-        opt_sb = page.locator("li[role='option']:has-text('ソフトボール'), .MuiAutocomplete-option:has-text('ソフトボール')")
-        try:
-            await opt_sb.first.wait_for(state="visible", timeout=5000)
-            await opt_sb.first.click()
-        except Exception:
-            options = await page.locator("li[role='option'], .MuiAutocomplete-option").all()
-            for opt in options:
-                if "ソフトボール" in await opt.inner_text():
-                    await opt.click()
-                    break
-
-        # 5. 検索実行
-        print("Submitting search condition form...")
-        await page.locator("button[type='submit']").click()
-        try:
-            await page.wait_for_load_state("networkidle", timeout=15000)
-        except Exception:
-            pass
-        await page.wait_for_timeout(3000)
-
-        print("Fetching full availability data (Morning & Afternoon) across date range...")
-        # Fetch both morning and afternoon slots for all baseball & softball courts across 60 days
-        raw_slots = await page.evaluate("""async () => {
-            const facilityId = 8;
-            // 7 courts: 第2野球場 (1, 2, 3, 6, 7), ソフトボール場 (5, 6)
-            const subFacilityIds = [268, 269, 270, 273, 274, 303, 304];
-            
-            // Build date list: today + next 60 days
-            const dates = [];
-            const now = new Date();
-            for (let i = 0; i < 60; i++) {
-                const d = new Date(now);
-                d.setDate(now.getDate() + i);
-                const yyyy = d.getFullYear();
-                const mm = String(d.getMonth() + 1).padStart(2, '0');
-                const dd = String(d.getDate()).padStart(2, '0');
-                dates.push(`${yyyy}-${mm}-${dd}`);
-            }
-
-            // Fetch in concurrent batches of 6 requests
-            const allSlots = [];
-            const batchSize = 6;
-            for (let i = 0; i < dates.length; i += batchSize) {
-                const batchDates = dates.slice(i, i + batchSize);
-                const batchPromises = batchDates.map(async (targetDate) => {
-                    try {
-                        const res = await fetch("https://zdjn8hpyod.execute-api.ap-northeast-1.amazonaws.com/prd/us-reservation/reservation-application/facility-list/availability", {
-                            method: "POST",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({
-                                facilityId,
-                                subFacilityIds,
-                                periodRange: "1",
-                                usageDate: targetDate
-                            })
-                        });
-                        const json = await res.json();
-                        return json.result?.slots || [];
-                    } catch (e) {
-                        return [];
-                    }
-                });
-                const batchResults = await Promise.all(batchPromises);
-                batchResults.forEach(slots => allSlots.push(...slots));
-            }
-            return allSlots;
-        }""")
-
-        await browser.close()
+    raw_slots = await loop.run_in_executor(None, fetch_all)
 
     if not raw_slots:
-        raise RuntimeError("秋ヶ瀬公園の空き状況データが0件でした（セッション確立失敗またはアクセス制限の可能性があります）。")
+        raise RuntimeError("秋ヶ瀬公園の空き状況データが0件でした（APIエラーまたはアクセス制限の可能性があります）。")
 
     # Deduplicate and format dataset with morning (午前) and afternoon (午後)
     seen_keys = set()
@@ -295,12 +209,28 @@ async def main():
     print(f"[Result] 成功: {len(successes)} 件, 失敗: {len(errors)} 件")
     print("==========================================")
 
-    # If all attempted targets failed, exit with 1 to notify GitHub Actions
+    # Output summary to GitHub Actions Step Summary if available
+    summary_path = os.environ.get("GITHUB_STEP_SUMMARY")
+    if summary_path:
+        try:
+            with open(summary_path, "a", encoding="utf-8") as f:
+                f.write("### スクレイピング実行結果\n\n")
+                f.write(f"- 成功: `{', '.join(successes) if successes else 'なし'}`\n")
+                if errors:
+                    f.write(f"- 失敗: `{', '.join(e[0] for e in errors)}`\n\n")
+                    f.write("#### エラー詳細\n")
+                    for target_name, err in errors:
+                        f.write(f"- **{target_name}**: `{err}`\n")
+        except Exception as e:
+            print(f"[WARN] Failed to write step summary: {e}")
+
+    # Exit with code 1 if any target failed so GitHub Actions notifies developers
     if errors and not successes:
         print(f"\n[CRITICAL] すべてのスクレイピング対象でエラーが発生しました。")
         sys.exit(1)
     elif errors:
-        print(f"\n[PARTIAL] 一部対象でエラーが発生しましたが、取得できた最新データは保持されます。")
+        print(f"\n[PARTIAL ERROR] 一部対象でエラーが発生しました: {[e[0] for e in errors]}")
+        sys.exit(1)
 
 if __name__ == "__main__":
     asyncio.run(main())

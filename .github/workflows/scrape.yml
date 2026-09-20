@@ -53,7 +53,7 @@ jobs:
           python scraper/scrape.py
 
       - name: Commit and Push updated data
-        if: github.event_name == 'workflow_dispatch' || steps.check_schedule.outputs.should_run == 'true'
+        if: (github.event_name == 'workflow_dispatch' || steps.check_schedule.outputs.should_run == 'true') && always() && steps.check_schedule.conclusion == 'success'
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: 'auto: update availability data (pref & city)'
