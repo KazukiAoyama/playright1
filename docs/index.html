@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>野球場・ソフトボール場 空き状況自動閲覧システム | さいたま市 & 埼玉県営公園</title>
-  <meta name="description" content="さいたま市施設予約システム（少年野球場9グラウンド）および埼玉県営公園（秋ヶ瀬公園）の土日・祝日限定の最新空き状況（午前・午後別）を常時閲覧できるリアルタイムダッシュボードです。">
-  
+  <title>野球場・ソフトボール場 空き状況閲覧システム</title>
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Outfit:wght@400;600;700&display=swap"
+    rel="stylesheet">
+
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -24,32 +26,32 @@
       --text-main: #0f172a;
       --text-muted: #64748b;
       --text-subtle: #94a3b8;
-      
+
       --accent-green: #15803d;
       --accent-green-bg: #dcfce7;
       --accent-green-border: #86efac;
-      
+
       --accent-yellow: #b45309;
       --accent-yellow-bg: #fef3c7;
       --accent-yellow-border: #fde047;
-      
+
       --accent-red: #dc2626;
       --accent-red-bg: #fee2e2;
-      
+
       --accent-blue: #2563eb;
       --accent-blue-bg: #eff6ff;
       --accent-blue-border: #bfdbfe;
-      
+
       --holiday-red: #e11d48;
       --holiday-bg: #ffe4e6;
       --holiday-tag: #be123c;
-      
+
       --sat-blue: #1d4ed8;
       --sat-bg: #eff6ff;
-      
+
       --sun-red: #dc2626;
       --sun-bg: #fef2f2;
-      
+
       --radius-lg: 10px;
       --radius-md: 6px;
       --radius-sm: 4px;
@@ -131,8 +133,9 @@
 
     .header-meta {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
-      gap: 10px;
+      gap: 6px 10px;
     }
 
     .update-badge {
@@ -169,6 +172,45 @@
     .btn-reserve:hover {
       background: #1d4ed8;
       box-shadow: 0 3px 8px rgba(37, 99, 235, 0.35);
+    }
+
+    /* Refresh Button */
+    .btn-refresh {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 11px;
+      background: #0284c7;
+      color: #fff;
+      border: none;
+      font-size: 0.76rem;
+      font-weight: 600;
+      font-family: inherit;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      box-shadow: 0 2px 5px rgba(2, 132, 199, 0.25);
+      white-space: nowrap;
+    }
+
+    .btn-refresh:hover:not(:disabled) {
+      background: #0369a1;
+      box-shadow: 0 3px 8px rgba(2, 132, 199, 0.35);
+    }
+
+    .btn-refresh.cooldown {
+      background: #f1f5f9;
+      color: #64748b;
+      border: 1px solid #cbd5e1;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .btn-refresh.running {
+      background: #d97706;
+      color: #fff;
+      cursor: wait;
+      box-shadow: none;
     }
 
     /* System Tabs */
@@ -347,7 +389,8 @@
       white-space: nowrap;
     }
 
-    th, td {
+    th,
+    td {
       padding: 2px 4px;
       text-align: center;
       border-bottom: 1px solid #f1f5f9;
@@ -375,57 +418,65 @@
       z-index: 5;
       text-align: left;
       font-weight: 700;
-      min-width: 105px;
-      max-width: 130px;
+      width: 62px;
+      min-width: 62px;
+      max-width: 62px;
       border-right: 1px solid var(--border-color);
       color: var(--text-main);
-      padding-left: 6px;
-      padding-right: 4px;
+      padding: 2px 4px;
+      line-height: 1.25;
       overflow: hidden;
-      text-overflow: ellipsis;
+      word-break: break-all;
     }
 
     .court-name-cell {
       position: sticky;
-      left: 105px;
+      left: 62px;
       background: #fafbfd;
       z-index: 5;
       text-align: left;
       font-weight: 600;
-      min-width: 125px;
-      max-width: 155px;
+      width: 64px;
+      min-width: 64px;
+      max-width: 64px;
       border-right: 1px solid var(--border-color);
       color: #334155;
-      padding-left: 6px;
-      padding-right: 4px;
+      padding: 2px 4px;
+      line-height: 1.25;
       overflow: hidden;
-      text-overflow: ellipsis;
+      word-break: break-all;
     }
 
     th.ground-name-cell {
       left: 0;
       z-index: 12;
       background: #f1f5f9;
+      text-align: center;
+      padding: 2px 2px;
     }
 
     th.court-name-cell {
-      left: 105px;
+      left: 62px;
       z-index: 12;
       background: #f1f5f9;
+      text-align: center;
+      padding: 2px 2px;
     }
 
     .time-type-cell {
       position: sticky;
-      left: 230px;
+      left: 126px;
       background: #ffffff;
       z-index: 5;
-      min-width: 48px;
+      width: 44px;
+      min-width: 44px;
+      max-width: 44px;
       border-right: 2px solid var(--border-darker);
       padding: 1px 2px;
     }
 
     th.time-type-cell {
-      left: 230px;
+      left: 126px;
       z-index: 12;
       background: #f1f5f9;
     }
@@ -532,12 +583,15 @@
     tbody tr:hover td {
       background-color: #f8fafc;
     }
+
     tbody tr:hover .ground-name-cell {
       background-color: #f1f5f9;
     }
+
     tbody tr:hover .court-name-cell {
       background-color: #f1f5f9;
     }
+
     tbody tr:hover .time-type-cell {
       background-color: #f1f5f9;
     }
@@ -581,7 +635,9 @@
     }
 
     @keyframes spin {
-      to { transform: rotate(360deg); }
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     /* Modal */
@@ -613,8 +669,15 @@
     }
 
     @keyframes modalFadeIn {
-      from { transform: scale(0.96); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+      from {
+        transform: scale(0.96);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
 
     .modal-title {
@@ -645,131 +708,94 @@
     .modal-close:hover {
       background: #e2e8f0;
     }
+
+    /* Responsive adjustments for header and toolbar */
+    @media (max-width: 1080px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      .header-meta {
+        width: 100%;
+        justify-content: flex-start;
+      }
+    }
   </style>
 
 </head>
+
 <body>
   <div class="container">
     <!-- Header -->
     <header>
       <div class="header-title-group">
-        <div class="header-icon">
-          <i class="fa-solid fa-baseball-bat-ball"></i>
-        </div>
         <div>
-          <h1 id="mainTitle">さいたま市 少年野球場 空き状況自動閲覧システム</h1>
-          <div class="subtitle" id="mainSubtitle">荒川総合・八王子・見沼臨時・大間木・浦和総合・さくら草・宝来・西遊馬・三橋（土日・祝日限定）</div>
+          <h1 id="mainTitle">野球場・ソフトボール場 空き状況自動閲覧システム</h1>
         </div>
       </div>
       <div class="header-meta">
+        <div class="update-badge" id="totalAvailBadge">
+          <i class="fa-solid fa-circle-check" style="color:var(--accent-green);"></i>
+          <span>空き枠: <strong id="totalAvailCount" style="color:var(--accent-green);">読み込み中...</strong></span>
+        </div>
         <div class="update-badge">
           <i class="fa-regular fa-clock"></i>
-          <span>最終更新: <strong id="updateTime">読み込み中...</strong></span>
+          <span>更新: <strong id="updateTime">読み込み中...</strong></span>
         </div>
-        <a id="reserveButton" href="https://saitama.rsv.ws-scs.jp/web/" target="_blank" rel="noopener" class="btn-reserve">
-          <i class="fa-solid fa-arrow-up-right-from-square"></i> <span id="reserveButtonText">さいたま市予約システム</span>
-        </a>
+        <!-- Refresh Button with 30-min cooldown -->
+        <button id="btnRefresh" class="btn-refresh" type="button" onclick="triggerRefreshScraper()" title="最新の空き状況データを取得します">
+          <i class="fa-solid fa-rotate"></i> <span id="refreshBtnText">最新データ更新</span>
+        </button>
+        <div style="display:flex; gap:6px;">
+          <a href="https://saitama.rsv.ws-scs.jp/web/" target="_blank" rel="noopener" class="btn-reserve"
+            title="さいたま市公共施設予約システムを開く">
+            <span>市予約</span>
+          </a>
+          <a href="https://saitama-pref-reserve.michi-shiru.jp/facilitysearchcondition" target="_blank" rel="noopener"
+            class="btn-reserve" style="background: linear-gradient(135deg, #059669, #047857);"
+            title="埼玉県県営公園施設予約サービスを開く">
+            <span>県(秋ヶ瀬)</span>
+          </a>
+        </div>
       </div>
     </header>
-
-    <!-- Source Tabs -->
-    <div class="system-tabs">
-      <button class="system-tab active" id="tabCity" onclick="switchSource('city')">
-        <i class="fa-solid fa-city"></i> さいたま市（少年野球場 9グラウンド）
-        <span class="badge-count" id="cityAvailBadge">8空き</span>
-      </button>
-      <button class="system-tab" id="tabPref" onclick="switchSource('pref')">
-        <i class="fa-solid fa-tree"></i> 埼玉県営公園（秋ヶ瀬公園）
-        <span class="badge-count" id="prefAvailBadge">45空き</span>
-      </button>
-    </div>
 
     <!-- Filter Toolbar -->
     <div class="toolbar">
       <div class="filter-group">
-        <!-- Ground filter (for Saitama City) -->
-        <div id="groundSelectContainer" style="display:flex; align-items:center; gap:4px;">
-          <label style="font-size:0.75rem; color:var(--text-muted); font-weight:600;"><i class="fa-solid fa-location-dot"></i> グラウンド:</label>
-          <select id="groundSelect" class="select-control">
-            <option value="ALL">すべてのグラウンド (9箇所)</option>
-            <option value="荒川総合運動公園">荒川総合運動公園 (5面)</option>
-            <option value="八王子公園">八王子公園 (1面)</option>
-            <option value="見沼臨時グラウンド">見沼臨時グラウンド (2面)</option>
-            <option value="大間木公園">大間木公園 (4面)</option>
-            <option value="浦和総合運動場">浦和総合運動場 (2面)</option>
-            <option value="さくら草公園">さくら草公園 (1面)</option>
-            <option value="宝来運動公園">宝来運動公園 (2面)</option>
-            <option value="西遊馬公園">西遊馬公園 (2面)</option>
-            <option value="三橋総合公園">三橋総合公園 (1面)</option>
-          </select>
-        </div>
-
-        <!-- Month Filter -->
-        <div style="display:flex; align-items:center; gap:4px;">
-          <label style="font-size:0.75rem; color:var(--text-muted); font-weight:600;"><i class="fa-regular fa-calendar"></i> 月:</label>
-          <select id="monthSelect" class="select-control">
-            <option value="ALL">すべての月</option>
-          </select>
-        </div>
-
         <!-- Day Filter -->
         <div style="display:flex; align-items:center; gap:4px;">
-          <label style="font-size:0.75rem; color:var(--text-muted); font-weight:600;"><i class="fa-solid fa-calendar-week"></i> 日程:</label>
+          <label style="font-size:0.75rem; color:var(--text-muted); font-weight:600;"><i
+              class="fa-solid fa-calendar-week"></i> 日程:</label>
           <select id="dayTypeSelect" class="select-control">
-            <option value="WEEKEND_HOLIDAY" selected>土日・祝日のみ (推奨)</option>
-            <option value="ALL">平日含むすべての日程</option>
-          </select>
-        </div>
-
-        <!-- Time Slot Filter (午前 / 午後) -->
-        <div style="display:flex; align-items:center; gap:4px;">
-          <label style="font-size:0.75rem; color:var(--text-muted); font-weight:600;"><i class="fa-regular fa-clock"></i> 時間帯:</label>
-          <select id="timeSlotSelect" class="select-control">
-            <option value="ALL" selected>午前・午後 両方</option>
-            <option value="午前">午前のみ</option>
-            <option value="午後">午後のみ</option>
-          </select>
-        </div>
-
-        <!-- Court Filter for Akigase -->
-        <div id="prefCourtSelectContainer" style="display:none; align-items:center; gap:4px;">
-          <label style="font-size:0.75rem; color:var(--text-muted); font-weight:600;"><i class="fa-solid fa-filter"></i> 種目:</label>
-          <select id="prefCourtSelect" class="select-control">
-            <option value="ALL">野球場・ソフトボール場 全て</option>
-            <option value="BASEBALL">軟式野球場のみ</option>
-            <option value="SOFTBALL">ソフトボール場のみ</option>
+            <option value="WEEKEND_HOLIDAY" selected>土日・祝日のみ</option>
+            <option value="ALL">平日含むすべて</option>
           </select>
         </div>
 
         <!-- Available Only Toggle -->
         <button id="toggleAvailableOnly" class="toggle-btn" type="button">
-          <i class="fa-solid fa-circle-check"></i> 空き枠のみ表示 (○ / △)
+          <i class="fa-solid fa-circle-check"></i> 空き枠のみ表示
         </button>
       </div>
 
-      <!-- Quick chips for grounds when city tab is active -->
+      <!-- Quick chips for all 10 grounds -->
       <div class="ground-chips" id="groundChips">
-        <span class="ground-chip active" onclick="setGroundFilter('ALL')">全て (9)</span>
+        <span class="ground-chip active" onclick="setGroundFilter('ALL')">全て (10)</span>
+        <span class="ground-chip" onclick="setGroundFilter('秋ヶ瀬公園')">秋ヶ瀬(県営)</span>
         <span class="ground-chip" onclick="setGroundFilter('荒川総合運動公園')">荒川総合</span>
-        <span class="ground-chip" onclick="setGroundFilter('八王子公園')">八王子</span>
-        <span class="ground-chip" onclick="setGroundFilter('見沼臨時グラウンド')">見沼臨時</span>
         <span class="ground-chip" onclick="setGroundFilter('大間木公園')">大間木</span>
+        <span class="ground-chip" onclick="setGroundFilter('八王子公園')">八王子</span>
         <span class="ground-chip" onclick="setGroundFilter('浦和総合運動場')">浦和総合</span>
+        <span class="ground-chip" onclick="setGroundFilter('見沼臨時グラウンド')">見沼臨時</span>
         <span class="ground-chip" onclick="setGroundFilter('さくら草公園')">さくら草</span>
-        <span class="ground-chip" onclick="setGroundFilter('宝来運動公園')">宝来</span>
         <span class="ground-chip" onclick="setGroundFilter('西遊馬公園')">西遊馬</span>
+        <span class="ground-chip" onclick="setGroundFilter('宝来運動公園')">宝来</span>
         <span class="ground-chip" onclick="setGroundFilter('三橋総合公園')">三橋総合</span>
       </div>
     </div>
 
-    <!-- Legend -->
-    <div class="legend-bar">
-      <span>凡例:</span>
-      <div class="legend-item"><span class="status-badge badge-open">○</span> 予約可能 (空き)</div>
-      <div class="legend-item"><span class="status-badge badge-lottery">△</span> 一部空き・抽選</div>
-      <div class="legend-item"><span class="status-badge badge-closed">×</span> 予約済・不可</div>
-      <div class="legend-item"><span class="status-badge badge-none">-</span> 期間外・休止</div>
-    </div>
 
 
     <!-- Main Content Area -->
@@ -782,7 +808,7 @@
       <table id="matrixTable">
         <thead>
           <tr id="matrixHeaderRow">
-            <th class="ground-name-cell" id="thGround">グラウンド</th>
+            <th class="ground-name-cell" id="thGround">グラ<br>ウンド</th>
             <th class="court-name-cell" id="thCourt">面名</th>
             <th class="time-type-cell" style="top:0; z-index:12;">区分</th>
           </tr>
@@ -798,7 +824,8 @@
     <div class="modal-box">
       <div class="modal-title" id="modalTitle">スロット詳細情報</div>
       <div id="modalBody" style="font-size:0.9rem; color:var(--text-muted);"></div>
-      <a id="modalReserveLink" href="https://saitama.rsv.ws-scs.jp/web/" target="_blank" rel="noopener" class="btn-reserve" style="width:100%; justify-content:center; margin-top:16px;">
+      <a id="modalReserveLink" href="https://saitama.rsv.ws-scs.jp/web/" target="_blank" rel="noopener"
+        class="btn-reserve" style="width:100%; justify-content:center; margin-top:16px;">
         <i class="fa-solid fa-arrow-up-right-from-square"></i> 予約システムで予約・申請
       </a>
       <button class="modal-close" onclick="closeModal()">閉じる</button>
@@ -844,95 +871,123 @@
       return getJapaneseHoliday(dateStr) !== null;
     }
 
-    let currentSource = 'city'; // 'city' | 'pref'
-    let cityData = null;
-    let prefData = null;
+    // Format table cell text: wrap every maxChars and shorten ソフトボール場 -> ソフト
+    function formatCellText(text, maxChars = 4, shortenSoftball = true) {
+      if (!text) return '';
+      let s = String(text);
+      if (shortenSoftball) {
+        s = s.replace(/ソフトボール場/g, 'ソフト');
+      }
+      const chunks = [];
+      for (let i = 0; i < s.length; i += maxChars) {
+        chunks.push(s.substring(i, i + maxChars));
+      }
+      return chunks.join('<br>');
+    }
+
+    let allData = [];
     let filterAvailableOnly = false;
+    let currentGroundFilter = 'ALL';
 
-    // Switch between Saitama City and Saitama Prefecture
-    async function switchSource(source) {
-      if (currentSource === source && (source === 'city' ? cityData : prefData)) return;
-      currentSource = source;
+    const GROUND_ORDER = [
+      '秋ヶ瀬公園',
+      '荒川総合運動公園',
+      '大間木公園',
+      '八王子公園',
+      '浦和総合運動場',
+      '見沼臨時グラウンド',
+      'さくら草公園',
+      '西遊馬公園',
+      '宝来運動公園',
+      '三橋総合公園'
+    ];
 
-      document.getElementById('tabCity').classList.toggle('active', source === 'city');
-      document.getElementById('tabPref').classList.toggle('active', source === 'pref');
-
-      const groundContainer = document.getElementById('groundSelectContainer');
-      const groundChips = document.getElementById('groundChips');
-      const prefCourtContainer = document.getElementById('prefCourtSelectContainer');
-
-      if (source === 'city') {
-        document.getElementById('mainTitle').textContent = 'さいたま市 少年野球場 空き状況自動閲覧システム';
-        document.getElementById('mainSubtitle').textContent = '荒川総合・八王子・見沼臨時・大間木・浦和総合・さくら草・宝来・西遊馬・三橋（土日・祝日限定）';
-        document.getElementById('reserveButton').href = 'https://saitama.rsv.ws-scs.jp/web/';
-        document.getElementById('reserveButtonText').textContent = 'さいたま市予約システム';
-        groundContainer.style.display = 'flex';
-        groundChips.style.display = 'flex';
-        prefCourtContainer.style.display = 'none';
-        if (!cityData) {
-          await loadCityData();
-        } else {
-          initDashboard(cityData);
-        }
-      } else {
-        document.getElementById('mainTitle').textContent = '秋ヶ瀬公園 野球場・ソフトボール場 空き状況自動閲覧システム';
-        document.getElementById('mainSubtitle').textContent = '埼玉県県営公園施設予約サービス（秋ヶ瀬公園 野球場・ソフトボール場）土日・祝日限定';
-        document.getElementById('reserveButton').href = 'https://saitama-pref-reserve.michi-shiru.jp/facilitysearchcondition';
-        document.getElementById('reserveButtonText').textContent = '埼玉県営予約システム';
-        groundContainer.style.display = 'none';
-        groundChips.style.display = 'none';
-        prefCourtContainer.style.display = 'flex';
-        if (!prefData) {
-          await loadPrefData();
-        } else {
-          initDashboard(prefData);
-        }
-      }
+    function getTodayString() {
+      const d = new Date();
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${y}-${m}-${day}`;
     }
 
-    async function loadCityData() {
-      if (currentSource === 'city') {
-        showLoading('さいたま市の最新空き状況データを読み込んでいます...');
-      }
-      try {
-        const response = await fetch('./data_city.json?t=' + Date.now());
-        if (!response.ok) throw new Error('data_city.json fetch failed');
-        cityData = await response.json();
-        
-        // Update badge
-        const avail = cityData.weekendHolidayAvailable !== undefined ? cityData.weekendHolidayAvailable : cityData.availableSlotsCount;
-        document.getElementById('cityAvailBadge').textContent = `${avail}空き`;
-        
-        if (currentSource === 'city') {
-          initDashboard(cityData);
-        }
-      } catch (err) {
-        if (currentSource === 'city') {
-          showError('さいたま市データの読み込みに失敗しました。');
-        }
-      }
+    // Get current month and next month string in YYYY-MM format
+    function getCurrentAndNextMonthStrings() {
+      const now = new Date();
+      const y1 = now.getFullYear();
+      const m1 = String(now.getMonth() + 1).padStart(2, '0');
+      const curMonth = `${y1}-${m1}`;
+
+      const nextDate = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+      const y2 = nextDate.getFullYear();
+      const m2 = String(nextDate.getMonth() + 1).padStart(2, '0');
+      const nextMonth = `${y2}-${m2}`;
+
+      return [curMonth, nextMonth];
     }
 
-    async function loadPrefData() {
-      if (currentSource === 'pref') {
-        showLoading('埼玉県営公園（秋ヶ瀬公園）のデータを読み込んでいます...');
-      }
+    // Load both Saitama City and Prefectural Park data in parallel
+    async function loadAllData() {
+      showLoading('さいたま市および秋ヶ瀬公園（埼玉県営）の空き状況データを読み込んでいます...');
       try {
-        const response = await fetch('./data.json?t=' + Date.now());
-        if (!response.ok) throw new Error('data.json fetch failed');
-        prefData = await response.json();
+        const [cityRes, prefRes] = await Promise.all([
+          fetch('./data_city.json?t=' + Date.now()).catch(() => null),
+          fetch('./data.json?t=' + Date.now()).catch(() => null)
+        ]);
 
-        // Calculate available count
-        const avail = (prefData.data || []).filter(s => s.available && isWeekendOrHoliday(s.date)).length;
-        document.getElementById('prefAvailBadge').textContent = `${avail}空き`;
+        let cityItems = [];
+        let prefItems = [];
+        const updateTimes = [];
 
-        if (currentSource === 'pref') {
-          initDashboard(prefData);
+        if (cityRes && cityRes.ok) {
+          const cityJson = await cityRes.json();
+          if (cityJson.updatedAt) updateTimes.push(`市: ${cityJson.updatedAt.substring(5, 16)}`);
+          cityItems = (cityJson.data || []).map(item => ({
+            ...item,
+            source: 'city',
+            groundName: item.groundName,
+            courtName: item.courtName || item.subFacilityName
+          }));
         }
+
+        if (prefRes && prefRes.ok) {
+          const prefJson = await prefRes.json();
+          if (prefJson.updatedAt) updateTimes.push(`県: ${prefJson.updatedAt.substring(5, 16)}`);
+          prefItems = (prefJson.data || []).map(item => ({
+            ...item,
+            source: 'pref',
+            groundName: '秋ヶ瀬公園',
+            courtName: item.subFacilityName || item.courtName
+          }));
+        }
+
+        allData = [...cityItems, ...prefItems];
+
+        if (allData.length === 0) {
+          showError('空き状況データの読み込みに失敗しました。');
+          return;
+        }
+
+        document.getElementById('updateTime').textContent = updateTimes.join(' / ') || '完了';
+
+        // Calculate available counts for current and next month from today onwards
+        const todayStr = getTodayString();
+        const [curMonth, nextMonth] = getCurrentAndNextMonthStrings();
+        const isTargetSlot = (s) => {
+          const itemMonth = s.date.substring(0, 7);
+          return (itemMonth === curMonth || itemMonth === nextMonth) &&
+            s.available &&
+            isWeekendOrHoliday(s.date) &&
+            s.date >= todayStr;
+        };
+
+        const cityAvail = cityItems.filter(isTargetSlot).length;
+        const prefAvail = prefItems.filter(isTargetSlot).length;
+        const totalAvail = cityAvail + prefAvail;
+        document.getElementById('totalAvailCount').textContent = `${totalAvail}枠 (市:${cityAvail} / 県:${prefAvail})`;
+
+        initDashboard();
       } catch (err) {
-        if (currentSource === 'pref') {
-          showError('秋ヶ瀬公園データの読み込みに失敗しました。');
-        }
+        showError('データ処理中にエラーが発生しました。');
       }
     }
 
@@ -952,51 +1007,21 @@
     }
 
     function setGroundFilter(groundName) {
-      document.getElementById('groundSelect').value = groundName;
+      currentGroundFilter = groundName;
       document.querySelectorAll('.ground-chip').forEach(c => {
-        c.classList.toggle('active', c.textContent.includes(groundName === 'ALL' ? '全て' : groundName.substring(0, 4)));
+        c.classList.toggle('active', c.textContent.includes(groundName === 'ALL' ? '全て' : (groundName === '秋ヶ瀬公園' ? '秋ヶ瀬' : groundName.substring(0, 4))));
       });
       render();
     }
 
-    function initDashboard(rawData) {
+    function initDashboard() {
       document.getElementById('loadingArea').style.display = 'none';
-      document.getElementById('updateTime').textContent = rawData.updatedAt || '不明';
-
-      // Populate Month Selector Options
-      const monthSet = new Set();
-      (rawData.data || []).forEach(item => {
-        if (item.date) monthSet.add(item.date.substring(0, 7));
-      });
-      const monthSelect = document.getElementById('monthSelect');
-      const curMonthVal = monthSelect.value;
-      monthSelect.innerHTML = '<option value="ALL">すべての月</option>';
-      Array.from(monthSet).sort().forEach(m => {
-        const opt = document.createElement('option');
-        opt.value = m;
-        opt.textContent = m.replace('-', '年') + '月';
-        monthSelect.appendChild(opt);
-      });
-      if (Array.from(monthSet).includes(curMonthVal)) {
-        monthSelect.value = curMonthVal;
-      }
-
       render();
     }
 
     // Attach control listeners once
     function setupEventListeners() {
-      document.getElementById('groundSelect').addEventListener('change', (e) => {
-        const val = e.target.value;
-        document.querySelectorAll('.ground-chip').forEach(c => {
-          c.classList.toggle('active', c.textContent.includes(val === 'ALL' ? '全て' : val.substring(0, 4)));
-        });
-        render();
-      });
-      document.getElementById('monthSelect').addEventListener('change', render);
       document.getElementById('dayTypeSelect').addEventListener('change', render);
-      document.getElementById('timeSlotSelect').addEventListener('change', render);
-      document.getElementById('prefCourtSelect').addEventListener('change', render);
 
       const toggleBtn = document.getElementById('toggleAvailableOnly');
       toggleBtn.addEventListener('click', () => {
@@ -1007,38 +1032,27 @@
     }
 
     function getFilteredData() {
-      const activeData = currentSource === 'city' ? cityData : prefData;
-      if (!activeData || !activeData.data) return [];
+      if (!allData || allData.length === 0) return [];
 
-      const groundVal = document.getElementById('groundSelect').value;
-      const monthVal = document.getElementById('monthSelect').value;
+      const groundVal = currentGroundFilter;
       const dayTypeVal = document.getElementById('dayTypeSelect').value;
-      const timeSlotVal = document.getElementById('timeSlotSelect').value;
-      const prefCourtVal = document.getElementById('prefCourtSelect').value;
+      const todayStr = getTodayString();
+      const [curMonth, nextMonth] = getCurrentAndNextMonthStrings();
 
-      return activeData.data.filter(item => {
-        // Ground Filter (City mode)
-        if (currentSource === 'city' && groundVal !== 'ALL') {
-          if (item.groundName !== groundVal) return false;
-        }
+      return allData.filter(item => {
+        // 当月と翌月のみ表示
+        const itemMonth = item.date.substring(0, 7);
+        if (itemMonth !== curMonth && itemMonth !== nextMonth) return false;
 
-        // Court Filter (Pref mode)
-        if (currentSource === 'pref') {
-          if (prefCourtVal === 'BASEBALL' && !item.subFacilityName.includes('野球')) return false;
-          if (prefCourtVal === 'SOFTBALL' && !item.subFacilityName.includes('ソフト')) return false;
-        }
+        // その日（当日）以降の日付のみ表示（過去日は除外）
+        if (item.date < todayStr) return false;
 
-        // Month Filter
-        if (monthVal !== 'ALL' && !item.date.startsWith(monthVal)) return false;
+        // Ground Filter
+        if (groundVal !== 'ALL' && item.groundName !== groundVal) return false;
 
         // Day Type Filter: Default is WEEKEND_HOLIDAY (土日・祝日のみ)
         if (dayTypeVal === 'WEEKEND_HOLIDAY') {
           if (!isWeekendOrHoliday(item.date)) return false;
-        }
-
-        // Time Slot Filter (午前 / 午後)
-        if (timeSlotVal !== 'ALL') {
-          if (item.timeSlotType !== timeSlotVal) return false;
         }
 
         // Available Only Toggle (○ or △)
@@ -1058,18 +1072,11 @@
       const headerRow = document.getElementById('matrixHeaderRow');
       const tbody = document.getElementById('matrixTableBody');
 
-      if (currentSource === 'city') {
-        headerRow.innerHTML = `
-          <th class="ground-name-cell">グラウンド</th>
-          <th class="court-name-cell">面名</th>
-          <th class="time-type-cell">区分</th>
-        `;
-      } else {
-        headerRow.innerHTML = `
-          <th class="court-name-cell" style="left:0;">面名</th>
-          <th class="time-type-cell" style="left:170px;">区分</th>
-        `;
-      }
+      headerRow.innerHTML = `
+        <th class="ground-name-cell">グラ<br>ウンド</th>
+        <th class="court-name-cell">面名</th>
+        <th class="time-type-cell">区分</th>
+      `;
       tbody.innerHTML = '';
 
       if (items.length === 0) {
@@ -1079,7 +1086,6 @@
 
       // Unique Dates
       const dates = Array.from(new Set(items.map(i => i.date))).sort();
-      const timeSlotVal = document.getElementById('timeSlotSelect').value;
 
       // Build Date Column Headers with Holiday detection
       dates.forEach(dStr => {
@@ -1108,133 +1114,81 @@
       // Quick Lookup Map
       const map = new Map();
       items.forEach(i => {
-        const courtId = i.courtName || i.subFacilityName;
-        const gName = i.groundName || '秋ヶ瀬公園';
-        map.set(`${gName}_${courtId}_${i.timeSlotType}_${i.date}`, i);
+        map.set(`${i.groundName}_${i.courtName}_${i.timeSlotType}_${i.date}`, i);
       });
 
-      // Determine which time slot rows to show per court
-      let slotsToShow = ['午前', '午後'];
-      if (timeSlotVal === '午前') slotsToShow = ['午前'];
-      if (timeSlotVal === '午後') slotsToShow = ['午後'];
+      // Always show both morning and afternoon
+      const slotsToShow = ['午前', '午後'];
 
-      if (currentSource === 'city') {
-        // Group by Ground -> Courts
-        const groundCourtMap = new Map();
-        items.forEach(i => {
-          if (!groundCourtMap.has(i.groundName)) {
-            groundCourtMap.set(i.groundName, new Set());
-          }
-          groundCourtMap.get(i.groundName).add(i.courtName || i.subFacilityName);
-        });
+      // Group by Ground -> Courts
+      const groundCourtMap = new Map();
+      items.forEach(i => {
+        if (!groundCourtMap.has(i.groundName)) {
+          groundCourtMap.set(i.groundName, new Set());
+        }
+        groundCourtMap.get(i.groundName).add(i.courtName);
+      });
 
-        groundCourtMap.forEach((courtSet, gName) => {
-          const courts = Array.from(courtSet).sort();
-          const groundTotalRows = courts.length * slotsToShow.length;
-          let isFirstCourtOfGround = true;
+      // Sort grounds according to GROUND_ORDER
+      const activeGrounds = Array.from(groundCourtMap.keys()).sort((a, b) => {
+        const idxA = GROUND_ORDER.indexOf(a);
+        const idxB = GROUND_ORDER.indexOf(b);
+        return (idxA !== -1 ? idxA : 999) - (idxB !== -1 ? idxB : 999);
+      });
 
-          courts.forEach((court, cIdx) => {
-            slotsToShow.forEach((timeSlotType, tIdx) => {
-              const tr = document.createElement('tr');
+      activeGrounds.forEach(gName => {
+        const courts = Array.from(groundCourtMap.get(gName)).sort();
+        const groundTotalRows = courts.length * slotsToShow.length;
+        let isFirstCourtOfGround = true;
 
-              // Ground Name Cell (Rowspan for all courts and slots of this ground)
-              if (isFirstCourtOfGround && tIdx === 0) {
-                const tdGround = document.createElement('td');
-                tdGround.className = 'ground-name-cell';
-                tdGround.textContent = gName;
-                tdGround.rowSpan = groundTotalRows;
-                tr.appendChild(tdGround);
-                isFirstCourtOfGround = false;
-              }
-
-              // Court Name Cell (Rowspan for morning & afternoon)
-              if (tIdx === 0) {
-                const tdCourt = document.createElement('td');
-                tdCourt.className = 'court-name-cell';
-                tdCourt.textContent = court;
-                if (slotsToShow.length > 1) {
-                  tdCourt.rowSpan = slotsToShow.length;
-                }
-                tr.appendChild(tdCourt);
-              }
-
-              // Time Slot Pill Cell
-              const tdTime = document.createElement('td');
-              tdTime.className = 'time-type-cell';
-              const pillClass = timeSlotType === '午前' ? 'morning' : 'afternoon';
-              tdTime.innerHTML = `<span class="time-pill ${pillClass}">${timeSlotType}</span>`;
-              tr.appendChild(tdTime);
-
-              // Date Cells
-              dates.forEach(date => {
-                const td = document.createElement('td');
-                const slot = map.get(`${gName}_${court}_${timeSlotType}_${date}`);
-
-                if (slot) {
-                  let badgeClass = 'badge-none';
-                  if (slot.status === 'available' || slot.status === '1' || slot.status === '7') badgeClass = 'badge-open';
-                  else if (slot.status === 'partial' || slot.status === '4') badgeClass = 'badge-lottery';
-                  else if (slot.status === 'full' || slot.status === '8' || slot.status === '0' || slot.status === '6') badgeClass = 'badge-closed';
-
-                  const badge = document.createElement('span');
-                  badge.className = `status-badge ${badgeClass}`;
-                  badge.textContent = slot.symbol;
-                  const hol = getJapaneseHoliday(slot.date);
-                  badge.title = `${gName} ${court} [${slot.timeSlotType}] ${slot.date}${hol ? ' (' + hol + ')' : ''} : ${slot.statusText}`;
-                  badge.onclick = () => openModal(slot);
-                  td.appendChild(badge);
-                } else {
-                  td.textContent = '-';
-                  td.style.color = '#334155';
-                }
-                tr.appendChild(td);
-              });
-
-              tbody.appendChild(tr);
-            });
-          });
-        });
-      } else {
-        // Pref mode (Akigase Park)
-        const courts = Array.from(new Set(items.map(i => i.subFacilityName))).sort();
-
-        courts.forEach(court => {
-          slotsToShow.forEach((timeSlotType, index) => {
+        courts.forEach((court, cIdx) => {
+          slotsToShow.forEach((timeSlotType, tIdx) => {
             const tr = document.createElement('tr');
 
-            if (index === 0) {
-              const tdName = document.createElement('td');
-              tdName.className = 'court-name-cell';
-              tdName.style.left = '0';
-              tdName.textContent = court;
-              if (slotsToShow.length > 1) {
-                tdName.rowSpan = slotsToShow.length;
-              }
-              tr.appendChild(tdName);
+            // Ground Name Cell (Rowspan for all courts and slots of this ground)
+            if (isFirstCourtOfGround && tIdx === 0) {
+              const tdGround = document.createElement('td');
+              tdGround.className = 'ground-name-cell';
+              tdGround.innerHTML = formatCellText(gName, 4);
+              tdGround.rowSpan = groundTotalRows;
+              tr.appendChild(tdGround);
+              isFirstCourtOfGround = false;
             }
 
+            // Court Name Cell (Rowspan for morning & afternoon)
+            if (tIdx === 0) {
+              const tdCourt = document.createElement('td');
+              tdCourt.className = 'court-name-cell';
+              tdCourt.innerHTML = formatCellText(court, 4);
+              if (slotsToShow.length > 1) {
+                tdCourt.rowSpan = slotsToShow.length;
+              }
+              tr.appendChild(tdCourt);
+            }
+
+            // Time Slot Pill Cell
             const tdTime = document.createElement('td');
             tdTime.className = 'time-type-cell';
-            tdTime.style.left = '170px';
             const pillClass = timeSlotType === '午前' ? 'morning' : 'afternoon';
             tdTime.innerHTML = `<span class="time-pill ${pillClass}">${timeSlotType}</span>`;
             tr.appendChild(tdTime);
 
+            // Date Cells
             dates.forEach(date => {
               const td = document.createElement('td');
-              const slot = map.get(`秋ヶ瀬公園_${court}_${timeSlotType}_${date}`);
+              const slot = map.get(`${gName}_${court}_${timeSlotType}_${date}`);
 
               if (slot) {
                 let badgeClass = 'badge-none';
-                if (slot.status === '1' || slot.status === '7') badgeClass = 'badge-open';
-                else if (slot.status === '4') badgeClass = 'badge-lottery';
-                else if (slot.status === '8' || slot.status === '0' || slot.status === '6') badgeClass = 'badge-closed';
+                if (slot.status === 'available' || slot.status === '1' || slot.status === '7') badgeClass = 'badge-open';
+                else if (slot.status === 'partial' || slot.status === '4') badgeClass = 'badge-lottery';
+                else if (slot.status === 'full' || slot.status === '8' || slot.status === '0' || slot.status === '6') badgeClass = 'badge-closed';
 
                 const badge = document.createElement('span');
                 badge.className = `status-badge ${badgeClass}`;
                 badge.textContent = slot.symbol;
                 const hol = getJapaneseHoliday(slot.date);
-                badge.title = `${slot.subFacilityName} [${slot.timeSlotType}] ${slot.date}${hol ? ' (' + hol + ')' : ''} : ${slot.statusText}`;
+                badge.title = `${gName} ${court} [${slot.timeSlotType}] ${slot.date}${hol ? ' (' + hol + ')' : ''} : ${slot.statusText}`;
                 badge.onclick = () => openModal(slot);
                 td.appendChild(badge);
               } else {
@@ -1247,44 +1201,44 @@
             tbody.appendChild(tr);
           });
         });
-      }
+      });
     }
 
     function openModal(slot) {
       const modal = document.getElementById('detailModal');
-      const titleName = slot.groundName ? `${slot.groundName} ${slot.courtName || slot.subFacilityName}` : slot.subFacilityName;
-      document.getElementById('modalTitle').textContent = `${titleName} の空き詳細`;
-      
+      const isPref = slot.source === 'pref' || slot.groundName === '秋ヶ瀬公園';
+      const facilityLabel = `${slot.groundName} ${slot.courtName || slot.subFacilityName}`;
+      document.getElementById('modalTitle').textContent = `${facilityLabel} の空き詳細`;
+
       const dayNames = ['日', '月', '火', '水', '木', '金', '土'];
       const dt = new Date(slot.date);
       const dayOfWeek = dayNames[dt.getDay()];
       const holidayName = getJapaneseHoliday(slot.date);
       const dayLabel = holidayName ? `${dayOfWeek}・祝 (${holidayName})` : dayOfWeek;
 
-      const timeSlotBadge = slot.timeSlotType === '午前' 
-        ? '<span class="time-pill morning">午前</span>' 
+      const timeSlotBadge = slot.timeSlotType === '午前'
+        ? '<span class="time-pill morning">午前</span>'
         : '<span class="time-pill afternoon">午後</span>';
 
-      const timeRange = slot.startTime && slot.endTime 
+      const timeRange = slot.startTime && slot.endTime
         ? `${slot.startTime.substring(0, 5)} ～ ${slot.endTime.substring(0, 5)}`
         : (slot.timeSlotType === '午前' ? '09:00 ～ 13:00' : '13:00 ～ 17:00');
 
-      const isCity = currentSource === 'city';
-      document.getElementById('modalReserveLink').href = isCity 
-        ? 'https://saitama.rsv.ws-scs.jp/web/' 
-        : 'https://saitama-pref-reserve.michi-shiru.jp/facilitysearchcondition';
-      document.getElementById('modalReserveLink').innerHTML = isCity
-        ? '<i class="fa-solid fa-arrow-up-right-from-square"></i> さいたま市公共施設予約システムで予約'
-        : '<i class="fa-solid fa-arrow-up-right-from-square"></i> 埼玉県営予約システムで予約・申請';
+      document.getElementById('modalReserveLink').href = isPref
+        ? 'https://saitama-pref-reserve.michi-shiru.jp/facilitysearchcondition'
+        : 'https://saitama.rsv.ws-scs.jp/web/';
+      document.getElementById('modalReserveLink').innerHTML = isPref
+        ? '<i class="fa-solid fa-arrow-up-right-from-square"></i> 埼玉県営予約システムで予約・申請'
+        : '<i class="fa-solid fa-arrow-up-right-from-square"></i> さいたま市公共施設予約システムで予約';
 
       document.getElementById('modalBody').innerHTML = `
-        <p style="margin-bottom:8px;"><strong>グラウンド/施設:</strong> ${titleName}</p>
+        <p style="margin-bottom:8px;"><strong>施設/グラウンド:</strong> ${facilityLabel} (${isPref ? '埼玉県営' : 'さいたま市'})</p>
         <p style="margin-bottom:8px;"><strong>利用日:</strong> ${slot.date.replace(/-/g, '/')} (${dayLabel})</p>
         <p style="margin-bottom:8px;"><strong>時間区分:</strong> ${timeSlotBadge} ${timeRange}</p>
         <p style="margin-bottom:8px;"><strong>ステータス:</strong> ${slot.statusText} (${slot.symbol})</p>
         ${slot.lotteryAppNum ? `<p style="margin-bottom:8px;"><strong>抽選応募件数:</strong> ${slot.lotteryAppNum}件</p>` : ''}
         <p style="margin-top:12px; font-size:0.82rem; color:var(--text-muted);">
-          ※予約を行うには、各予約システムの利用者登録カードが必要です。
+          ※予約を行うには、${isPref ? '埼玉県営' : 'さいたま市'}の施設予約利用者登録カードが必要です。
         </p>
       `;
       modal.classList.add('active');
@@ -1294,12 +1248,148 @@
       document.getElementById('detailModal').classList.remove('active');
     }
 
+    // Refresh & Cooldown Management (30分制限)
+    let refreshCooldownRemaining = 0;
+    let isScrapingActive = false;
+    let cooldownTimerId = null;
+
+    async function checkRefreshStatus() {
+      try {
+        const res = await fetch('/api/status', { cache: 'no-store' });
+        if (!res.ok) return;
+        const status = await res.json();
+        updateRefreshButtonUI(status);
+      } catch (e) {
+        console.warn('Refresh API status not available:', e);
+      }
+    }
+
+    function updateRefreshButtonUI(status) {
+      const btn = document.getElementById('btnRefresh');
+      const text = document.getElementById('refreshBtnText');
+      if (!btn || !text) return;
+      const icon = btn.querySelector('i');
+
+      isScrapingActive = status.is_running;
+      refreshCooldownRemaining = status.remaining_seconds;
+
+      if (isScrapingActive) {
+        btn.disabled = true;
+        btn.className = 'btn-refresh running';
+        if (icon) icon.className = 'fa-solid fa-rotate fa-spin';
+        text.textContent = '更新中... (約1〜2分)';
+        btn.title = '現在スクレイピングを実行中です。完了までお待ちください。';
+      } else if (refreshCooldownRemaining > 0) {
+        btn.disabled = true;
+        btn.className = 'btn-refresh cooldown';
+        if (icon) icon.className = 'fa-regular fa-clock';
+        const min = Math.ceil(refreshCooldownRemaining / 60);
+        text.textContent = `あと${min}分で更新可`;
+        btn.title = `前回更新から30分経過するまで更新できません（残り約${min}分）。`;
+      } else {
+        btn.disabled = false;
+        btn.className = 'btn-refresh';
+        if (icon) icon.className = 'fa-solid fa-rotate';
+        text.textContent = '最新データ更新';
+        btn.title = 'スクレイパーを実行して最新の空き状況を取得します';
+      }
+    }
+
+    function startCooldownLocalTimer() {
+      if (cooldownTimerId) clearInterval(cooldownTimerId);
+      cooldownTimerId = setInterval(() => {
+        if (!isScrapingActive && refreshCooldownRemaining > 0) {
+          refreshCooldownRemaining--;
+          const btn = document.getElementById('btnRefresh');
+          const text = document.getElementById('refreshBtnText');
+          if (refreshCooldownRemaining <= 0) {
+            checkRefreshStatus();
+          } else if (btn && text) {
+            const min = Math.ceil(refreshCooldownRemaining / 60);
+            text.textContent = `あと${min}分で更新可`;
+          }
+        }
+      }, 1000);
+    }
+
+    async function triggerRefreshScraper() {
+      if (isScrapingActive) return;
+      if (refreshCooldownRemaining > 0) {
+        const min = Math.ceil(refreshCooldownRemaining / 60);
+        alert(`前回更新から30分経過するまで更新できません。\n（次回更新可能まで あと約${min}分です）`);
+        return;
+      }
+
+      const confirmed = confirm(
+        '最新の空き状況をスクレイピングで取得しますか？\n\n' +
+        '※ 秋ヶ瀬公園およびさいたま市全施設の巡回に約1〜2分かかります。\n' +
+        '※ 取得完了後、画面は自動的に最新情報に更新されます。'
+      );
+      if (!confirmed) return;
+
+      const btn = document.getElementById('btnRefresh');
+      const text = document.getElementById('refreshBtnText');
+      const icon = btn?.querySelector('i');
+      if (btn) {
+        btn.disabled = true;
+        btn.className = 'btn-refresh running';
+        if (icon) icon.className = 'fa-solid fa-rotate fa-spin';
+        if (text) text.textContent = '更新中... (約1〜2分)';
+      }
+
+      try {
+        const res = await fetch('/api/refresh', { method: 'POST' });
+        const data = await res.json();
+
+        if (res.status === 429) {
+          alert(data.error || '前回更新から30分経過していません。');
+          checkRefreshStatus();
+          return;
+        }
+
+        if (!res.ok) {
+          alert('エラーが発生しました: ' + (data.error || 'サーバーエラー'));
+          checkRefreshStatus();
+          return;
+        }
+
+        // Poll /api/status until completed
+        isScrapingActive = true;
+        const pollInterval = setInterval(async () => {
+          try {
+            const pollRes = await fetch('/api/status', { cache: 'no-store' });
+            if (!pollRes.ok) return;
+            const pollData = await pollRes.json();
+            if (!pollData.is_running) {
+              clearInterval(pollInterval);
+              isScrapingActive = false;
+              updateRefreshButtonUI(pollData);
+
+              if (pollData.last_scrape_result && pollData.last_scrape_result.status === 'success') {
+                alert('最新データの取得が完了しました！画面を最新表示に更新します。');
+                await loadAllData();
+              } else {
+                alert('スクレイピングでエラーが発生した可能性があります。\n' + (pollData.last_scrape_result?.message || ''));
+                await loadAllData();
+              }
+            }
+          } catch (err) {
+            console.error('Polling error:', err);
+          }
+        }, 3000);
+
+      } catch (err) {
+        alert('更新リクエストの送信に失敗しました: ' + err.message);
+        checkRefreshStatus();
+      }
+    }
+
     // Initialize on page load
     setupEventListeners();
-    // Load city data first, and preload pref data in background
-    loadCityData().then(() => {
-      loadPrefData();
-    });
+    loadAllData();
+    checkRefreshStatus();
+    startCooldownLocalTimer();
   </script>
 </body>
+
 </html>

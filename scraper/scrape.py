@@ -5,6 +5,11 @@ import json
 from datetime import datetime, timezone, timedelta
 from playwright.async_api import async_playwright
 
+script_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.abspath(os.path.join(script_dir, ".."))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+
 sys.stdout.reconfigure(encoding='utf-8')
 
 STATUS_MAP = {
@@ -208,6 +213,8 @@ async def run_scraper():
 
 async def main():
     target = sys.argv[1] if len(sys.argv) > 1 else "all"
+    errors = []
+
     if target in ("pref", "all"):
         print("\n==========================================")
         print(">>> 1. 埼玉県営公園（秋ヶ瀬公園）スクレイピング")
@@ -216,16 +223,25 @@ async def main():
             await run_scraper()
         except Exception as e:
             print(f"[ERROR] 埼玉県営公園スクレイピング失敗: {e}")
+            errors.append(("pref", e))
 
     if target in ("city", "all"):
         print("\n==========================================")
         print(">>> 2. さいたま市公共施設（少年野球場9箇所）スクレイピング")
         print("==========================================")
         try:
-            from scraper.saitama_city_scraper import scrape_saitama_city
+            try:
+                from scraper.saitama_city_scraper import scrape_saitama_city
+            except ImportError:
+                from saitama_city_scraper import scrape_saitama_city
             await scrape_saitama_city()
         except Exception as e:
             print(f"[ERROR] さいたま市スクレイピング失敗: {e}")
+            errors.append(("city", e))
+
+    if errors:
+        print(f"\n[ERROR] {len(errors)} 件のスクレイピングでエラーが発生しました。")
+        sys.exit(1)
 
 if __name__ == "__main__":
     asyncio.run(main())

@@ -1,15 +1,16 @@
 @echo off
-title �H�������� �󂫏󋵃��[�J���T�[�o�[
+chcp 65001 > nul
+title 野球場・ソフトボール場 空き状況ローカルサーバー
 
 echo =========================================================
-echo  �H�������� �󂫏󋵃��[�J��Web�T�[�o�[�N��
+echo  野球場・ソフトボール場 空き状況ローカルWebサーバー起動
 echo =========================================================
 echo.
-echo [1/2] �u���E�U�� http://localhost:8000 ���J���܂�...
+echo [1/2] ブラウザで http://localhost:8000 を開きます...
 start http://localhost:8000
 
-echo [2/2] ���[�J��Web�T�[�o�[���N�����܂� (��~����ɂ� Ctrl+C)...
+echo [2/2] ローカルWebサーバーを起動します (停止するには Ctrl+C)...
 echo.
-python -m http.server 8000 --directory docs
+python server.py
 
 pause
