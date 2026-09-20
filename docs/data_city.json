@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-20 19:47:29 JST",
+  "updatedAt": "2026-09-21 08:14:52 JST",
   "facilityCategory": "さいたま市公共施設予約システム（少年野球場）",
   "targetUrl": "https://saitama.rsv.ws-scs.jp/web/rsvWTransInstSrchBuildAction.do",
   "targetGrounds": [
@@ -12227,9 +12227,9 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -12243,9 +12243,9 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -12451,8 +12451,8 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "closed",
-      "statusText": "休館/保守",
+      "status": "unavailable",
+      "statusText": "期間外",
       "symbol": "-",
       "available": false
     },
@@ -12467,8 +12467,8 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "closed",
-      "statusText": "休館/保守",
+      "status": "unavailable",
+      "statusText": "期間外",
       "symbol": "-",
       "available": false
     },
@@ -12483,8 +12483,8 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "closed",
-      "statusText": "休館/保守",
+      "status": "unavailable",
+      "statusText": "期間外",
       "symbol": "-",
       "available": false
     },
@@ -12499,8 +12499,8 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "closed",
-      "statusText": "休館/保守",
+      "status": "unavailable",
+      "statusText": "期間外",
       "symbol": "-",
       "available": false
     },
@@ -12739,8 +12739,8 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "closed",
-      "statusText": "休館/保守",
+      "status": "unavailable",
+      "statusText": "期間外",
       "symbol": "-",
       "available": false
     },
@@ -12755,8 +12755,8 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "closed",
-      "statusText": "休館/保守",
+      "status": "unavailable",
+      "statusText": "期間外",
       "symbol": "-",
       "available": false
     },
@@ -12771,8 +12771,8 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "closed",
-      "statusText": "休館/保守",
+      "status": "unavailable",
+      "statusText": "期間外",
       "symbol": "-",
       "available": false
     },
@@ -12787,8 +12787,8 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "closed",
-      "statusText": "休館/保守",
+      "status": "unavailable",
+      "statusText": "期間外",
       "symbol": "-",
       "available": false
     },
