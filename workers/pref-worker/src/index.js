@@ -207,9 +207,93 @@ export default {
       });
     }
 
+    // 4. GitHub Actions ワークフロー手動キック用エンドポイント: /trigger-scrape
+    if (url.pathname === "/trigger-scrape") {
+      const force = url.searchParams.get("force") === "true";
+      const result = await triggerGitHubWorkflow(env, { force });
+      return new Response(JSON.stringify(result, null, 2), {
+        status: result.success ? 200 : (result.status || 500),
+        headers: {
+          ...CORS_HEADERS,
+          "Content-Type": "application/json; charset=utf-8",
+        },
+      });
+    }
+
     return new Response(JSON.stringify({ error: "Not Found" }), {
       status: 404,
       headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
     });
   },
+
+  /**
+   * Cloudflare Cron Triggers により定刻に呼び出されるハンドラ
+   */
+  async scheduled(event, env, ctx) {
+    console.log(`[Cron] Triggered at ${new Date().toISOString()}, cron: ${event.cron}`);
+    ctx.waitUntil(
+      triggerGitHubWorkflow(env, { force: false })
+        .then((res) => {
+          console.log("[Cron] Result:", JSON.stringify(res));
+        })
+        .catch((err) => {
+          console.error("[Cron] Error executing triggerGitHubWorkflow:", err);
+        })
+    );
+  },
 };
+
+/**
+ * GitHub API 経由で Actions ワークフロー (workflow_dispatch) をキック
+ */
+async function triggerGitHubWorkflow(env, options = {}) {
+  const owner = env.GITHUB_OWNER || "KazukiAoyama";
+  const repo = env.GITHUB_REPO || "playright1";
+  const workflowId = env.WORKFLOW_ID || "scrape.yml";
+  const pat = env.GITHUB_PAT;
+
+  if (!pat) {
+    const msg = "GITHUB_PAT が設定されていません。wrangler secret put GITHUB_PAT で登録してください。";
+    console.error(`[GitHub Trigger] ${msg}`);
+    return { success: false, error: msg };
+  }
+
+  const url = `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflowId}/dispatches`;
+  const force = options.force === true;
+
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${pat}`,
+        "Accept": "application/vnd.github+json",
+        "User-Agent": "Cloudflare-Worker-Scheduler",
+        "X-GitHub-Api-Version": "2022-11-28",
+      },
+      body: JSON.stringify({
+        ref: "main",
+        inputs: {
+          force: String(force),
+        },
+      }),
+    });
+
+    if (res.status === 204) {
+      const msg = `Workflow (${workflowId}) triggered successfully! (force=${force})`;
+      console.log(`[GitHub Trigger] ${msg}`);
+      return { success: true, message: msg, timestamp: new Date().toISOString() };
+    } else {
+      const errorText = await res.text();
+      console.error(`[GitHub Trigger] Failed: HTTP ${res.status}`, errorText);
+      return {
+        success: false,
+        status: res.status,
+        error: errorText,
+      };
+    }
+  } catch (e) {
+    console.error(`[GitHub Trigger] Exception:`, e);
+    return { success: false, error: String(e) };
+  }
+}
+

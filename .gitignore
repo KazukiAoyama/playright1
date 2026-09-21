@@ -40,3 +40,6 @@ Desktop.ini
 
 # Temporary scratch
 scratch/
+
+# Cloudflare Wrangler
+.wrangler/
