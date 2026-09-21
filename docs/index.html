@@ -892,8 +892,8 @@
       return [curMonth, nextMonth];
     }
 
-    // Cloudflare Worker の URL (デプロイ後に設定。設定時は GitHub Pages からもオンタイム即時取得が可能になります)
-    const CLOUDFLARE_WORKER_URL = '';
+    // Cloudflare Worker の URL (エッジから埼玉県営 Direct API をオンタイム中継)
+    const CLOUDFLARE_WORKER_URL = 'https://saitama-pref-worker.kazuki-aoyama.workers.dev';
 
     // Load both Saitama City and Prefectural Park data
     // City is read from periodically updated data_city.json
