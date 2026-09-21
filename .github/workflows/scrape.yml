@@ -47,16 +47,16 @@ jobs:
         run: |
           python -m playwright install chromium --with-deps
 
-      - name: Run Scraper (Saitama City)
+      - name: Run Scraper
         if: github.event_name == 'workflow_dispatch' || steps.check_schedule.outputs.should_run == 'true'
         run: |
-          python scraper/scrape.py city
+          python scraper/scrape.py all
 
       - name: Commit and Push updated data
         if: (github.event_name == 'workflow_dispatch' || steps.check_schedule.outputs.should_run == 'true') && always() && steps.check_schedule.conclusion == 'success'
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: 'auto: update availability data (city)'
-          file_pattern: 'docs/data_city.json'
+          commit_message: 'auto: update availability data (pref & city)'
+          file_pattern: 'docs/*.json'
           commit_user_name: 'github-actions[bot]'
           commit_user_email: 'github-actions[bot]@users.noreply.github.com'

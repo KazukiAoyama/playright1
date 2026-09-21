@@ -56,10 +56,10 @@ def parse_updated_at(raw_str):
 
 def get_all_data_timestamps(project_root):
     """
-    Check docs/data_city.json and return a dictionary:
-    { "data_city.json": datetime or None }
+    Check docs/data.json and docs/data_city.json and return a dictionary:
+    { "data.json": datetime or None, "data_city.json": datetime or None }
     """
-    candidates = ["data_city.json"]
+    candidates = ["data.json", "data_city.json"]
     results = {}
     for filename in candidates:
         file_path = os.path.join(project_root, "docs", filename)
