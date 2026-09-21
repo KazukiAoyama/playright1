@@ -1,0 +1,20 @@
+{
+  "name": "saitama-pref-reservation-worker",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker proxy for Saitama Prefecture Park Reservation API",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "keywords": [
+    "cloudflare-workers",
+    "scraper",
+    "reservation"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^3.100.0"
+  }
+}

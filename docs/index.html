@@ -892,15 +892,45 @@
       return [curMonth, nextMonth];
     }
 
+    // Cloudflare Worker の URL (デプロイ後に設定。設定時は GitHub Pages からもオンタイム即時取得が可能になります)
+    const CLOUDFLARE_WORKER_URL = '';
+
     // Load both Saitama City and Prefectural Park data
     // City is read from periodically updated data_city.json
-    // Pref (Akigase Park) is scraped on-time via /api/pref on page load (with fallback to data.json)
+    // Pref (Akigase Park) is scraped on-time via Cloudflare Worker or local /api/pref (with fallback to data.json)
     async function loadAllData() {
       showLoading('さいたま市の予約データ読込 ＆ 秋ヶ瀬公園の最新空き状況をオンタイム取得中...');
       try {
         const cityPromise = fetch('./data_city.json?t=' + Date.now()).catch(() => null);
 
         const prefPromise = (async () => {
+          // 1. Cloudflare Worker が設定されている場合: エッジから高速オンタイム取得 (GitHub Pagesでも動作)
+          if (CLOUDFLARE_WORKER_URL) {
+            try {
+              const base = CLOUDFLARE_WORKER_URL.replace(/\/+$/, '');
+              const [p1Res, p2Res] = await Promise.all([
+                fetch(`${base}/api/pref?days=30&offset=0&t=` + Date.now(), { cache: 'no-store' }),
+                fetch(`${base}/api/pref?days=30&offset=30&t=` + Date.now(), { cache: 'no-store' })
+              ]);
+              if (p1Res.ok) {
+                const p1 = await p1Res.json();
+                let combinedSlots = p1.data || [];
+                if (p2Res.ok) {
+                  const p2 = await p2Res.json();
+                  combinedSlots = [...combinedSlots, ...(p2.data || [])];
+                }
+                return {
+                  updatedAt: p1.updatedAt || (new Date().toISOString()),
+                  data: combinedSlots,
+                  _isLive: true
+                };
+              }
+            } catch (err) {
+              console.warn('Cloudflare Worker fetch failed, falling back...', err);
+            }
+          }
+
+          // 2. ローカルサーバー API (/api/pref) が利用可能な場合: ローカルからオンタイム取得
           try {
             const apiRes = await fetch('/api/pref?t=' + Date.now(), { cache: 'no-store' });
             if (apiRes.ok) {
@@ -909,8 +939,10 @@
               return data;
             }
           } catch (e) {
-            // Local server API unavailable, proceed to fallback
+            // Local server API unavailable, proceed to static fallback
           }
+
+          // 3. 静的ファイル (docs/data.json) へのフォールバック
           try {
             const fallbackRes = await fetch('./data.json?t=' + Date.now());
             if (fallbackRes.ok) {
