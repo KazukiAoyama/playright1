@@ -4,6 +4,7 @@ import time
 import json
 import threading
 import subprocess
+import asyncio
 from datetime import datetime
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
@@ -23,6 +24,45 @@ COOLDOWN_SECONDS = 30 * 60  # 30分 = 1800秒
 state_lock = threading.Lock()
 is_scraping_running = False
 last_scrape_status = {"status": "idle", "message": ""}
+
+# 県スクレイパー（秋ヶ瀬公園）オンタイム取得用キャッシュとロック
+pref_lock = threading.Lock()
+pref_cache = {
+    "timestamp": 0,
+    "data": None
+}
+PREF_CACHE_TTL = 30  # 30秒以内の再アクセスなら直近取得データを即時返却
+
+def get_pref_data_live(force=False):
+    """Fetches real-time prefectural park (Akigase) data via Direct API with caching."""
+    global pref_cache
+    now = time.time()
+    
+    with pref_lock:
+        if not force and pref_cache["data"] and (now - pref_cache["timestamp"] < PREF_CACHE_TTL):
+            return pref_cache["data"], False
+        
+        print(f"[{datetime.now().strftime('%H:%M:%S')}] On-time scraping Akigase Park data (Direct API)...")
+        try:
+            if BASE_DIR not in sys.path:
+                sys.path.insert(0, BASE_DIR)
+            from scraper.scrape import run_scraper
+            result = asyncio.run(run_scraper())
+            pref_cache["timestamp"] = time.time()
+            pref_cache["data"] = result
+            return result, True
+        except Exception as e:
+            print(f"[ERROR] On-time pref scraping failed: {e}")
+            # Fallback to existing data.json if available
+            fallback_file = os.path.join(DOCS_DIR, "data.json")
+            if os.path.exists(fallback_file):
+                try:
+                    with open(fallback_file, "r", encoding="utf-8") as f:
+                        data = json.load(f)
+                    return data, False
+                except Exception:
+                    pass
+            raise e
 
 def get_last_updated_timestamp():
     """Returns the newest modification time of the data json files."""
@@ -84,8 +124,17 @@ class CustomAppHandler(SimpleHTTPRequestHandler):
         super().__init__(*args, directory=DOCS_DIR, **kwargs)
 
     def do_GET(self):
-        if self.path == "/api/status":
+        url_path = self.path.split("?")[0]
+        if url_path == "/api/status":
             self.send_json_response(self.get_status_payload())
+            return
+        elif url_path == "/api/pref":
+            try:
+                force = "force=1" in self.path or "force=true" in self.path
+                data, fetched_live = get_pref_data_live(force=force)
+                self.send_json_response(data)
+            except Exception as e:
+                self.send_json_response({"error": str(e)}, status_code=500)
             return
         super().do_GET()
 
@@ -162,7 +211,7 @@ def main():
     print("  野球場・ソフトボール場 空き状況ローカルサーバー")
     print(f"  URL: http://localhost:{PORT}")
     print(f"  配信ディレクトリ: {DOCS_DIR}")
-    print("  API: GET /api/status, POST /api/refresh (30分間隔制限)")
+    print("  API: GET /api/pref (秋ヶ瀬公園オンタイム取得), GET /api/status, POST /api/refresh")
     print("  停止するには Ctrl+C を押してください")
     print("=" * 60)
     try:

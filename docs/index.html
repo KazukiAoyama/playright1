@@ -892,14 +892,37 @@
       return [curMonth, nextMonth];
     }
 
-    // Load both Saitama City and Prefectural Park data in parallel
+    // Load both Saitama City and Prefectural Park data
+    // City is read from periodically updated data_city.json
+    // Pref (Akigase Park) is scraped on-time via /api/pref on page load (with fallback to data.json)
     async function loadAllData() {
-      showLoading('さいたま市および秋ヶ瀬公園（埼玉県営）の空き状況データを読み込んでいます...');
+      showLoading('さいたま市の予約データ読込 ＆ 秋ヶ瀬公園の最新空き状況をオンタイム取得中...');
       try {
-        const [cityRes, prefRes] = await Promise.all([
-          fetch('./data_city.json?t=' + Date.now()).catch(() => null),
-          fetch('./data.json?t=' + Date.now()).catch(() => null)
-        ]);
+        const cityPromise = fetch('./data_city.json?t=' + Date.now()).catch(() => null);
+
+        const prefPromise = (async () => {
+          try {
+            const apiRes = await fetch('/api/pref?t=' + Date.now(), { cache: 'no-store' });
+            if (apiRes.ok) {
+              const data = await apiRes.json();
+              data._isLive = true;
+              return data;
+            }
+          } catch (e) {
+            // Local server API unavailable, proceed to fallback
+          }
+          try {
+            const fallbackRes = await fetch('./data.json?t=' + Date.now());
+            if (fallbackRes.ok) {
+              return await fallbackRes.json();
+            }
+          } catch (e) {
+            console.warn('Fallback data.json fetch failed:', e);
+          }
+          return null;
+        })();
+
+        const [cityRes, prefJson] = await Promise.all([cityPromise, prefPromise]);
 
         let cityItems = [];
         let prefItems = [];
@@ -916,9 +939,13 @@
           }));
         }
 
-        if (prefRes && prefRes.ok) {
-          const prefJson = await prefRes.json();
-          if (prefJson.updatedAt) updateTimes.push(`県: ${prefJson.updatedAt.substring(5, 16)}`);
+        if (prefJson) {
+          if (prefJson.updatedAt) {
+            const timeStr = prefJson._isLive
+              ? `県(即時): ${prefJson.updatedAt.substring(11, 16)}`
+              : `県: ${prefJson.updatedAt.substring(5, 16)}`;
+            updateTimes.push(timeStr);
+          }
           prefItems = (prefJson.data || []).map(item => ({
             ...item,
             source: 'pref',
