@@ -1,11 +1,12 @@
 name: Scrape Saitama Park Reservation
 
 on:
-  schedule:
-    # JST 06:08 - 08:38, every 30 minutes (UTC 21:08 - 23:38 previous day)
-    - cron: '8,38 21-23 * * *'
-    # JST 09:08 - 22:38, every 30 minutes (UTC 00:08 - 13:38 current day)
-    - cron: '8,38 0-13 * * *'
+  # Cloudflare Workers の Cron Triggers から定時実行されるため内蔵scheduleは無効化（二重実行防止）
+  # schedule:
+  #   # JST 06:08 - 08:38, every 30 minutes (UTC 21:08 - 23:38 previous day)
+  #   - cron: '8,38 21-23 * * *'
+  #   # JST 09:08 - 22:38, every 30 minutes (UTC 00:08 - 13:38 current day)
+  #   - cron: '8,38 0-13 * * *'
   workflow_dispatch:
     inputs:
       force:
