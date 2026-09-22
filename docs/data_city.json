@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-22 13:40:57 JST",
+  "updatedAt": "2026-09-22 14:10:49 JST",
   "facilityCategory": "さいたま市公共施設予約システム（少年野球場）",
   "targetUrl": "https://saitama.rsv.ws-scs.jp/web/rsvWTransInstSrchBuildAction.do",
   "targetGrounds": [
@@ -52,9 +52,9 @@
     }
   ],
   "totalSlots": 2440,
-  "availableSlotsCount": 588,
+  "availableSlotsCount": 587,
   "weekendHolidaySlots": 840,
-  "weekendHolidayAvailable": 4,
+  "weekendHolidayAvailable": 3,
   "data": [
     {
       "groundName": "さくら草公園",
@@ -14211,10 +14211,10 @@
       "holidayName": "秋分の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "full",
+      "statusText": "予約あり",
+      "symbol": "×",
+      "available": false
     },
     {
       "groundName": "八王子公園",
