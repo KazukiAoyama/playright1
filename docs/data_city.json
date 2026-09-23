@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-23 22:41:00 JST",
+  "updatedAt": "2026-09-24 06:11:01 JST",
   "facilityCategory": "さいたま市公共施設予約システム（少年野球場）",
   "targetUrl": "https://saitama.rsv.ws-scs.jp/web/rsvWTransInstSrchBuildAction.do",
   "targetGrounds": [
@@ -52,9 +52,9 @@
     }
   ],
   "totalSlots": 2440,
-  "availableSlotsCount": 586,
+  "availableSlotsCount": 584,
   "weekendHolidaySlots": 840,
-  "weekendHolidayAvailable": 2,
+  "weekendHolidayAvailable": 0,
   "data": [
     {
       "groundName": "さくら草公園",
@@ -14147,9 +14147,9 @@
       "holidayName": "秋分の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14163,9 +14163,9 @@
       "holidayName": "秋分の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14211,10 +14211,10 @@
       "holidayName": "秋分の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "八王子公園",
@@ -14227,9 +14227,9 @@
       "holidayName": "秋分の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14243,9 +14243,9 @@
       "holidayName": "秋分の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14259,9 +14259,9 @@
       "holidayName": "秋分の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14275,9 +14275,9 @@
       "holidayName": "秋分の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14291,9 +14291,9 @@
       "holidayName": "秋分の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14307,9 +14307,9 @@
       "holidayName": "秋分の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14323,9 +14323,9 @@
       "holidayName": "秋分の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14339,9 +14339,9 @@
       "holidayName": "秋分の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14355,9 +14355,9 @@
       "holidayName": "秋分の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14371,9 +14371,9 @@
       "holidayName": "秋分の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14387,9 +14387,9 @@
       "holidayName": "秋分の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14403,9 +14403,9 @@
       "holidayName": "秋分の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14419,9 +14419,9 @@
       "holidayName": "秋分の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14435,9 +14435,9 @@
       "holidayName": "秋分の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14451,9 +14451,9 @@
       "holidayName": "秋分の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14467,9 +14467,9 @@
       "holidayName": "秋分の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14483,9 +14483,9 @@
       "holidayName": "秋分の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14499,9 +14499,9 @@
       "holidayName": "秋分の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14515,9 +14515,9 @@
       "holidayName": "秋分の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14531,9 +14531,9 @@
       "holidayName": "秋分の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14547,9 +14547,9 @@
       "holidayName": "秋分の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14563,9 +14563,9 @@
       "holidayName": "秋分の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14579,9 +14579,9 @@
       "holidayName": "秋分の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14595,9 +14595,9 @@
       "holidayName": "秋分の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14611,9 +14611,9 @@
       "holidayName": "秋分の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14627,9 +14627,9 @@
       "holidayName": "秋分の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14643,9 +14643,9 @@
       "holidayName": "秋分の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14659,9 +14659,9 @@
       "holidayName": "秋分の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14675,9 +14675,9 @@
       "holidayName": "秋分の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14691,9 +14691,9 @@
       "holidayName": "秋分の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14707,9 +14707,9 @@
       "holidayName": "秋分の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14723,10 +14723,10 @@
       "holidayName": "秋分の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "見沼臨時グラウンド",
@@ -14739,9 +14739,9 @@
       "holidayName": "秋分の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14755,9 +14755,9 @@
       "holidayName": "秋分の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -14771,9 +14771,9 @@
       "holidayName": "秋分の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
