@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30 08:10:51 JST",
+  "updatedAt": "2026-09-30 08:41:04 JST",
   "facilityCategory": "さいたま市公共施設予約システム（少年野球場）",
   "targetUrl": "https://saitama.rsv.ws-scs.jp/web/rsvWTransInstSrchBuildAction.do",
   "targetGrounds": [
@@ -52,7 +52,7 @@
     }
   ],
   "totalSlots": 2440,
-  "availableSlotsCount": 449,
+  "availableSlotsCount": 447,
   "weekendHolidaySlots": 840,
   "weekendHolidayAvailable": 0,
   "data": [
@@ -18691,10 +18691,10 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "八王子公園",
@@ -18707,10 +18707,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "大間木公園",
