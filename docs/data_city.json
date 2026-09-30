@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30 10:11:02 JST",
+  "updatedAt": "2026-09-30 10:40:45 JST",
   "facilityCategory": "さいたま市公共施設予約システム（少年野球場）",
   "targetUrl": "https://saitama.rsv.ws-scs.jp/web/rsvWTransInstSrchBuildAction.do",
   "targetGrounds": [
@@ -52,7 +52,7 @@
     }
   ],
   "totalSlots": 2440,
-  "availableSlotsCount": 443,
+  "availableSlotsCount": 432,
   "weekendHolidaySlots": 840,
   "weekendHolidayAvailable": 0,
   "data": [
@@ -18851,10 +18851,10 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "closed",
+      "statusText": "休館/保守",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "宝来運動公園",
@@ -18867,10 +18867,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "closed",
+      "statusText": "休館/保守",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "宝来運動公園",
@@ -18883,10 +18883,10 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "closed",
+      "statusText": "休館/保守",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "宝来運動公園",
@@ -18899,10 +18899,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "closed",
+      "statusText": "休館/保守",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "浦和総合運動場",
@@ -18979,9 +18979,9 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "closed",
+      "statusText": "休館/保守",
+      "symbol": "-",
       "available": false
     },
     {
@@ -18995,9 +18995,9 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "closed",
+      "statusText": "休館/保守",
+      "symbol": "-",
       "available": false
     },
     {
@@ -19011,9 +19011,9 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "closed",
+      "statusText": "休館/保守",
+      "symbol": "-",
       "available": false
     },
     {
@@ -19027,9 +19027,9 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "closed",
+      "statusText": "休館/保守",
+      "symbol": "-",
       "available": false
     },
     {
@@ -19043,8 +19043,8 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "unavailable",
-      "statusText": "期間外",
+      "status": "closed",
+      "statusText": "休館/保守",
       "symbol": "-",
       "available": false
     },
@@ -19059,8 +19059,8 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "unavailable",
-      "statusText": "期間外",
+      "status": "closed",
+      "statusText": "休館/保守",
       "symbol": "-",
       "available": false
     },
@@ -19075,8 +19075,8 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "unavailable",
-      "statusText": "期間外",
+      "status": "closed",
+      "statusText": "休館/保守",
       "symbol": "-",
       "available": false
     },
@@ -19091,8 +19091,8 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "unavailable",
-      "statusText": "期間外",
+      "status": "closed",
+      "statusText": "休館/保守",
       "symbol": "-",
       "available": false
     },
@@ -19107,8 +19107,8 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "unavailable",
-      "statusText": "期間外",
+      "status": "closed",
+      "statusText": "休館/保守",
       "symbol": "-",
       "available": false
     },
@@ -19123,8 +19123,8 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "unavailable",
-      "statusText": "期間外",
+      "status": "closed",
+      "statusText": "休館/保守",
       "symbol": "-",
       "available": false
     },
@@ -19491,10 +19491,10 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "closed",
+      "statusText": "休館/保守",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "宝来運動公園",
@@ -19507,10 +19507,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "closed",
+      "statusText": "休館/保守",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "宝来運動公園",
@@ -19523,10 +19523,10 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "closed",
+      "statusText": "休館/保守",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "宝来運動公園",
@@ -19539,10 +19539,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "closed",
+      "statusText": "休館/保守",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "浦和総合運動場",
@@ -19779,10 +19779,10 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "closed",
+      "statusText": "休館/保守",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "西遊馬公園",
@@ -19795,10 +19795,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "closed",
+      "statusText": "休館/保守",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "西遊馬公園",
@@ -19827,10 +19827,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "full",
+      "statusText": "予約あり",
+      "symbol": "×",
+      "available": false
     },
     {
       "groundName": "見沼臨時グラウンド",
