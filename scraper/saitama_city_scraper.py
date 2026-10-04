@@ -11,7 +11,7 @@ sys.stdout.reconfigure(encoding='utf-8')
 
 TOP_URL = "https://saitama.rsv.ws-scs.jp/web/index.jsp"
 
-# Target 9 grounds specified by the user
+# Target grounds specified by the user
 TARGET_GROUNDS = [
     {"name": "荒川総合運動公園", "code": "4020"},
     {"name": "八王子公園", "code": "4110"},
@@ -22,7 +22,38 @@ TARGET_GROUNDS = [
     {"name": "宝来運動公園", "code": "4090"},
     {"name": "西遊馬公園", "code": "4050"},
     {"name": "三橋総合公園", "code": "4060"},
+    {"name": "西堀高沼公園", "code": "4220"},
 ]
+
+# Slot configurations per ground (default: 午前, 午後 / 西堀高沼公園: 午前1, 午前2, 午後1, 午後2)
+GROUND_SLOT_DEFS = {
+    "西堀高沼公園": [
+        {"type": "午前1", "start": "07:00:00", "end": "09:00:00"},
+        {"type": "午前2", "start": "09:00:00", "end": "12:00:00"},
+        {"type": "午後1", "start": "12:00:00", "end": "15:00:00"},
+        {"type": "午後2", "start": "15:00:00", "end": "18:00:00"},
+    ],
+}
+DEFAULT_SLOT_DEFS = [
+    {"type": "午前", "start": "09:00:00", "end": "13:00:00"},
+    {"type": "午後", "start": "13:00:00", "end": "17:00:00"},
+]
+
+PERIOD_NORM = {
+    "午前": "午前",
+    "午後": "午後",
+    "午前１": "午前1",
+    "午前２": "午前2",
+    "午後１": "午後1",
+    "午後２": "午後2",
+    "午前1": "午前1",
+    "午前2": "午前2",
+    "午後1": "午後1",
+    "午後2": "午後2",
+    "夜間１": "夜間1",
+    "夜間２": "夜間2",
+    "夜間": "夜間",
+}
 
 # Official Japanese Holidays 2026
 HOLIDAYS_2026 = {
@@ -83,8 +114,9 @@ def parse_week_view(html: str):
             cells = r.find_all(["th", "td"])
             if not cells:
                 continue
-            period = cells[0].get_text(strip=True)
-            if period in ["午前", "午後", "夜間１", "夜間２", "夜間"]:
+            period_raw = cells[0].get_text(strip=True)
+            period = PERIOD_NORM.get(period_raw, period_raw)
+            if period in ["午前", "午後", "午前1", "午前2", "午後1", "午後2", "夜間1", "夜間2", "夜間"]:
                 for idx, c in enumerate(cells[1:]):
                     if idx < len(days_info):
                         y, m, d = days_info[idx]
@@ -180,6 +212,8 @@ def parse_calendar_html(html: str, ground_name: str, resolved_slots: dict = None
     slots = []
     seen_days = set()
 
+    slot_defs = GROUND_SLOT_DEFS.get(ground_name, DEFAULT_SLOT_DEFS)
+
     for tr in soup.find_all("tr"):
         for td in tr.find_all(["td"]):
             text = td.get_text(strip=True)
@@ -197,80 +231,43 @@ def parse_calendar_html(html: str, ground_name: str, resolved_slots: dict = None
             imgs = [img.get("alt", "") for img in td.find_all("img") if img.get("alt")]
             status_img = imgs[0] if imgs else ""
 
-            # Check if this day was resolved via week view
-            k_m = (year, month, day, "午前")
-            k_a = (year, month, day, "午後")
-
-            if k_m in resolved_slots and k_a in resolved_slots:
-                m_stat, m_sym, m_desc, m_avail = resolved_slots[k_m]
-                a_stat, a_sym, a_desc, a_avail = resolved_slots[k_a]
-            elif "全て空き" in status_img:
-                m_stat, a_stat = "available", "available"
-                m_sym, a_sym = "○", "○"
-                m_desc, a_desc = "空き", "空き"
-                m_avail, a_avail = True, True
-            elif "一部空き" in status_img:
-                # If resolution wasn't available, check individual slots
-                if k_m in resolved_slots:
-                    m_stat, m_sym, m_desc, m_avail = resolved_slots[k_m]
-                else:
-                    m_stat, m_sym, m_desc, m_avail = "partial", "△", "一部空き", True
-                if k_a in resolved_slots:
-                    a_stat, a_sym, a_desc, a_avail = resolved_slots[k_a]
-                else:
-                    a_stat, a_sym, a_desc, a_avail = "partial", "△", "一部空き", True
-            elif "予約あり" in status_img:
-                m_stat, a_stat = "full", "full"
-                m_sym, a_sym = "×", "×"
-                m_desc, a_desc = "予約あり", "予約あり"
-                m_avail, a_avail = False, False
-            elif "休館日" in status_img or "保守日" in status_img:
-                m_stat, a_stat = "closed", "closed"
-                m_sym, a_sym = "-", "-"
-                m_desc, a_desc = "休館/保守", "休館/保守"
-                m_avail, a_avail = False, False
-            else:
-                m_stat, a_stat = "unavailable", "unavailable"
-                m_sym, a_sym = "-", "-"
-                m_desc, a_desc = "期間外", "期間外"
-                m_avail, a_avail = False, False
-
             date_str = dt.strftime("%Y-%m-%d")
             day_of_week = ["月", "火", "水", "木", "金", "土", "日"][dt.weekday()]
             full_sub_name = f"{ground_name} {court_name}".strip()
 
-            slots.append({
-                "groundName": ground_name,
-                "subFacilityName": full_sub_name,
-                "courtName": court_name,
-                "timeSlotType": "午前",
-                "date": date_str,
-                "dayOfWeek": day_of_week,
-                "isWeekendOrHoliday": is_wk_hol,
-                "holidayName": holiday_name,
-                "startTime": "09:00:00",
-                "endTime": "13:00:00",
-                "status": m_stat,
-                "statusText": m_desc,
-                "symbol": m_sym,
-                "available": m_avail
-            })
-            slots.append({
-                "groundName": ground_name,
-                "subFacilityName": full_sub_name,
-                "courtName": court_name,
-                "timeSlotType": "午後",
-                "date": date_str,
-                "dayOfWeek": day_of_week,
-                "isWeekendOrHoliday": is_wk_hol,
-                "holidayName": holiday_name,
-                "startTime": "13:00:00",
-                "endTime": "17:00:00",
-                "status": a_stat,
-                "statusText": a_desc,
-                "symbol": a_sym,
-                "available": a_avail
-            })
+            for sdef in slot_defs:
+                stype = sdef["type"]
+                k = (year, month, day, stype)
+
+                if k in resolved_slots:
+                    stat, sym, desc, avail = resolved_slots[k]
+                elif "全て空き" in status_img:
+                    stat, sym, desc, avail = "available", "○", "空き", True
+                elif "一部空き" in status_img:
+                    stat, sym, desc, avail = "partial", "△", "一部空き", True
+                elif "予約あり" in status_img:
+                    stat, sym, desc, avail = "full", "×", "予約あり", False
+                elif "休館日" in status_img or "保守日" in status_img:
+                    stat, sym, desc, avail = "closed", "-", "休館/保守", False
+                else:
+                    stat, sym, desc, avail = "unavailable", "-", "期間外", False
+
+                slots.append({
+                    "groundName": ground_name,
+                    "subFacilityName": full_sub_name,
+                    "courtName": court_name,
+                    "timeSlotType": stype,
+                    "date": date_str,
+                    "dayOfWeek": day_of_week,
+                    "isWeekendOrHoliday": is_wk_hol,
+                    "holidayName": holiday_name,
+                    "startTime": sdef["start"],
+                    "endTime": sdef["end"],
+                    "status": stat,
+                    "statusText": desc,
+                    "symbol": sym,
+                    "available": avail
+                })
 
     return ground_name, court_name, slots
 

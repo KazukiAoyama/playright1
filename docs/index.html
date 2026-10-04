@@ -737,9 +737,9 @@
         </button>
       </div>
 
-      <!-- Quick chips for all 10 grounds -->
+      <!-- Quick chips for all 11 grounds -->
       <div class="ground-chips" id="groundChips">
-        <span class="ground-chip active" onclick="setGroundFilter('ALL')">全て (10)</span>
+        <span class="ground-chip active" onclick="setGroundFilter('ALL')">全て (11)</span>
         <span class="ground-chip" onclick="setGroundFilter('秋ヶ瀬公園')">秋ヶ瀬(県営)</span>
         <span class="ground-chip" onclick="setGroundFilter('荒川総合運動公園')">荒川総合</span>
         <span class="ground-chip" onclick="setGroundFilter('大間木公園')">大間木</span>
@@ -750,6 +750,7 @@
         <span class="ground-chip" onclick="setGroundFilter('西遊馬公園')">西遊馬</span>
         <span class="ground-chip" onclick="setGroundFilter('宝来運動公園')">宝来</span>
         <span class="ground-chip" onclick="setGroundFilter('三橋総合公園')">三橋総合</span>
+        <span class="ground-chip" onclick="setGroundFilter('西堀高沼公園')">西堀高沼</span>
       </div>
     </div>
 
@@ -866,7 +867,8 @@
       'さくら草公園',
       '西遊馬公園',
       '宝来運動公園',
-      '三橋総合公園'
+      '三橋総合公園',
+      '西堀高沼公園'
     ];
 
     function getTodayString() {
@@ -1143,8 +1145,11 @@
         map.set(`${i.groundName}_${i.courtName}_${i.timeSlotType}_${i.date}`, i);
       });
 
-      // Always show both morning and afternoon
-      const slotsToShow = ['午前', '午後'];
+      // Slot types per ground
+      const GROUND_SLOTS = {
+        '西堀高沼公園': ['午前1', '午前2', '午後1', '午後2']
+      };
+      const DEFAULT_SLOTS = ['午前', '午後'];
 
       // Group by Ground -> Courts
       const groundCourtMap = new Map();
@@ -1164,6 +1169,7 @@
 
       activeGrounds.forEach(gName => {
         const courts = Array.from(groundCourtMap.get(gName)).sort();
+        const slotsToShow = GROUND_SLOTS[gName] || DEFAULT_SLOTS;
         const groundTotalRows = courts.length * slotsToShow.length;
         let isFirstCourtOfGround = true;
 
@@ -1181,7 +1187,7 @@
               isFirstCourtOfGround = false;
             }
 
-            // Court Name Cell (Rowspan for morning & afternoon)
+            // Court Name Cell (Rowspan for all slots of this court)
             if (tIdx === 0) {
               const tdCourt = document.createElement('td');
               tdCourt.className = 'court-name-cell';
@@ -1195,7 +1201,8 @@
             // Time Slot Pill Cell
             const tdTime = document.createElement('td');
             tdTime.className = 'time-type-cell';
-            const pillClass = timeSlotType === '午前' ? 'morning' : 'afternoon';
+            const isMorning = timeSlotType.startsWith('午前');
+            const pillClass = isMorning ? 'morning' : 'afternoon';
             tdTime.innerHTML = `<span class="time-pill ${pillClass}">${timeSlotType}</span>`;
             tr.appendChild(tdTime);
 
@@ -1242,9 +1249,8 @@
       const holidayName = getJapaneseHoliday(slot.date);
       const dayLabel = holidayName ? `${dayOfWeek}・祝 (${holidayName})` : dayOfWeek;
 
-      const timeSlotBadge = slot.timeSlotType === '午前'
-        ? '<span class="time-pill morning">午前</span>'
-        : '<span class="time-pill afternoon">午後</span>';
+      const isMorning = slot.timeSlotType.startsWith('午前');
+      const timeSlotBadge = `<span class="time-pill ${isMorning ? 'morning' : 'afternoon'}">${slot.timeSlotType}</span>`;
 
       const timeRange = slot.startTime && slot.endTime
         ? `${slot.startTime.substring(0, 5)} ～ ${slot.endTime.substring(0, 5)}`
