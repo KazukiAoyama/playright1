@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-05 11:11:36 JST",
+  "updatedAt": "2026-10-05 11:41:41 JST",
   "facilityCategory": "さいたま市公共施設予約システム（少年野球場）",
   "targetUrl": "https://saitama.rsv.ws-scs.jp/web/rsvWTransInstSrchBuildAction.do",
   "targetGrounds": [
@@ -57,7 +57,7 @@
     }
   ],
   "totalSlots": 2684,
-  "availableSlotsCount": 1012,
+  "availableSlotsCount": 1011,
   "weekendHolidaySlots": 924,
   "weekendHolidayAvailable": 0,
   "data": [
@@ -3176,10 +3176,10 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "full",
+      "statusText": "予約あり",
+      "symbol": "×",
+      "available": false
     },
     {
       "groundName": "浦和総合運動場",
@@ -3208,9 +3208,9 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "closed",
-      "statusText": "休館/保守",
-      "symbol": "-",
+      "status": "full",
+      "statusText": "予約あり",
+      "symbol": "×",
       "available": false
     },
     {
@@ -3224,9 +3224,9 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "closed",
-      "statusText": "休館/保守",
-      "symbol": "-",
+      "status": "full",
+      "statusText": "予約あり",
+      "symbol": "×",
       "available": false
     },
     {
