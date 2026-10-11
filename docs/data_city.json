@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-11 10:41:54 JST",
+  "updatedAt": "2026-10-11 11:11:37 JST",
   "facilityCategory": "さいたま市公共施設予約システム（少年野球場）",
   "targetUrl": "https://saitama.rsv.ws-scs.jp/web/rsvWTransInstSrchBuildAction.do",
   "targetGrounds": [
@@ -57,9 +57,9 @@
     }
   ],
   "totalSlots": 2684,
-  "availableSlotsCount": 916,
+  "availableSlotsCount": 918,
   "weekendHolidaySlots": 924,
-  "weekendHolidayAvailable": 0,
+  "weekendHolidayAvailable": 2,
   "data": [
     {
       "groundName": "さくら草公園",
@@ -8296,10 +8296,10 @@
       "holidayName": "スポーツの日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
-      "available": false
+      "status": "available",
+      "statusText": "空き",
+      "symbol": "○",
+      "available": true
     },
     {
       "groundName": "荒川総合運動公園",
@@ -8312,10 +8312,10 @@
       "holidayName": "スポーツの日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
-      "available": false
+      "status": "available",
+      "statusText": "空き",
+      "symbol": "○",
+      "available": true
     },
     {
       "groundName": "西堀高沼公園",
