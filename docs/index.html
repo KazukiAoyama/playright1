@@ -845,6 +845,9 @@
       if (s.includes('野球場第')) {
         return s.replace('野球場第', '野球場<br>第');
       }
+      if (s.startsWith('人工芝') || s.startsWith('天然芝')) {
+        return s.slice(0, 3) + '<br>' + s.slice(3);
+      }
 
       const chunks = [];
       for (let i = 0; i < s.length; i += maxChars) {
@@ -973,6 +976,27 @@
           }));
         }
 
+        const AKIGASE_COURT_MAP = {
+          629: '人工芝SSA',
+          630: '人工芝SSB',
+          631: '人工芝SSC',
+          632: '天然芝SSD',
+          633: '天然芝SSE',
+        };
+
+        function normalizeCourtName(courtName, subFacilityId) {
+          if (subFacilityId && AKIGASE_COURT_MAP[subFacilityId]) {
+            return AKIGASE_COURT_MAP[subFacilityId];
+          }
+          if (!courtName) return '';
+          if (courtName.includes('人工芝第１') || courtName.includes('SSA')) return '人工芝SSA';
+          if (courtName.includes('人工芝第２') || courtName.includes('SSB')) return '人工芝SSB';
+          if (courtName.includes('人工芝第３') || courtName.includes('SSC')) return '人工芝SSC';
+          if (courtName.includes('天然芝第１') || courtName.includes('SSD')) return '天然芝SSD';
+          if (courtName.includes('天然芝第２') || courtName.includes('SSE')) return '天然芝SSE';
+          return courtName;
+        }
+
         if (prefJson) {
           if (prefJson.updatedAt) {
             const timeStr = prefJson._isLive
@@ -980,12 +1004,15 @@
               : `県: ${prefJson.updatedAt.substring(5, 16)}`;
             updateTimes.push(timeStr);
           }
-          prefItems = (prefJson.data || []).map(item => ({
-            ...item,
-            source: 'pref',
-            groundName: '秋ヶ瀬公園',
-            courtName: item.subFacilityName || item.courtName
-          }));
+          prefItems = (prefJson.data || []).map(item => {
+            const cName = normalizeCourtName(item.courtName || item.subFacilityName, item.subFacilityId);
+            return {
+              ...item,
+              source: 'pref',
+              groundName: '秋ヶ瀬公園',
+              courtName: cName
+            };
+          });
         }
 
         allData = [...cityItems, ...prefItems];
@@ -1167,8 +1194,36 @@
         return (idxA !== -1 ? idxA : 999) - (idxB !== -1 ? idxB : 999);
       });
 
+      // Ordered courts per ground
+      const GROUND_COURT_ORDER = {
+        '秋ヶ瀬公園': [
+          '第2野球場第１グラウンド',
+          '第2野球場第２グラウンド',
+          '第2野球場第３グラウンド',
+          '第2野球場第６グラウンド',
+          '第2野球場第７グラウンド',
+          'ソフトボール場第５グラウンド',
+          'ソフトボール場第６グラウンド',
+          '人工芝SSA',
+          '人工芝SSB',
+          '人工芝SSC',
+          '天然芝SSD',
+          '天然芝SSE'
+        ]
+      };
+
       activeGrounds.forEach(gName => {
-        const courts = Array.from(groundCourtMap.get(gName)).sort();
+        const courtOrderList = GROUND_COURT_ORDER[gName];
+        const courts = Array.from(groundCourtMap.get(gName)).sort((a, b) => {
+          if (courtOrderList) {
+            const idxA = courtOrderList.indexOf(a);
+            const idxB = courtOrderList.indexOf(b);
+            if (idxA !== -1 && idxB !== -1) return idxA - idxB;
+            if (idxA !== -1) return -1;
+            if (idxB !== -1) return 1;
+          }
+          return a.localeCompare(b);
+        });
         const slotsToShow = GROUND_SLOTS[gName] || DEFAULT_SLOTS;
         const groundTotalRows = courts.length * slotsToShow.length;
         let isFirstCourtOfGround = true;

@@ -44,10 +44,32 @@ function getJSTDates(days = 30, offset = 0) {
   return dates;
 }
 
+const COURT_NAME_MAP = {
+  629: "人工芝SSA",
+  630: "人工芝SSB",
+  631: "人工芝SSC",
+  632: "天然芝SSD",
+  633: "天然芝SSE",
+};
+
+function getCourtDisplayName(subId, rawName) {
+  if (subId && COURT_NAME_MAP[subId]) return COURT_NAME_MAP[subId];
+  if (rawName) {
+    if (rawName.includes("人工芝第１") || rawName.includes("SSA")) return "人工芝SSA";
+    if (rawName.includes("人工芝第２") || rawName.includes("SSB")) return "人工芝SSB";
+    if (rawName.includes("人工芝第３") || rawName.includes("SSC")) return "人工芝SSC";
+    if (rawName.includes("天然芝第１") || rawName.includes("SSD")) return "天然芝SSD";
+    if (rawName.includes("天然芝第２") || rawName.includes("SSE")) return "天然芝SSE";
+  }
+  return rawName;
+}
+
+const DEFAULT_SUB_FACILITY_IDS = [268, 269, 270, 273, 274, 303, 304, 629, 630, 631, 632, 633];
+
 /**
  * 埼玉県の Direct API から特定日の空き枠を取得
  */
-async function fetchDateSlots(targetDate, facilityId = 8, subFacilityIds = [268, 269, 270, 273, 274, 303, 304]) {
+async function fetchDateSlots(targetDate, facilityId = 8, subFacilityIds = DEFAULT_SUB_FACILITY_IDS) {
   const payload = {
     facilityId: facilityId,
     subFacilityIds: subFacilityIds,
@@ -94,10 +116,13 @@ function formatSlots(rawSlots) {
     const startTime = slot.slotStartTime || "";
     const timeSlotType = startTime < "12:30:00" ? "午前" : "午後";
     const stInfo = STATUS_MAP[String(slot.slotStatus)] || { text: "不明", symbol: "?", available: false };
+    const displayName = getCourtDisplayName(slot.subFacilityId, slot.subFacilityName);
 
     formatted.push({
       subFacilityId: slot.subFacilityId,
-      subFacilityName: slot.subFacilityName,
+      subFacilityName: displayName,
+      courtName: displayName,
+      rawSubFacilityName: slot.subFacilityName,
       timeSlotType: timeSlotType,
       date: slot.targetDate,
       startTime: slot.slotStartTime,

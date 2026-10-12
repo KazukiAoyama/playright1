@@ -26,13 +26,40 @@ STATUS_MAP = {
     "10": {"text": "個人利用", "symbol": "×", "available": False},
 }
 
+COURT_NAME_MAP = {
+    629: "人工芝SSA",
+    630: "人工芝SSB",
+    631: "人工芝SSC",
+    632: "天然芝SSD",
+    633: "天然芝SSE",
+}
+
+def get_court_display_name(sub_id, raw_name):
+    if sub_id in COURT_NAME_MAP:
+        return COURT_NAME_MAP[sub_id]
+    if raw_name:
+        if "人工芝第１グラウンド" in raw_name or "SSA" in raw_name:
+            return "人工芝SSA"
+        if "人工芝第２グラウンド" in raw_name or "SSB" in raw_name:
+            return "人工芝SSB"
+        if "人工芝第３グラウンド" in raw_name or "SSC" in raw_name:
+            return "人工芝SSC"
+        if "天然芝第１グラウンド" in raw_name or "SSD" in raw_name:
+            return "天然芝SSD"
+        if "天然芝第２グラウンド" in raw_name or "SSE" in raw_name:
+            return "天然芝SSE"
+    return raw_name
+
+# 12 courts: 第2野球場 (1, 2, 3, 6, 7), ソフトボール場 (5, 6), 人工芝 (SSA, SSB, SSC), 天然芝 (SSD, SSE)
+DEFAULT_SUB_FACILITY_IDS = [268, 269, 270, 273, 274, 303, 304, 629, 630, 631, 632, 633]
+
 TARGET_URL = "https://saitama-pref-reserve.michi-shiru.jp/facilitysearchcondition"
 
 def fetch_date_slots(target_date, facility_id=8, sub_facility_ids=None):
     """Fetch time slots for a single date directly from the backend reservation API."""
     import urllib.request
     if sub_facility_ids is None:
-        sub_facility_ids = [268, 269, 270, 273, 274, 303, 304]
+        sub_facility_ids = DEFAULT_SUB_FACILITY_IDS
 
     url = "https://zdjn8hpyod.execute-api.ap-northeast-1.amazonaws.com/prd/us-reservation/reservation-application/facility-list/availability"
     headers = {
@@ -65,8 +92,8 @@ async def run_scraper():
     from concurrent.futures import ThreadPoolExecutor
 
     facility_id = 8
-    # 7 courts: 第2野球場 (1, 2, 3, 6, 7), ソフトボール場 (5, 6)
-    sub_facility_ids = [268, 269, 270, 273, 274, 303, 304]
+    # 12 courts: 第2野球場 (1, 2, 3, 6, 7), ソフトボール場 (5, 6), 人工芝 (SSA, SSB, SSC), 天然芝 (SSD, SSE)
+    sub_facility_ids = DEFAULT_SUB_FACILITY_IDS
 
     # Build date list: today + next 60 days
     jst = timezone(timedelta(hours=9))
@@ -107,9 +134,15 @@ async def run_scraper():
             time_slot_type = "午後"
 
         st_info = STATUS_MAP.get(str(slot.get("slotStatus")), {"text": "不明", "symbol": "?", "available": False})
+        sub_id = slot.get("subFacilityId")
+        raw_name = slot.get("subFacilityName")
+        display_name = get_court_display_name(sub_id, raw_name)
+
         formatted_data.append({
-            "subFacilityId": slot.get("subFacilityId"),
-            "subFacilityName": slot.get("subFacilityName"),
+            "subFacilityId": sub_id,
+            "subFacilityName": display_name,
+            "courtName": display_name,
+            "rawSubFacilityName": raw_name,
             "timeSlotType": time_slot_type,
             "date": slot.get("targetDate"),
             "startTime": slot.get("slotStartTime"),
