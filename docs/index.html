@@ -360,6 +360,12 @@
       line-height: 1.15;
     }
 
+    /* 各グラウンド間の区切り線（濃い横罫線） */
+    .ground-boundary-bottom,
+    tr.ground-last-row td {
+      border-bottom: 2px solid #475569 !important;
+    }
+
     th {
       background: #f8fafc;
       color: var(--text-muted);
@@ -1248,13 +1254,21 @@
         let isFirstCourtOfGround = true;
 
         courts.forEach((court, cIdx) => {
+          const isLastCourt = (cIdx === courts.length - 1);
+
           slotsToShow.forEach((timeSlotType, tIdx) => {
+            const isLastSlot = (tIdx === slotsToShow.length - 1);
+            const isLastRowOfGround = isLastCourt && isLastSlot;
+
             const tr = document.createElement('tr');
+            if (isLastRowOfGround) {
+              tr.className = 'ground-last-row';
+            }
 
             // Ground Name Cell (Rowspan for all courts and slots of this ground)
             if (isFirstCourtOfGround && tIdx === 0) {
               const tdGround = document.createElement('td');
-              tdGround.className = 'ground-name-cell';
+              tdGround.className = 'ground-name-cell ground-boundary-bottom';
               tdGround.innerHTML = formatCellText(gName, 4);
               tdGround.rowSpan = groundTotalRows;
               tr.appendChild(tdGround);
@@ -1264,7 +1278,7 @@
             // Court Name Cell (Rowspan for all slots of this court)
             if (tIdx === 0) {
               const tdCourt = document.createElement('td');
-              tdCourt.className = 'court-name-cell';
+              tdCourt.className = 'court-name-cell' + (isLastCourt ? ' ground-boundary-bottom' : '');
               tdCourt.innerHTML = formatCellText(court, 4);
               if (slotsToShow.length > 1) {
                 tdCourt.rowSpan = slotsToShow.length;
