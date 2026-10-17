@@ -12,7 +12,7 @@ sys.stdout.reconfigure(encoding='utf-8')
 TOP_URL = "https://saitama.rsv.ws-scs.jp/web/index.jsp"
 
 # Target grounds specified by the user
-TARGET_GROUNDS = [
+TARGET_GROUNDS_BASEBALL = [
     {"name": "荒川総合運動公園", "code": "4020"},
     {"name": "八王子公園", "code": "4110"},
     {"name": "見沼臨時グラウンド", "code": "4320"},
@@ -24,6 +24,13 @@ TARGET_GROUNDS = [
     {"name": "三橋総合公園", "code": "4060"},
     {"name": "西堀高沼公園", "code": "4220"},
 ]
+
+# 追加対象：ソフトボール（少年）カテゴリの施設（荒川総合運動公園のソフト・少年野球場）
+TARGET_GROUNDS_SOFTBALL = [
+    {"name": "荒川総合運動公園", "code": "4020"},
+]
+
+TARGET_GROUNDS = TARGET_GROUNDS_BASEBALL
 
 # Slot configurations per ground (default: 午前, 午後 / 西堀高沼公園: 午前1, 午前2, 午後1, 午後2)
 GROUND_SLOT_DEFS = {
@@ -38,6 +45,21 @@ DEFAULT_SLOT_DEFS = [
     {"type": "午前", "start": "09:00:00", "end": "13:00:00"},
     {"type": "午後", "start": "13:00:00", "end": "17:00:00"},
 ]
+
+COURT_NAME_MAP = {
+    "ソフト・少年野球場（北）Ａ": "ソフトA",
+    "ソフト・少年野球場（北）Ｂ": "ソフトB",
+    "ソフト・少年野球場（南）Ｃ": "ソフトC",
+    "ソフト・少年野球場（南）Ｄ": "ソフトD",
+    "ソフト・少年野球場（南）Ｅ": "ソフトE",
+    "ソフト・少年野球場（南）Ｆ": "ソフトF",
+    "ソフト・少年野球場（北）A": "ソフトA",
+    "ソフト・少年野球場（北）B": "ソフトB",
+    "ソフト・少年野球場（南）C": "ソフトC",
+    "ソフト・少年野球場（南）D": "ソフトD",
+    "ソフト・少年野球場（南）E": "ソフトE",
+    "ソフト・少年野球場（南）F": "ソフトF",
+}
 
 PERIOD_NORM = {
     "午前": "午前",
@@ -195,11 +217,13 @@ def parse_calendar_html(html: str, ground_name: str, resolved_slots: dict = None
     # Determine court name
     h_link = soup.find("a", href=re.compile(r'city\.saitama\.jp'))
     court_name = "グラウンド"
+    raw_court_name = "グラウンド"
     if h_link and h_link.parent:
         full_title = h_link.parent.get_text(" ", strip=True)
         c_name = full_title.replace(ground_name, "").replace("空き状況", "").replace("\xa0", "").strip()
         if c_name:
-            court_name = c_name
+            raw_court_name = c_name
+            court_name = COURT_NAME_MAP.get(raw_court_name, raw_court_name)
 
     # Determine year and month
     header_m = soup.find(string=re.compile(r'(\d{4})年(\d{1,2})月'))
@@ -233,7 +257,7 @@ def parse_calendar_html(html: str, ground_name: str, resolved_slots: dict = None
 
             date_str = dt.strftime("%Y-%m-%d")
             day_of_week = ["月", "火", "水", "木", "金", "土", "日"][dt.weekday()]
-            full_sub_name = f"{ground_name} {court_name}".strip()
+            full_sub_name = f"{ground_name} {raw_court_name}".strip()
 
             for sdef in slot_defs:
                 stype = sdef["type"]
@@ -271,160 +295,171 @@ def parse_calendar_html(html: str, ground_name: str, resolved_slots: dict = None
 
     return ground_name, court_name, slots
 
+async def navigate_to_category(page, category_name: str):
+    print(f"利用目的から > 屋外スポーツ > {category_name} へ遷移...", flush=True)
+    await page.goto(TOP_URL, wait_until="domcontentloaded", timeout=30000)
+    async with page.expect_navigation(timeout=30000):
+        await page.locator("img[alt='施設の空き状況']").click()
+    async with page.expect_navigation(timeout=30000):
+        await page.locator("img[alt='利用目的から']").click()
+    async with page.expect_navigation(timeout=30000):
+        await page.locator("text=屋外スポーツ").click()
+    async with page.expect_navigation(timeout=30000):
+        await page.locator(f"text={category_name}").click()
+
+async def scrape_ground_facilities(page, g_name: str, all_slots: list) -> int:
+    target_link = page.locator(f"a:has-text('{g_name}')")
+    if await target_link.count() == 0:
+        print(f"  警告: {g_name} のリンクが見つかりません。スキップします。", flush=True)
+        return 0
+
+    async with page.expect_navigation(timeout=45000):
+        await target_link.first.click()
+
+    # Check if this is facility selection page (multi-facility) or direct month view (single-facility)
+    page_title = await page.title()
+    is_facility_select = "施設選択画面" in page_title or await page.locator("text=すべて").count() > 0
+
+    courts_scraped = 0
+    if is_facility_select:
+        print(f"  {g_name}: 複数施設あり。すべてを選択して巡回開始...", flush=True)
+        async with page.expect_navigation(timeout=45000):
+            await page.locator("text=すべて").first.click()
+
+        # Loop through all facilities via 次の施設
+        while True:
+            courts_scraped += 1
+            # Month 1 (当月)
+            html_m1 = await page.content()
+            resolved_m1 = await resolve_partial_days(page, html_m1)
+            if resolved_m1:
+                # Re-read content after returning to month view
+                html_m1 = await page.content()
+
+            _, court_name, s1 = parse_calendar_html(html_m1, g_name, resolved_m1)
+            all_slots.extend(s1)
+            print(f"    面: {court_name} (当月 {len(s1)} 枠取得, 一部空き詳細解決: {len(resolved_m1)//2}日)", flush=True)
+
+            # Next Month (翌月)
+            next_month_btn = page.locator("a:has(img[alt='次の月'])")
+            if await next_month_btn.count() > 0:
+                async with page.expect_navigation(timeout=45000):
+                    await next_month_btn.first.click()
+                html_m2 = await page.content()
+                resolved_m2 = await resolve_partial_days(page, html_m2)
+                if resolved_m2:
+                    html_m2 = await page.content()
+
+                _, _, s2 = parse_calendar_html(html_m2, g_name, resolved_m2)
+                all_slots.extend(s2)
+
+                # Return to Month 1 before navigating to next facility
+                prev_month_btn = page.locator("a:has(img[alt='前の月'])")
+                if await prev_month_btn.count() > 0:
+                    async with page.expect_navigation(timeout=45000):
+                        await prev_month_btn.first.click()
+
+            # Check next facility button
+            next_fac_btn = page.locator("a:has(img[alt='次の施設'])")
+            if await next_fac_btn.count() > 0:
+                async with page.expect_navigation(timeout=45000):
+                    await next_fac_btn.first.click()
+            else:
+                break
+
+        # Go back to 館選択画面
+        back_btn = page.locator("a:has(img[alt='もどる'])")
+        if await back_btn.count() > 0:
+            async with page.expect_navigation(timeout=45000):
+                await back_btn.first.click()
+
+        # If still on 施設選択画面, click back once more
+        if "施設選択画面" in (await page.title()) or "InstAction" in page.url:
+            back_btn2 = page.locator("a:has(img[alt='もどる'])")
+            if await back_btn2.count() > 0:
+                async with page.expect_navigation(timeout=45000):
+                    await back_btn2.first.click()
+
+    else:
+        # Single facility
+        courts_scraped = 1
+        # Month 1
+        html_m1 = await page.content()
+        resolved_m1 = await resolve_partial_days(page, html_m1)
+        if resolved_m1:
+            html_m1 = await page.content()
+
+        _, court_name, s1 = parse_calendar_html(html_m1, g_name, resolved_m1)
+        all_slots.extend(s1)
+        print(f"    面: {court_name} (当月 {len(s1)} 枠取得, 一部空き詳細解決: {len(resolved_m1)//2}日)", flush=True)
+
+        # Month 2
+        next_month_btn = page.locator("a:has(img[alt='次の月'])")
+        if await next_month_btn.count() > 0:
+            async with page.expect_navigation(timeout=45000):
+                await next_month_btn.first.click()
+            html_m2 = await page.content()
+            resolved_m2 = await resolve_partial_days(page, html_m2)
+            if resolved_m2:
+                html_m2 = await page.content()
+
+            _, _, s2 = parse_calendar_html(html_m2, g_name, resolved_m2)
+            all_slots.extend(s2)
+
+        # Go back to 館選択画面
+        back_btn = page.locator("a:has(img[alt='もどる'])")
+        if await back_btn.count() > 0:
+            async with page.expect_navigation(timeout=45000):
+                await back_btn.first.click()
+
+    return courts_scraped
+
 async def scrape_saitama_city():
     print("=== さいたま市公共施設予約システム スクレイピング開始 ===", flush=True)
     all_slots = []
-    ground_summary = []
+    court_counts_by_ground = {}
 
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
         page = await browser.new_page()
 
-        print("1. トップページへアクセス...", flush=True)
-        await page.goto(TOP_URL, wait_until="domcontentloaded", timeout=30000)
+        # 1. 軟式野球（少年）の巡回
+        print("\n=== [1/2] 屋外スポーツ > 軟式野球（少年）巡回開始 ===", flush=True)
+        await navigate_to_category(page, "軟式野球（少年）")
 
-        print("2. 施設の空き状況へ遷移...", flush=True)
-        async with page.expect_navigation():
-            await page.locator("img[alt='施設の空き状況']").click()
-
-        print("3. 利用目的から > 屋外スポーツ > 軟式野球（少年）へ遷移...", flush=True)
-        async with page.expect_navigation():
-            await page.locator("img[alt='利用目的から']").click()
-        async with page.expect_navigation():
-            await page.locator("text=屋外スポーツ").click()
-        async with page.expect_navigation():
-            await page.locator("text=軟式野球（少年）").click()
-
-        print("4. 館選択画面（指定URL）に到達しました", flush=True)
-
-        for g_idx, ground in enumerate(TARGET_GROUNDS):
+        for g_idx, ground in enumerate(TARGET_GROUNDS_BASEBALL):
             g_name = ground["name"]
-            print(f"\n[{g_idx+1}/{len(TARGET_GROUNDS)}] グラウンド巡回中: {g_name}...", flush=True)
+            print(f"\n[野球 {g_idx+1}/{len(TARGET_GROUNDS_BASEBALL)}] グラウンド巡回中: {g_name}...", flush=True)
 
             try:
-                target_link = page.locator(f"a:has-text('{g_name}')")
-                if await target_link.count() == 0:
-                    print(f"  警告: {g_name} のリンクが見つかりません。スキップします。", flush=True)
-                    continue
-
-                async with page.expect_navigation(timeout=45000):
-                    await target_link.first.click()
-
-                # Check if this is facility selection page (multi-facility) or direct month view (single-facility)
-                page_title = await page.title()
-                is_facility_select = "施設選択画面" in page_title or await page.locator("text=すべて").count() > 0
-
-                courts_scraped = 0
-                if is_facility_select:
-                    print(f"  {g_name}: 複数施設あり。すべてを選択して巡回開始...", flush=True)
-                    async with page.expect_navigation(timeout=45000):
-                        await page.locator("text=すべて").first.click()
-
-                    # Loop through all facilities via 次の施設
-                    while True:
-                        courts_scraped += 1
-                        # Month 1 (当月)
-                        html_m1 = await page.content()
-                        resolved_m1 = await resolve_partial_days(page, html_m1)
-                        if resolved_m1:
-                            # Re-read content after returning to month view
-                            html_m1 = await page.content()
-
-                        _, court_name, s1 = parse_calendar_html(html_m1, g_name, resolved_m1)
-                        all_slots.extend(s1)
-                        print(f"    面: {court_name} (当月 {len(s1)} 枠取得, 一部空き詳細解決: {len(resolved_m1)//2}日)", flush=True)
-
-                        # Next Month (翌月)
-                        next_month_btn = page.locator("a:has(img[alt='次の月'])")
-                        if await next_month_btn.count() > 0:
-                            async with page.expect_navigation(timeout=45000):
-                                await next_month_btn.first.click()
-                            html_m2 = await page.content()
-                            resolved_m2 = await resolve_partial_days(page, html_m2)
-                            if resolved_m2:
-                                html_m2 = await page.content()
-
-                            _, _, s2 = parse_calendar_html(html_m2, g_name, resolved_m2)
-                            all_slots.extend(s2)
-
-                            # Return to Month 1 before navigating to next facility
-                            prev_month_btn = page.locator("a:has(img[alt='前の月'])")
-                            if await prev_month_btn.count() > 0:
-                                async with page.expect_navigation(timeout=45000):
-                                    await prev_month_btn.first.click()
-
-                        # Check next facility button
-                        next_fac_btn = page.locator("a:has(img[alt='次の施設'])")
-                        if await next_fac_btn.count() > 0:
-                            async with page.expect_navigation(timeout=45000):
-                                await next_fac_btn.first.click()
-                        else:
-                            break
-
-                    # Go back to 館選択画面
-                    back_btn = page.locator("a:has(img[alt='もどる'])")
-                    if await back_btn.count() > 0:
-                        async with page.expect_navigation(timeout=45000):
-                            await back_btn.first.click()
-
-                    # If still on 施設選択画面, click back once more
-                    if "施設選択画面" in (await page.title()) or "InstAction" in page.url:
-                        back_btn2 = page.locator("a:has(img[alt='もどる'])")
-                        if await back_btn2.count() > 0:
-                            async with page.expect_navigation(timeout=45000):
-                                await back_btn2.first.click()
-
-                else:
-                    # Single facility
-                    courts_scraped = 1
-                    # Month 1
-                    html_m1 = await page.content()
-                    resolved_m1 = await resolve_partial_days(page, html_m1)
-                    if resolved_m1:
-                        html_m1 = await page.content()
-
-                    _, court_name, s1 = parse_calendar_html(html_m1, g_name, resolved_m1)
-                    all_slots.extend(s1)
-                    print(f"    面: {court_name} (当月 {len(s1)} 枠取得, 一部空き詳細解決: {len(resolved_m1)//2}日)", flush=True)
-
-                    # Month 2
-                    next_month_btn = page.locator("a:has(img[alt='次の月'])")
-                    if await next_month_btn.count() > 0:
-                        async with page.expect_navigation(timeout=45000):
-                            await next_month_btn.first.click()
-                        html_m2 = await page.content()
-                        resolved_m2 = await resolve_partial_days(page, html_m2)
-                        if resolved_m2:
-                            html_m2 = await page.content()
-
-                        _, _, s2 = parse_calendar_html(html_m2, g_name, resolved_m2)
-                        all_slots.extend(s2)
-
-                    # Go back to 館選択画面
-                    back_btn = page.locator("a:has(img[alt='もどる'])")
-                    if await back_btn.count() > 0:
-                        async with page.expect_navigation(timeout=45000):
-                            await back_btn.first.click()
-
-                ground_summary.append({
-                    "groundName": g_name,
-                    "courtCount": courts_scraped
-                })
-
+                cnt = await scrape_ground_facilities(page, g_name, all_slots)
+                court_counts_by_ground[g_name] = court_counts_by_ground.get(g_name, 0) + cnt
             except Exception as e:
                 print(f"  [ERROR] {g_name} の巡回中にエラーが発生しました: {e}", flush=True)
-                # Try to recover back to 館選択画面
+                # エラー復帰: 再度カテゴリページへ戻る
                 try:
-                    for _ in range(3):
-                        cur_url = page.url
-                        if "rsvWTransInstSrchBuildAction" in cur_url:
-                            break
-                        back_btn = page.locator("a:has(img[alt='もどる'])")
-                        if await back_btn.count() > 0:
-                            async with page.expect_navigation(timeout=10000):
-                                await back_btn.first.click()
+                    await navigate_to_category(page, "軟式野球（少年）")
                 except Exception:
                     pass
+
+        # 2. ソフトボール（少年）の巡回（荒川総合運動公園 ソフト・少年野球場 北A,B / 南C,D,E,F）
+        print("\n=== [2/2] 屋外スポーツ > ソフトボール（少年）巡回開始 ===", flush=True)
+        try:
+            await navigate_to_category(page, "ソフトボール（少年）")
+            for g_idx, ground in enumerate(TARGET_GROUNDS_SOFTBALL):
+                g_name = ground["name"]
+                print(f"\n[ソフト {g_idx+1}/{len(TARGET_GROUNDS_SOFTBALL)}] グラウンド巡回中: {g_name}...", flush=True)
+                try:
+                    cnt = await scrape_ground_facilities(page, g_name, all_slots)
+                    court_counts_by_ground[g_name] = court_counts_by_ground.get(g_name, 0) + cnt
+                except Exception as e:
+                    print(f"  [ERROR] {g_name}(ソフト) の巡回中にエラーが発生しました: {e}", flush=True)
+                    try:
+                        await navigate_to_category(page, "ソフトボール（少年）")
+                    except Exception:
+                        pass
+        except Exception as e:
+            print(f"  [ERROR] ソフトボール巡回への遷移中にエラーが発生しました: {e}", flush=True)
 
         await browser.close()
 
@@ -437,6 +472,11 @@ async def scrape_saitama_city():
     final_slots = list(unique_slots_map.values())
     final_slots.sort(key=lambda s: (s["date"], s["groundName"], s["subFacilityName"], s["timeSlotType"]))
 
+    ground_summary = [
+        {"groundName": g["name"], "courtCount": court_counts_by_ground.get(g["name"], 0)}
+        for g in TARGET_GROUNDS_BASEBALL
+    ]
+
     available_count = sum(1 for s in final_slots if s["available"])
     weekend_hol_slots = [s for s in final_slots if s["isWeekendOrHoliday"]]
     weekend_hol_avail = sum(1 for s in weekend_hol_slots if s["available"])
@@ -445,9 +485,9 @@ async def scrape_saitama_city():
     now_str = datetime.now(jst).strftime("%Y-%m-%d %H:%M:%S JST")
     output_data = {
         "updatedAt": now_str,
-        "facilityCategory": "さいたま市公共施設予約システム（少年野球場）",
+        "facilityCategory": "さいたま市公共施設予約システム（少年野球場・ソフトボール場）",
         "targetUrl": "https://saitama.rsv.ws-scs.jp/web/rsvWTransInstSrchBuildAction.do",
-        "targetGrounds": [g["name"] for g in TARGET_GROUNDS],
+        "targetGrounds": [g["name"] for g in TARGET_GROUNDS_BASEBALL],
         "groundsSummary": ground_summary,
         "totalSlots": len(final_slots),
         "availableSlotsCount": available_count,
@@ -463,7 +503,7 @@ async def scrape_saitama_city():
 
     print(f"\n=== スクレイピング完了 ===", flush=True)
     print(f"出力ファイル: {out_path}", flush=True)
-    print(f"取得グラウンド数: {len(ground_summary)} / {len(TARGET_GROUNDS)}", flush=True)
+    print(f"取得グラウンド数: {len(ground_summary)} / {len(TARGET_GROUNDS_BASEBALL)}", flush=True)
     print(f"総スロット数: {len(final_slots)} (うち土日祝: {len(weekend_hol_slots)})", flush=True)
     print(f"土日祝 空きスロット: {weekend_hol_avail} 枠", flush=True)
     return output_data

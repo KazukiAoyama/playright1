@@ -965,17 +965,6 @@
         let prefItems = [];
         const updateTimes = [];
 
-        if (cityRes && cityRes.ok) {
-          const cityJson = await cityRes.json();
-          if (cityJson.updatedAt) updateTimes.push(`市: ${cityJson.updatedAt.substring(5, 16)}`);
-          cityItems = (cityJson.data || []).map(item => ({
-            ...item,
-            source: 'city',
-            groundName: item.groundName,
-            courtName: item.courtName || item.subFacilityName
-          }));
-        }
-
         const AKIGASE_COURT_MAP = {
           629: '人工芝SSA',
           630: '人工芝SSB',
@@ -994,7 +983,24 @@
           if (courtName.includes('人工芝第３') || courtName.includes('SSC')) return '人工芝SSC';
           if (courtName.includes('天然芝第１') || courtName.includes('SSD')) return '天然芝SSD';
           if (courtName.includes('天然芝第２') || courtName.includes('SSE')) return '天然芝SSE';
+          if (courtName.includes('ソフト・少年野球場（北）Ａ') || courtName.includes('ソフト・少年野球場（北）A') || courtName === 'ソフトA') return 'ソフトA';
+          if (courtName.includes('ソフト・少年野球場（北）Ｂ') || courtName.includes('ソフト・少年野球場（北）B') || courtName === 'ソフトB') return 'ソフトB';
+          if (courtName.includes('ソフト・少年野球場（南）Ｃ') || courtName.includes('ソフト・少年野球場（南）C') || courtName === 'ソフトC') return 'ソフトC';
+          if (courtName.includes('ソフト・少年野球場（南）Ｄ') || courtName.includes('ソフト・少年野球場（南）D') || courtName === 'ソフトD') return 'ソフトD';
+          if (courtName.includes('ソフト・少年野球場（南）Ｅ') || courtName.includes('ソフト・少年野球場（南）E') || courtName === 'ソフトE') return 'ソフトE';
+          if (courtName.includes('ソフト・少年野球場（南）Ｆ') || courtName.includes('ソフト・少年野球場（南）F') || courtName === 'ソフトF') return 'ソフトF';
           return courtName;
+        }
+
+        if (cityRes && cityRes.ok) {
+          const cityJson = await cityRes.json();
+          if (cityJson.updatedAt) updateTimes.push(`市: ${cityJson.updatedAt.substring(5, 16)}`);
+          cityItems = (cityJson.data || []).map(item => ({
+            ...item,
+            source: 'city',
+            groundName: item.groundName,
+            courtName: normalizeCourtName(item.courtName || item.subFacilityName)
+          }));
         }
 
         if (prefJson) {
@@ -1209,6 +1215,19 @@
           '人工芝SSC',
           '天然芝SSD',
           '天然芝SSE'
+        ],
+        '荒川総合運動公園': [
+          '野球場Ａ',
+          '野球場Ｂ',
+          '野球場Ｃ',
+          '野球場Ｄ',
+          '野球場Ｅ',
+          'ソフトA',
+          'ソフトB',
+          'ソフトC',
+          'ソフトD',
+          'ソフトE',
+          'ソフトF'
         ]
       };
 
