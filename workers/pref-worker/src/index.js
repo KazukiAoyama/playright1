@@ -245,6 +245,60 @@ export default {
       });
     }
 
+    // 5. 通知設定の取得: GET /api/notify-settings
+    if (url.pathname === "/api/notify-settings" && request.method === "GET") {
+      const result = await getNotifySettings(env);
+      return new Response(JSON.stringify(result), {
+        status: result.success ? 200 : 500,
+        headers: {
+          ...CORS_HEADERS,
+          "Content-Type": "application/json; charset=utf-8",
+          "Cache-Control": "no-cache",
+        },
+      });
+    }
+
+    // 6. 通知設定の保存: POST /api/notify-settings
+    if (url.pathname === "/api/notify-settings" && request.method === "POST") {
+      try {
+        const body = await request.json();
+        const result = await saveNotifySettings(env, body);
+        return new Response(JSON.stringify(result), {
+          status: result.success ? 200 : 500,
+          headers: {
+            ...CORS_HEADERS,
+            "Content-Type": "application/json; charset=utf-8",
+          },
+        });
+      } catch (err) {
+        return new Response(JSON.stringify({ success: false, error: String(err) }), {
+          status: 400,
+          headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+        });
+      }
+    }
+
+    // 7. LINEテスト通知送信: POST /api/test-notify
+    if (url.pathname === "/api/test-notify" && request.method === "POST") {
+      try {
+        const body = await request.json().catch(() => ({}));
+        const token = body.token || env.LINE_CHANNEL_ACCESS_TOKEN;
+        const result = await sendLineBroadcast(token, body.message || "⚾ 【テスト通知】LINE通知設定が正常に保存され、接続テストに成功しました！");
+        return new Response(JSON.stringify(result), {
+          status: result.success ? 200 : 500,
+          headers: {
+            ...CORS_HEADERS,
+            "Content-Type": "application/json; charset=utf-8",
+          },
+        });
+      } catch (err) {
+        return new Response(JSON.stringify({ success: false, error: String(err) }), {
+          status: 400,
+          headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+        });
+      }
+    }
+
     return new Response(JSON.stringify({ error: "Not Found" }), {
       status: 404,
       headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
@@ -321,4 +375,143 @@ async function triggerGitHubWorkflow(env, options = {}) {
     return { success: false, error: String(e) };
   }
 }
+
+/**
+ * UTF-8文字列を安全にBase64エンコード
+ */
+function utf8ToBase64(str) {
+  const bytes = new TextEncoder().encode(str);
+  let binary = "";
+  for (let i = 0; i < bytes.length; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return btoa(binary);
+}
+
+/**
+ * Base64文字列を安全にUTF-8デコード
+ */
+function base64ToUtf8(base64) {
+  const binary = atob(base64.replace(/\r?\n/g, ""));
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) {
+    bytes[i] = binary.charCodeAt(i);
+  }
+  return new TextDecoder().decode(bytes);
+}
+
+/**
+ * GitHub API 経由で docs/notify_settings.json を取得
+ */
+async function getNotifySettings(env) {
+  const owner = env.GITHUB_OWNER || "KazukiAoyama";
+  const repo = env.GITHUB_REPO || "playright1";
+  const pat = env.GITHUB_PAT;
+  const path = "docs/notify_settings.json";
+
+  const headers = {
+    "User-Agent": "Cloudflare-Worker-NotifySettings",
+    "Accept": "application/vnd.github+json",
+  };
+  if (pat) headers["Authorization"] = `Bearer ${pat}`;
+
+  try {
+    const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, { headers });
+    if (!res.ok) {
+      return { success: false, error: `GitHub API returned ${res.status}` };
+    }
+    const data = await res.json();
+    const jsonStr = base64ToUtf8(data.content);
+    const settings = JSON.parse(jsonStr);
+    return { success: true, settings, sha: data.sha };
+  } catch (e) {
+    return { success: false, error: String(e) };
+  }
+}
+
+/**
+ * GitHub API 経由で docs/notify_settings.json を保存 (コミット)
+ */
+async function saveNotifySettings(env, settings) {
+  const owner = env.GITHUB_OWNER || "KazukiAoyama";
+  const repo = env.GITHUB_REPO || "playright1";
+  const pat = env.GITHUB_PAT;
+  const path = "docs/notify_settings.json";
+
+  if (!pat) {
+    return { success: false, error: "GITHUB_PAT が設定されていません。" };
+  }
+
+  const headers = {
+    "User-Agent": "Cloudflare-Worker-NotifySettings",
+    "Accept": "application/vnd.github+json",
+    "Authorization": `Bearer ${pat}`,
+  };
+
+  try {
+    // 既存ファイルの SHA を取得
+    let sha = null;
+    const getRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, { headers });
+    if (getRes.ok) {
+      const existing = await getRes.json();
+      sha = existing.sha;
+    }
+
+    settings.updatedAt = new Date().toISOString();
+    const contentStr = JSON.stringify(settings, null, 2);
+    const base64Content = utf8ToBase64(contentStr);
+
+    const body = {
+      message: "update: LINE notification settings from web admin",
+      content: base64Content,
+    };
+    if (sha) body.sha = sha;
+
+    const putRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
+      method: "PUT",
+      headers: { ...headers, "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+
+    if (putRes.ok || putRes.status === 201) {
+      return { success: true, message: "Settings saved successfully", updatedAt: settings.updatedAt };
+    } else {
+      const errText = await putRes.text();
+      return { success: false, error: errText, status: putRes.status };
+    }
+  } catch (e) {
+    return { success: false, error: String(e) };
+  }
+}
+
+/**
+ * LINE Messaging API (Broadcast) へのメッセージ送信
+ */
+async function sendLineBroadcast(token, text) {
+  if (!token) {
+    return { success: false, error: "LINE Channel Access Token が指定されていません。" };
+  }
+  const url = "https://api.line.me/v2/bot/message/broadcast";
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        messages: [{ type: "text", text }],
+      }),
+    });
+    if (res.ok) {
+      return { success: true, message: "LINE broadcast sent successfully" };
+    } else {
+      const errText = await res.text();
+      return { success: false, status: res.status, error: errText };
+    }
+  } catch (e) {
+    return { success: false, error: String(e) };
+  }
+}
+
 

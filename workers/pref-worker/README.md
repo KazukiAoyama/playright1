@@ -50,18 +50,21 @@ npx wrangler deploy
 ```bash
 cd workers/pref-worker
 npx wrangler secret put GITHUB_PAT
-# プロンプトが表示されたらコピーしたトークンを貼り付け
+# LINE通知のWebテスト送信を行う場合はこちらも登録
+npx wrangler secret put LINE_CHANNEL_ACCESS_TOKEN
 ```
 
 **方法 B (Cloudflare ダッシュボード):**
 1. 対象の Worker（`saitama-pref-reservation-worker`）を開く
 2. **[Settings]** -> **[Variables and Secrets]** を開く
 3. **Add** を押し、Type を **Secret**、Name を `GITHUB_PAT`、Value にトークンを貼り付けて保存
+4. 同様に、Name を `LINE_CHANNEL_ACCESS_TOKEN`、Value に発行したLINE長期アクセストークンを貼り付けて保存
 
 ### 3. 動作テスト（手動キック）
 Worker の URL に `/trigger-scrape` を付けてブラウザまたは curl でアクセスすると、GitHub Actions が即座に起動するかテストできます：
 - 通常判定でキック: `https://<your-worker>.workers.dev/trigger-scrape`
 - 強制実行（強制スクレイピング）: `https://<your-worker>.workers.dev/trigger-scrape?force=true`
+- 通知設定の取得確認: `https://<your-worker>.workers.dev/api/notify-settings`
 
 ---
 

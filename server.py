@@ -136,9 +136,53 @@ class CustomAppHandler(SimpleHTTPRequestHandler):
             except Exception as e:
                 self.send_json_response({"error": str(e)}, status_code=500)
             return
+        elif url_path == "/api/notify-settings":
+            settings_path = os.path.join(DOCS_DIR, "notify_settings.json")
+            if os.path.exists(settings_path):
+                try:
+                    with open(settings_path, "r", encoding="utf-8") as f:
+                        settings = json.load(f)
+                    self.send_json_response({"success": True, "settings": settings})
+                    return
+                except Exception as e:
+                    self.send_json_response({"success": False, "error": str(e)}, status_code=500)
+                    return
+            self.send_json_response({"success": False, "error": "Not Found"}, status_code=404)
+            return
         super().do_GET()
 
     def do_POST(self):
+        url_path = self.path.split("?")[0]
+        if url_path == "/api/notify-settings":
+            try:
+                content_length = int(self.headers.get("Content-Length", 0))
+                body = self.rfile.read(content_length)
+                settings = json.loads(body.decode("utf-8"))
+                settings["updatedAt"] = datetime.now().isoformat()
+                settings_path = os.path.join(DOCS_DIR, "notify_settings.json")
+                with open(settings_path, "w", encoding="utf-8") as f:
+                    json.dump(settings, f, ensure_ascii=False, indent=2)
+                self.send_json_response({"success": True, "message": "Settings saved locally"})
+            except Exception as e:
+                self.send_json_response({"success": False, "error": str(e)}, status_code=500)
+            return
+
+        if url_path == "/api/test-notify":
+            try:
+                content_length = int(self.headers.get("Content-Length", 0))
+                body = self.rfile.read(content_length) if content_length > 0 else b"{}"
+                payload = json.loads(body.decode("utf-8")) if body else {}
+                msg = payload.get("message", "⚾ 【テスト通知】ローカルサーバーからのテスト送信に成功しました！")
+                from scraper.notify import send_line_broadcast
+                token = os.environ.get("LINE_CHANNEL_ACCESS_TOKEN", "").strip()
+                if not token:
+                    token = "FSkVnkfWa5vd7fgUDd6mIdDvXPheZRde7hGpinCoE9JEr4uikfDO/Ca1xlSx7z0msKq3/vgPRKe7tDrhXO6ogKv3ClQLadospyrSAyJVM6sWKoA4tomLhH07R16nCklczjgDZeL9Z6+vEm77ppI3WwdB04t89/1O/w1cDnyilFU="
+                success = send_line_broadcast(token, msg)
+                self.send_json_response({"success": success})
+            except Exception as e:
+                self.send_json_response({"success": False, "error": str(e)}, status_code=500)
+            return
+
         if self.path == "/api/refresh":
             global is_scraping_running, last_scrape_status
             remaining, can_refresh, last_ts = get_cooldown_info()
