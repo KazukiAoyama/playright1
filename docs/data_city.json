@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-24 08:41:34 JST",
+  "updatedAt": "2026-10-24 09:15:40 JST",
   "facilityCategory": "さいたま市公共施設予約システム（少年野球場・ソフトボール場）",
   "targetUrl": "https://saitama.rsv.ws-scs.jp/web/rsvWTransInstSrchBuildAction.do",
   "targetGrounds": [
@@ -57,9 +57,9 @@
     }
   ],
   "totalSlots": 3416,
-  "availableSlotsCount": 922,
+  "availableSlotsCount": 920,
   "weekendHolidaySlots": 1176,
-  "weekendHolidayAvailable": 2,
+  "weekendHolidayAvailable": 0,
   "data": [
     {
       "groundName": "さくら草公園",
@@ -21448,10 +21448,10 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "西遊馬公園",
@@ -21464,10 +21464,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "西遊馬公園",
@@ -21480,8 +21480,8 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "closed",
-      "statusText": "休館/保守",
+      "status": "unavailable",
+      "statusText": "期間外",
       "symbol": "-",
       "available": false
     },
@@ -21496,8 +21496,8 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "closed",
-      "statusText": "休館/保守",
+      "status": "unavailable",
+      "statusText": "期間外",
       "symbol": "-",
       "available": false
     },
