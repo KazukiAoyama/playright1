@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-25 19:41:48 JST",
+  "updatedAt": "2026-10-25 20:11:07 JST",
   "facilityCategory": "さいたま市公共施設予約システム（少年野球場・ソフトボール場）",
   "targetUrl": "https://saitama.rsv.ws-scs.jp/web/rsvWTransInstSrchBuildAction.do",
   "targetGrounds": [
@@ -57,7 +57,7 @@
     }
   ],
   "totalSlots": 3416,
-  "availableSlotsCount": 924,
+  "availableSlotsCount": 923,
   "weekendHolidaySlots": 1176,
   "weekendHolidayAvailable": 0,
   "data": [
@@ -25240,10 +25240,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "full",
+      "statusText": "予約あり",
+      "symbol": "×",
+      "available": false
     },
     {
       "groundName": "大間木公園",
