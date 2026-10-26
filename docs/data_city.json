@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-26 14:41:33 JST",
+  "updatedAt": "2026-10-26 15:11:16 JST",
   "facilityCategory": "さいたま市公共施設予約システム（少年野球場・ソフトボール場）",
   "targetUrl": "https://saitama.rsv.ws-scs.jp/web/rsvWTransInstSrchBuildAction.do",
   "targetGrounds": [
@@ -57,7 +57,7 @@
     }
   ],
   "totalSlots": 3416,
-  "availableSlotsCount": 911,
+  "availableSlotsCount": 912,
   "weekendHolidaySlots": 1176,
   "weekendHolidayAvailable": 0,
   "data": [
@@ -26808,10 +26808,10 @@
       "holidayName": "",
       "startTime": "15:00:00",
       "endTime": "18:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
-      "available": false
+      "status": "available",
+      "statusText": "空き",
+      "symbol": "○",
+      "available": true
     },
     {
       "groundName": "西遊馬公園",
