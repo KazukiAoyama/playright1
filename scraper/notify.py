@@ -2,6 +2,7 @@ import os
 import sys
 import json
 import urllib.request
+import asyncio
 from datetime import datetime, timezone, timedelta
 
 try:
@@ -35,6 +36,8 @@ JP_HOLIDAYS = {
     "2028-07-17": "海の日", "2028-08-11": "山の日", "2028-09-18": "敬老の日", "2028-09-22": "秋分の日", "2028-10-09": "スポーツの日",
     "2028-11-03": "文化の日", "2028-11-23": "勤労感謝の日"
 }
+
+DEFAULT_PREF_WORKER_URL = "https://saitama-pref-worker.kazuki-aoyama.workers.dev"
 
 def get_day_type(date_str):
     """'sat', 'sun', 'holiday', 'weekday' のいずれかを返す"""
@@ -74,6 +77,89 @@ def save_json(filepath, data):
     with open(filepath, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
+def fetch_pref_data(pref_data_file=None):
+    """
+    秋ヶ瀬公園の最新空き枠データを取得する。
+    1. Cloudflare Worker から取得（GitHub Actions・Web向け、高速）
+    2. 失敗時は Direct API（scrape.py）から直接取得
+    3. 最終フォールバックとしてローカルの docs/data.json を使用
+    取得成功時は docs/data.json を最新に更新する。
+    """
+    worker_url = os.environ.get("CLOUDFLARE_WORKER_URL") or os.environ.get("PREF_WORKER_URL") or DEFAULT_PREF_WORKER_URL
+    worker_url = worker_url.rstrip("/")
+
+    combined_slots = []
+    p1_meta = {}
+
+    # 方法1: Cloudflare Worker 経由
+    try:
+        print(f"[PREF] Fetching Akigase Park data from Cloudflare Worker ({worker_url})...")
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+        }
+        for offset in [0, 30]:
+            req_url = f"{worker_url}/api/pref?days=30&offset={offset}&t={int(datetime.now().timestamp() * 1000)}"
+            req = urllib.request.Request(req_url, headers=headers)
+            with urllib.request.urlopen(req, timeout=20) as res:
+                if res.status == 200:
+                    resp_json = json.loads(res.read().decode("utf-8"))
+                    slots = resp_json.get("data", [])
+                    combined_slots.extend(slots)
+                    if offset == 0:
+                        p1_meta = resp_json
+                else:
+                    print(f"[WARN] Worker returned HTTP {res.status} for offset {offset}")
+
+        if combined_slots:
+            seen = set()
+            deduped_slots = []
+            for s in combined_slots:
+                k = (s.get("subFacilityId"), s.get("date"), s.get("startTime"), s.get("timeSlotType"))
+                if k not in seen:
+                    seen.add(k)
+                    deduped_slots.append(s)
+
+            now_jst = datetime.now(JST)
+            pref_data = {
+                "updatedAt": p1_meta.get("updatedAt") or now_jst.strftime("%Y-%m-%d %H:%M:%S JST"),
+                "facilityName": "秋ヶ瀬公園",
+                "purposes": ["軟式野球", "ソフトボール"],
+                "totalSlots": len(deduped_slots),
+                "availableSlotsCount": sum(1 for s in deduped_slots if s.get("available")),
+                "data": deduped_slots
+            }
+
+            if pref_data_file:
+                try:
+                    save_json(pref_data_file, pref_data)
+                    print(f"[PREF] Successfully fetched {len(deduped_slots)} slots from Worker and saved to {pref_data_file}")
+                except Exception as save_err:
+                    print(f"[WARN] Failed to cache pref data to {pref_data_file}: {save_err}")
+            return pref_data
+    except Exception as e:
+        print(f"[WARN] Worker fetch failed: {e}")
+
+    # 方法2: Direct API 直接呼び出し (ローカル環境等)
+    try:
+        print("[PREF] Attempting Direct API scraper fallback...")
+        try:
+            from scraper.scrape import run_scraper
+        except ImportError:
+            from scrape import run_scraper
+
+        res = asyncio.run(run_scraper())
+        if res and res.get("data"):
+            print(f"[PREF] Direct API fallback succeeded: {len(res['data'])} slots.")
+            return res
+    except Exception as scrape_err:
+        print(f"[WARN] Direct API fallback failed: {scrape_err}")
+
+    # 方法3: ローカルファイルから読み込み
+    if pref_data_file and os.path.exists(pref_data_file):
+        print(f"[PREF] Falling back to local file {pref_data_file}")
+        return load_json(pref_data_file, {})
+    return {}
+
 def send_line_broadcast(token, text):
     url = "https://api.line.me/v2/bot/message/broadcast"
     payload = {
@@ -104,7 +190,7 @@ def send_line_broadcast(token, text):
         print(f"[LINE EXCEPTION] {e}")
         return False
 
-def check_and_notify(force=False):
+def check_and_notify(force=False, dry_run=False):
     root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
     settings_file = os.path.join(root_dir, "docs", "notify_settings.json")
     city_data_file = os.path.join(root_dir, "docs", "data_city.json")
@@ -121,9 +207,9 @@ def check_and_notify(force=False):
     target_dates = set(settings.get("targetDates", [])) if "targetDates" in settings else None
     time_slots = settings.get("timeSlots", {"am": True, "pm": True})
 
-    # 2. 空き枠データの読み込み（さいたま市 & 埼玉県営）
+    # 2. 空き枠データの読み込み（さいたま市 & 埼玉県営・秋ヶ瀬公園）
     city_data = load_json(city_data_file, {})
-    pref_data = load_json(pref_data_file, {})
+    pref_data = fetch_pref_data(pref_data_file)
 
     all_slots = []
     # さいたま市
@@ -205,20 +291,21 @@ def check_and_notify(force=False):
     # 初回実行時（prev_available_keys が空）の場合は、大量通知を防ぐため状態保存のみ
     if not prev_available_keys and not force:
         print(f"[INIT] 初回実行のため、現在の空き枠 {len(current_all_available_keys)} 件を記録しました（通知は次回から開始します）。")
-        save_json(state_file, {
-            "lastChecked": now_jst.isoformat(),
-            "availableKeys": list(current_all_available_keys)
-        })
+        if not dry_run:
+            save_json(state_file, {
+                "lastChecked": now_jst.isoformat(),
+                "availableKeys": list(current_all_available_keys)
+            })
         return
 
     # 5. 新規空き枠があればLINE通知メッセージを作成
     if not newly_available_by_location:
         print("[INFO] 新規の空き枠はありませんでした。")
-        # 状態のみ最新に更新
-        save_json(state_file, {
-            "lastChecked": now_jst.isoformat(),
-            "availableKeys": list(current_all_available_keys)
-        })
+        if not dry_run:
+            save_json(state_file, {
+                "lastChecked": now_jst.isoformat(),
+                "availableKeys": list(current_all_available_keys)
+            })
         return
 
     total_new_slots = sum(len(slots) for slots in newly_available_by_location.values())
@@ -265,6 +352,10 @@ def check_and_notify(force=False):
     print(message_text)
     print("-------------------------")
 
+    if dry_run:
+        print("[DRY-RUN] LINE送信および状態ファイル保存をスキップしました。")
+        return
+
     # 6. LINE送信
     token = os.environ.get("LINE_CHANNEL_ACCESS_TOKEN", "").strip()
     # ローカル実行時のフォールバックトークン
@@ -288,4 +379,5 @@ def check_and_notify(force=False):
 
 if __name__ == "__main__":
     force_run = "--force" in sys.argv
-    check_and_notify(force=force_run)
+    dry_run = "--dry-run" in sys.argv
+    check_and_notify(force=force_run, dry_run=dry_run)

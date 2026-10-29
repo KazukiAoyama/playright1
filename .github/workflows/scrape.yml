@@ -73,7 +73,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: 'auto: update availability data & notification state'
-          file_pattern: 'docs/data_city.json docs/last_notified_state.json docs/notify_settings.json'
+          file_pattern: 'docs/data_city.json docs/data.json docs/last_notified_state.json docs/notify_settings.json'
           commit_user_name: 'github-actions[bot]'
           commit_user_email: 'github-actions[bot]@users.noreply.github.com'
 
