@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-02 21:11:52 JST",
+  "updatedAt": "2026-11-02 21:41:38 JST",
   "facilityName": "秋ヶ瀬公園",
   "purposes": [
     "軟式野球",
@@ -12141,7 +12141,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 6
+      "lotteryAppNum": 10
     },
     {
       "subFacilityId": 269,
@@ -12156,7 +12156,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 5
+      "lotteryAppNum": 9
     },
     {
       "subFacilityId": 270,
@@ -12201,7 +12201,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 6
+      "lotteryAppNum": 10
     },
     {
       "subFacilityId": 273,
@@ -12216,7 +12216,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 4
+      "lotteryAppNum": 8
     },
     {
       "subFacilityId": 274,
@@ -14661,7 +14661,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 1
+      "lotteryAppNum": 4
     },
     {
       "subFacilityId": 269,
@@ -14676,7 +14676,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 0
+      "lotteryAppNum": 4
     },
     {
       "subFacilityId": 270,
@@ -14706,7 +14706,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 0
+      "lotteryAppNum": 1
     },
     {
       "subFacilityId": 273,
@@ -14721,7 +14721,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 1
+      "lotteryAppNum": 4
     },
     {
       "subFacilityId": 273,
@@ -14736,7 +14736,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 0
+      "lotteryAppNum": 4
     },
     {
       "subFacilityId": 274,
@@ -15111,7 +15111,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 63
+      "lotteryAppNum": 64
     },
     {
       "subFacilityId": 274,
