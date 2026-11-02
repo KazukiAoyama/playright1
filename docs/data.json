@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-11-02 16:42:10 JST",
+  "updatedAt": "2026-11-02 17:12:03 JST",
   "facilityName": "秋ヶ瀬公園",
   "purposes": [
     "軟式野球",
     "ソフトボール"
   ],
   "totalSlots": 1440,
-  "availableSlotsCount": 846,
+  "availableSlotsCount": 850,
   "data": [
     {
       "subFacilityId": 303,
@@ -392,10 +392,10 @@
       "date": "2026-11-03",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "8",
-      "statusText": "予約済",
-      "symbol": "×",
-      "available": false,
+      "status": "1",
+      "statusText": "空き",
+      "symbol": "○",
+      "available": true,
       "lotteryAppNum": 0
     },
     {
@@ -407,10 +407,10 @@
       "date": "2026-11-03",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "8",
-      "statusText": "予約済",
-      "symbol": "×",
-      "available": false,
+      "status": "1",
+      "statusText": "空き",
+      "symbol": "○",
+      "available": true,
       "lotteryAppNum": 0
     },
     {
@@ -422,10 +422,10 @@
       "date": "2026-11-03",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "8",
-      "statusText": "予約済",
-      "symbol": "×",
-      "available": false,
+      "status": "1",
+      "statusText": "空き",
+      "symbol": "○",
+      "available": true,
       "lotteryAppNum": 0
     },
     {
@@ -662,10 +662,10 @@
       "date": "2026-11-03",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "8",
-      "statusText": "予約済",
-      "symbol": "×",
-      "available": false,
+      "status": "1",
+      "statusText": "空き",
+      "symbol": "○",
+      "available": true,
       "lotteryAppNum": 9
     },
     {
@@ -20061,7 +20061,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 2
+      "lotteryAppNum": 3
     },
     {
       "subFacilityId": 269,
@@ -20091,7 +20091,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 1
+      "lotteryAppNum": 2
     },
     {
       "subFacilityId": 270,
@@ -20121,7 +20121,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 2
+      "lotteryAppNum": 3
     },
     {
       "subFacilityId": 273,
@@ -20151,7 +20151,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 2
+      "lotteryAppNum": 3
     },
     {
       "subFacilityId": 274,
