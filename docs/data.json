@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-11-03 17:42:17 JST",
+  "updatedAt": "2026-11-03 18:11:46 JST",
   "facilityName": "秋ヶ瀬公園",
   "purposes": [
     "軟式野球",
     "ソフトボール"
   ],
   "totalSlots": 1440,
-  "availableSlotsCount": 843,
+  "availableSlotsCount": 844,
   "data": [
     {
       "subFacilityId": 303,
@@ -2102,10 +2102,10 @@
       "date": "2026-11-08",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "8",
-      "statusText": "予約済",
-      "symbol": "×",
-      "available": false,
+      "status": "1",
+      "statusText": "空き",
+      "symbol": "○",
+      "available": true,
       "lotteryAppNum": 21
     },
     {
@@ -11961,7 +11961,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 11
+      "lotteryAppNum": 15
     },
     {
       "subFacilityId": 629,
@@ -11991,7 +11991,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 11
+      "lotteryAppNum": 15
     },
     {
       "subFacilityId": 630,
@@ -12081,7 +12081,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 7
+      "lotteryAppNum": 10
     },
     {
       "subFacilityId": 633,
@@ -12141,7 +12141,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 23
+      "lotteryAppNum": 31
     },
     {
       "subFacilityId": 269,
@@ -12201,7 +12201,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 8
+      "lotteryAppNum": 12
     },
     {
       "subFacilityId": 273,
@@ -14661,7 +14661,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 34
+      "lotteryAppNum": 38
     },
     {
       "subFacilityId": 269,
@@ -14721,7 +14721,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 10
+      "lotteryAppNum": 14
     },
     {
       "subFacilityId": 273,
