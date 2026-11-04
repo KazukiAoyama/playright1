@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-04 20:11:56 JST",
+  "updatedAt": "2026-11-04 20:41:57 JST",
   "facilityName": "秋ヶ瀬公園",
   "purposes": [
     "軟式野球",
@@ -11241,7 +11241,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 5
+      "lotteryAppNum": 6
     },
     {
       "subFacilityId": 629,
@@ -11256,7 +11256,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 1
+      "lotteryAppNum": 2
     },
     {
       "subFacilityId": 630,
@@ -11271,7 +11271,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 16
+      "lotteryAppNum": 17
     },
     {
       "subFacilityId": 630,
@@ -11286,7 +11286,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 15
+      "lotteryAppNum": 16
     },
     {
       "subFacilityId": 631,
@@ -11331,7 +11331,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 2
+      "lotteryAppNum": 3
     },
     {
       "subFacilityId": 632,
@@ -11346,7 +11346,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 0
+      "lotteryAppNum": 1
     },
     {
       "subFacilityId": 633,
@@ -11361,7 +11361,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 3
+      "lotteryAppNum": 4
     },
     {
       "subFacilityId": 633,
@@ -11376,7 +11376,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 0
+      "lotteryAppNum": 1
     },
     {
       "subFacilityId": 268,
@@ -11481,7 +11481,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 10
+      "lotteryAppNum": 11
     },
     {
       "subFacilityId": 273,
@@ -11496,7 +11496,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 8
+      "lotteryAppNum": 9
     },
     {
       "subFacilityId": 274,
@@ -11511,7 +11511,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 21
+      "lotteryAppNum": 22
     },
     {
       "subFacilityId": 274,
@@ -11526,7 +11526,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 20
+      "lotteryAppNum": 21
     },
     {
       "subFacilityId": 303,
@@ -11601,7 +11601,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 15
+      "lotteryAppNum": 16
     },
     {
       "subFacilityId": 629,
@@ -11616,7 +11616,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 1
+      "lotteryAppNum": 2
     },
     {
       "subFacilityId": 630,
@@ -11631,7 +11631,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 15
+      "lotteryAppNum": 16
     },
     {
       "subFacilityId": 630,
@@ -11646,7 +11646,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 0
+      "lotteryAppNum": 1
     },
     {
       "subFacilityId": 631,
@@ -11691,7 +11691,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 9
+      "lotteryAppNum": 10
     },
     {
       "subFacilityId": 632,
@@ -11706,133 +11706,13 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 1
+      "lotteryAppNum": 2
     },
     {
       "subFacilityId": 633,
       "subFacilityName": "天然芝SSE",
       "courtName": "天然芝SSE",
       "rawSubFacilityName": "ソフトボール場兼少年野球場天然芝第２グラウンド SSE",
-      "timeSlotType": "午前",
-      "date": "2026-12-06",
-      "startTime": "08:30:00",
-      "endTime": "12:30:00",
-      "status": "4",
-      "statusText": "抽選受付",
-      "symbol": "△",
-      "available": true,
-      "lotteryAppNum": 11
-    },
-    {
-      "subFacilityId": 633,
-      "subFacilityName": "天然芝SSE",
-      "courtName": "天然芝SSE",
-      "rawSubFacilityName": "ソフトボール場兼少年野球場天然芝第２グラウンド SSE",
-      "timeSlotType": "午後",
-      "date": "2026-12-06",
-      "startTime": "13:00:00",
-      "endTime": "17:00:00",
-      "status": "4",
-      "statusText": "抽選受付",
-      "symbol": "△",
-      "available": true,
-      "lotteryAppNum": 1
-    },
-    {
-      "subFacilityId": 268,
-      "subFacilityName": "第２野球場第１グラウンド",
-      "courtName": "第２野球場第１グラウンド",
-      "rawSubFacilityName": "第２野球場第１グラウンド",
-      "timeSlotType": "午前",
-      "date": "2026-12-06",
-      "startTime": "08:30:00",
-      "endTime": "12:30:00",
-      "status": "6",
-      "statusText": "点検・不可",
-      "symbol": "×",
-      "available": false,
-      "lotteryAppNum": 0
-    },
-    {
-      "subFacilityId": 268,
-      "subFacilityName": "第２野球場第１グラウンド",
-      "courtName": "第２野球場第１グラウンド",
-      "rawSubFacilityName": "第２野球場第１グラウンド",
-      "timeSlotType": "午後",
-      "date": "2026-12-06",
-      "startTime": "13:00:00",
-      "endTime": "17:00:00",
-      "status": "6",
-      "statusText": "点検・不可",
-      "symbol": "×",
-      "available": false,
-      "lotteryAppNum": 0
-    },
-    {
-      "subFacilityId": 269,
-      "subFacilityName": "第２野球場第２グラウンド",
-      "courtName": "第２野球場第２グラウンド",
-      "rawSubFacilityName": "第２野球場第２グラウンド",
-      "timeSlotType": "午前",
-      "date": "2026-12-06",
-      "startTime": "08:30:00",
-      "endTime": "12:30:00",
-      "status": "4",
-      "statusText": "抽選受付",
-      "symbol": "△",
-      "available": true,
-      "lotteryAppNum": 32
-    },
-    {
-      "subFacilityId": 269,
-      "subFacilityName": "第２野球場第２グラウンド",
-      "courtName": "第２野球場第２グラウンド",
-      "rawSubFacilityName": "第２野球場第２グラウンド",
-      "timeSlotType": "午後",
-      "date": "2026-12-06",
-      "startTime": "13:00:00",
-      "endTime": "17:00:00",
-      "status": "4",
-      "statusText": "抽選受付",
-      "symbol": "△",
-      "available": true,
-      "lotteryAppNum": 11
-    },
-    {
-      "subFacilityId": 270,
-      "subFacilityName": "第２野球場第３グラウンド",
-      "courtName": "第２野球場第３グラウンド",
-      "rawSubFacilityName": "第２野球場第３グラウンド",
-      "timeSlotType": "午前",
-      "date": "2026-12-06",
-      "startTime": "08:30:00",
-      "endTime": "12:30:00",
-      "status": "4",
-      "statusText": "抽選受付",
-      "symbol": "△",
-      "available": true,
-      "lotteryAppNum": 5
-    },
-    {
-      "subFacilityId": 270,
-      "subFacilityName": "第２野球場第３グラウンド",
-      "courtName": "第２野球場第３グラウンド",
-      "rawSubFacilityName": "第２野球場第３グラウンド",
-      "timeSlotType": "午後",
-      "date": "2026-12-06",
-      "startTime": "13:00:00",
-      "endTime": "17:00:00",
-      "status": "4",
-      "statusText": "抽選受付",
-      "symbol": "△",
-      "available": true,
-      "lotteryAppNum": 3
-    },
-    {
-      "subFacilityId": 273,
-      "subFacilityName": "第２野球場第６グラウンド",
-      "courtName": "第２野球場第６グラウンド",
-      "rawSubFacilityName": "第２野球場第６グラウンド",
       "timeSlotType": "午前",
       "date": "2026-12-06",
       "startTime": "08:30:00",
@@ -11844,6 +11724,126 @@
       "lotteryAppNum": 12
     },
     {
+      "subFacilityId": 633,
+      "subFacilityName": "天然芝SSE",
+      "courtName": "天然芝SSE",
+      "rawSubFacilityName": "ソフトボール場兼少年野球場天然芝第２グラウンド SSE",
+      "timeSlotType": "午後",
+      "date": "2026-12-06",
+      "startTime": "13:00:00",
+      "endTime": "17:00:00",
+      "status": "4",
+      "statusText": "抽選受付",
+      "symbol": "△",
+      "available": true,
+      "lotteryAppNum": 2
+    },
+    {
+      "subFacilityId": 268,
+      "subFacilityName": "第２野球場第１グラウンド",
+      "courtName": "第２野球場第１グラウンド",
+      "rawSubFacilityName": "第２野球場第１グラウンド",
+      "timeSlotType": "午前",
+      "date": "2026-12-06",
+      "startTime": "08:30:00",
+      "endTime": "12:30:00",
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
+      "lotteryAppNum": 0
+    },
+    {
+      "subFacilityId": 268,
+      "subFacilityName": "第２野球場第１グラウンド",
+      "courtName": "第２野球場第１グラウンド",
+      "rawSubFacilityName": "第２野球場第１グラウンド",
+      "timeSlotType": "午後",
+      "date": "2026-12-06",
+      "startTime": "13:00:00",
+      "endTime": "17:00:00",
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
+      "lotteryAppNum": 0
+    },
+    {
+      "subFacilityId": 269,
+      "subFacilityName": "第２野球場第２グラウンド",
+      "courtName": "第２野球場第２グラウンド",
+      "rawSubFacilityName": "第２野球場第２グラウンド",
+      "timeSlotType": "午前",
+      "date": "2026-12-06",
+      "startTime": "08:30:00",
+      "endTime": "12:30:00",
+      "status": "4",
+      "statusText": "抽選受付",
+      "symbol": "△",
+      "available": true,
+      "lotteryAppNum": 33
+    },
+    {
+      "subFacilityId": 269,
+      "subFacilityName": "第２野球場第２グラウンド",
+      "courtName": "第２野球場第２グラウンド",
+      "rawSubFacilityName": "第２野球場第２グラウンド",
+      "timeSlotType": "午後",
+      "date": "2026-12-06",
+      "startTime": "13:00:00",
+      "endTime": "17:00:00",
+      "status": "4",
+      "statusText": "抽選受付",
+      "symbol": "△",
+      "available": true,
+      "lotteryAppNum": 12
+    },
+    {
+      "subFacilityId": 270,
+      "subFacilityName": "第２野球場第３グラウンド",
+      "courtName": "第２野球場第３グラウンド",
+      "rawSubFacilityName": "第２野球場第３グラウンド",
+      "timeSlotType": "午前",
+      "date": "2026-12-06",
+      "startTime": "08:30:00",
+      "endTime": "12:30:00",
+      "status": "4",
+      "statusText": "抽選受付",
+      "symbol": "△",
+      "available": true,
+      "lotteryAppNum": 6
+    },
+    {
+      "subFacilityId": 270,
+      "subFacilityName": "第２野球場第３グラウンド",
+      "courtName": "第２野球場第３グラウンド",
+      "rawSubFacilityName": "第２野球場第３グラウンド",
+      "timeSlotType": "午後",
+      "date": "2026-12-06",
+      "startTime": "13:00:00",
+      "endTime": "17:00:00",
+      "status": "4",
+      "statusText": "抽選受付",
+      "symbol": "△",
+      "available": true,
+      "lotteryAppNum": 4
+    },
+    {
+      "subFacilityId": 273,
+      "subFacilityName": "第２野球場第６グラウンド",
+      "courtName": "第２野球場第６グラウンド",
+      "rawSubFacilityName": "第２野球場第６グラウンド",
+      "timeSlotType": "午前",
+      "date": "2026-12-06",
+      "startTime": "08:30:00",
+      "endTime": "12:30:00",
+      "status": "4",
+      "statusText": "抽選受付",
+      "symbol": "△",
+      "available": true,
+      "lotteryAppNum": 13
+    },
+    {
       "subFacilityId": 273,
       "subFacilityName": "第２野球場第６グラウンド",
       "courtName": "第２野球場第６グラウンド",
@@ -11856,7 +11856,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 2
+      "lotteryAppNum": 3
     },
     {
       "subFacilityId": 274,
@@ -11871,7 +11871,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 62
+      "lotteryAppNum": 63
     },
     {
       "subFacilityId": 274,
@@ -11886,7 +11886,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 41
+      "lotteryAppNum": 42
     },
     {
       "subFacilityId": 303,
@@ -14151,7 +14151,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 12
+      "lotteryAppNum": 14
     },
     {
       "subFacilityId": 630,
@@ -14181,7 +14181,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 11
+      "lotteryAppNum": 13
     },
     {
       "subFacilityId": 631,
@@ -14211,7 +14211,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 8
+      "lotteryAppNum": 10
     },
     {
       "subFacilityId": 632,
@@ -14241,7 +14241,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 10
+      "lotteryAppNum": 12
     },
     {
       "subFacilityId": 633,
