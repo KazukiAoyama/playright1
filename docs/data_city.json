@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-05 20:11:53 JST",
+  "updatedAt": "2026-11-05 20:41:30 JST",
   "facilityCategory": "さいたま市公共施設予約システム（少年野球場・ソフトボール場）",
   "targetUrl": "https://saitama.rsv.ws-scs.jp/web/rsvWTransInstSrchBuildAction.do",
   "targetGrounds": [
@@ -57,7 +57,7 @@
     }
   ],
   "totalSlots": 3416,
-  "availableSlotsCount": 1486,
+  "availableSlotsCount": 1488,
   "weekendHolidaySlots": 1064,
   "weekendHolidayAvailable": 4,
   "data": [
@@ -22792,10 +22792,10 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
-      "available": false
+      "status": "available",
+      "statusText": "空き",
+      "symbol": "○",
+      "available": true
     },
     {
       "groundName": "浦和総合運動場",
@@ -22808,10 +22808,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
-      "available": false
+      "status": "available",
+      "statusText": "空き",
+      "symbol": "○",
+      "available": true
     },
     {
       "groundName": "荒川総合運動公園",
