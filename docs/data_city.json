@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-06 08:11:48 JST",
+  "updatedAt": "2026-11-06 08:41:47 JST",
   "facilityCategory": "さいたま市公共施設予約システム（少年野球場・ソフトボール場）",
   "targetUrl": "https://saitama.rsv.ws-scs.jp/web/rsvWTransInstSrchBuildAction.do",
   "targetGrounds": [
@@ -57,9 +57,9 @@
     }
   ],
   "totalSlots": 3416,
-  "availableSlotsCount": 1475,
+  "availableSlotsCount": 1476,
   "weekendHolidaySlots": 1064,
-  "weekendHolidayAvailable": 4,
+  "weekendHolidayAvailable": 5,
   "data": [
     {
       "groundName": "さくら草公園",
@@ -6152,10 +6152,10 @@
       "holidayName": "",
       "startTime": "07:00:00",
       "endTime": "09:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
-      "available": false
+      "status": "available",
+      "statusText": "空き",
+      "symbol": "○",
+      "available": true
     },
     {
       "groundName": "西堀高沼公園",
