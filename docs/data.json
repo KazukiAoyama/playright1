@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-11-05 09:12:07 JST",
+  "updatedAt": "2026-11-05 09:42:00 JST",
   "facilityName": "秋ヶ瀬公園",
   "purposes": [
     "軟式野球",
     "ソフトボール"
   ],
   "totalSlots": 1440,
-  "availableSlotsCount": 806,
+  "availableSlotsCount": 798,
   "data": [
     {
       "subFacilityId": 303,
@@ -2537,10 +2537,10 @@
       "date": "2026-11-12",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "8",
+      "statusText": "予約済",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -2552,10 +2552,10 @@
       "date": "2026-11-12",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "8",
+      "statusText": "予約済",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -2567,10 +2567,10 @@
       "date": "2026-11-12",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "8",
+      "statusText": "予約済",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -2582,10 +2582,10 @@
       "date": "2026-11-12",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "8",
+      "statusText": "予約済",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -2897,10 +2897,10 @@
       "date": "2026-11-13",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "8",
+      "statusText": "予約済",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -2912,10 +2912,10 @@
       "date": "2026-11-13",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "8",
+      "statusText": "予約済",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -2927,10 +2927,10 @@
       "date": "2026-11-13",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "8",
+      "statusText": "予約済",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -2942,10 +2942,10 @@
       "date": "2026-11-13",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "8",
+      "statusText": "予約済",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
