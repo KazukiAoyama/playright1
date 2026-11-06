@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-07 08:11:51 JST",
+  "updatedAt": "2026-11-07 08:42:34 JST",
   "facilityName": "秋ヶ瀬公園",
   "purposes": [
     "軟式野球",
@@ -17,9 +17,9 @@
       "date": "2026-11-07",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "8",
-      "statusText": "予約済",
-      "symbol": "×",
+      "status": "3",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false,
       "lotteryAppNum": 1
     },
@@ -77,9 +77,9 @@
       "date": "2026-11-07",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "8",
-      "statusText": "予約済",
-      "symbol": "×",
+      "status": "3",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false,
       "lotteryAppNum": 10
     },
@@ -107,9 +107,9 @@
       "date": "2026-11-07",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "2",
-      "statusText": "電話受付",
-      "symbol": "☎",
+      "status": "3",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false,
       "lotteryAppNum": 5
     },
@@ -137,9 +137,9 @@
       "date": "2026-11-07",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "8",
-      "statusText": "予約済",
-      "symbol": "×",
+      "status": "3",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false,
       "lotteryAppNum": 6
     },
@@ -167,9 +167,9 @@
       "date": "2026-11-07",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "2",
-      "statusText": "電話受付",
-      "symbol": "☎",
+      "status": "3",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false,
       "lotteryAppNum": 12
     },
@@ -197,9 +197,9 @@
       "date": "2026-11-07",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "2",
-      "statusText": "電話受付",
-      "symbol": "☎",
+      "status": "3",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false,
       "lotteryAppNum": 13
     },
@@ -257,9 +257,9 @@
       "date": "2026-11-07",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "8",
-      "statusText": "予約済",
-      "symbol": "×",
+      "status": "3",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false,
       "lotteryAppNum": 38
     },
@@ -287,9 +287,9 @@
       "date": "2026-11-07",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "2",
-      "statusText": "電話受付",
-      "symbol": "☎",
+      "status": "3",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false,
       "lotteryAppNum": 29
     },
@@ -317,9 +317,9 @@
       "date": "2026-11-07",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "8",
-      "statusText": "予約済",
-      "symbol": "×",
+      "status": "3",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false,
       "lotteryAppNum": 25
     },
@@ -347,9 +347,9 @@
       "date": "2026-11-07",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "8",
-      "statusText": "予約済",
-      "symbol": "×",
+      "status": "3",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false,
       "lotteryAppNum": 30
     },
@@ -10281,7 +10281,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 12
+      "lotteryAppNum": 19
     },
     {
       "subFacilityId": 633,
@@ -10296,7 +10296,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 5
+      "lotteryAppNum": 12
     },
     {
       "subFacilityId": 268,
@@ -12801,7 +12801,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 12
+      "lotteryAppNum": 19
     },
     {
       "subFacilityId": 633,
@@ -15441,7 +15441,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 4
+      "lotteryAppNum": 11
     },
     {
       "subFacilityId": 273,
