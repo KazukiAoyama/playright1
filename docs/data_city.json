@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-09 08:11:22 JST",
+  "updatedAt": "2026-11-09 08:41:11 JST",
   "facilityCategory": "さいたま市公共施設予約システム（少年野球場・ソフトボール場）",
   "targetUrl": "https://saitama.rsv.ws-scs.jp/web/rsvWTransInstSrchBuildAction.do",
   "targetGrounds": [
@@ -7304,9 +7304,9 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "closed",
-      "statusText": "休館/保守",
-      "symbol": "-",
+      "status": "full",
+      "statusText": "予約あり",
+      "symbol": "×",
       "available": false
     },
     {
@@ -7320,10 +7320,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "full",
+      "statusText": "予約あり",
+      "symbol": "×",
+      "available": false
     },
     {
       "groundName": "大間木公園",
@@ -8760,10 +8760,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
-      "available": false
+      "status": "available",
+      "statusText": "空き",
+      "symbol": "○",
+      "available": true
     },
     {
       "groundName": "荒川総合運動公園",
