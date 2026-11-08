@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-08 17:41:32 JST",
+  "updatedAt": "2026-11-08 18:11:35 JST",
   "facilityName": "秋ヶ瀬公園",
   "purposes": [
     "軟式野球",
@@ -10161,7 +10161,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 26
+      "lotteryAppNum": 33
     },
     {
       "subFacilityId": 629,
@@ -10191,7 +10191,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 26
+      "lotteryAppNum": 33
     },
     {
       "subFacilityId": 630,
@@ -10221,7 +10221,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 30
+      "lotteryAppNum": 37
     },
     {
       "subFacilityId": 631,
@@ -10251,7 +10251,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 24
+      "lotteryAppNum": 31
     },
     {
       "subFacilityId": 632,
@@ -10281,7 +10281,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 24
+      "lotteryAppNum": 30
     },
     {
       "subFacilityId": 633,
@@ -10371,7 +10371,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 22
+      "lotteryAppNum": 24
     },
     {
       "subFacilityId": 270,
@@ -12681,7 +12681,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 31
+      "lotteryAppNum": 38
     },
     {
       "subFacilityId": 629,
@@ -12711,7 +12711,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 34
+      "lotteryAppNum": 41
     },
     {
       "subFacilityId": 630,
@@ -12741,7 +12741,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 25
+      "lotteryAppNum": 32
     },
     {
       "subFacilityId": 631,
@@ -12771,7 +12771,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 28
+      "lotteryAppNum": 35
     },
     {
       "subFacilityId": 632,
@@ -12801,7 +12801,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 26
+      "lotteryAppNum": 32
     },
     {
       "subFacilityId": 633,
@@ -14856,7 +14856,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 7
+      "lotteryAppNum": 8
     },
     {
       "subFacilityId": 630,
@@ -14886,7 +14886,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 7
+      "lotteryAppNum": 8
     },
     {
       "subFacilityId": 631,
@@ -14931,7 +14931,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 15
+      "lotteryAppNum": 16
     },
     {
       "subFacilityId": 632,
@@ -14946,7 +14946,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 9
+      "lotteryAppNum": 11
     },
     {
       "subFacilityId": 633,
@@ -14976,7 +14976,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 9
+      "lotteryAppNum": 10
     },
     {
       "subFacilityId": 268,
@@ -15051,7 +15051,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 19
+      "lotteryAppNum": 20
     },
     {
       "subFacilityId": 270,
@@ -15066,7 +15066,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 8
+      "lotteryAppNum": 9
     },
     {
       "subFacilityId": 273,
@@ -15321,7 +15321,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 9
+      "lotteryAppNum": 10
     },
     {
       "subFacilityId": 633,
@@ -15381,7 +15381,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 13
+      "lotteryAppNum": 14
     },
     {
       "subFacilityId": 269,
