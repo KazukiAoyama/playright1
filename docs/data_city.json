@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10 07:41:12 JST",
+  "updatedAt": "2026-11-10 08:11:27 JST",
   "facilityCategory": "さいたま市公共施設予約システム（少年野球場・ソフトボール場）",
   "targetUrl": "https://saitama.rsv.ws-scs.jp/web/rsvWTransInstSrchBuildAction.do",
   "targetGrounds": [
@@ -57,7 +57,7 @@
     }
   ],
   "totalSlots": 3416,
-  "availableSlotsCount": 1401,
+  "availableSlotsCount": 1389,
   "weekendHolidaySlots": 1064,
   "weekendHolidayAvailable": 5,
   "data": [
@@ -8488,10 +8488,10 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "closed",
+      "statusText": "休館/保守",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -8504,10 +8504,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "closed",
+      "statusText": "休館/保守",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -8520,10 +8520,10 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "closed",
+      "statusText": "休館/保守",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -8536,10 +8536,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "closed",
+      "statusText": "休館/保守",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -8552,10 +8552,10 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "closed",
+      "statusText": "休館/保守",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -8568,10 +8568,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "closed",
+      "statusText": "休館/保守",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -8584,10 +8584,10 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "closed",
+      "statusText": "休館/保守",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -8600,10 +8600,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "closed",
+      "statusText": "休館/保守",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -8616,10 +8616,10 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "closed",
+      "statusText": "休館/保守",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -8632,10 +8632,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "closed",
+      "statusText": "休館/保守",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -8648,10 +8648,10 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "closed",
+      "statusText": "休館/保守",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -8664,10 +8664,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "closed",
+      "statusText": "休館/保守",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
