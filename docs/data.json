@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-09 11:41:18 JST",
+  "updatedAt": "2026-11-09 12:10:57 JST",
   "facilityName": "秋ヶ瀬公園",
   "purposes": [
     "軟式野球",
@@ -9651,7 +9651,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 28
+      "lotteryAppNum": 29
     },
     {
       "subFacilityId": 270,
@@ -12081,7 +12081,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 32
+      "lotteryAppNum": 33
     },
     {
       "subFacilityId": 633,
@@ -12441,7 +12441,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 34
+      "lotteryAppNum": 35
     },
     {
       "subFacilityId": 633,
@@ -14601,7 +14601,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 20
+      "lotteryAppNum": 21
     },
     {
       "subFacilityId": 633,
