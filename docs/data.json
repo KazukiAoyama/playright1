@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10 19:11:46 JST",
+  "updatedAt": "2026-11-10 19:42:08 JST",
   "facilityName": "秋ヶ瀬公園",
   "purposes": [
     "軟式野球",
@@ -9081,7 +9081,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 18
+      "lotteryAppNum": 19
     },
     {
       "subFacilityId": 629,
@@ -9096,7 +9096,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 13
+      "lotteryAppNum": 16
     },
     {
       "subFacilityId": 630,
@@ -9306,7 +9306,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 18
+      "lotteryAppNum": 19
     },
     {
       "subFacilityId": 273,
@@ -9456,7 +9456,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 14
+      "lotteryAppNum": 15
     },
     {
       "subFacilityId": 630,
@@ -11601,7 +11601,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 21
+      "lotteryAppNum": 23
     },
     {
       "subFacilityId": 629,
@@ -11661,7 +11661,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 21
+      "lotteryAppNum": 22
     },
     {
       "subFacilityId": 631,
@@ -11811,7 +11811,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 39
+      "lotteryAppNum": 40
     },
     {
       "subFacilityId": 270,
@@ -11961,7 +11961,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 61
+      "lotteryAppNum": 62
     },
     {
       "subFacilityId": 629,
@@ -11976,73 +11976,13 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 34
+      "lotteryAppNum": 36
     },
     {
       "subFacilityId": 630,
       "subFacilityName": "人工芝SSB",
       "courtName": "人工芝SSB",
       "rawSubFacilityName": "ソフトボール場兼少年野球場人工芝第２グラウンド　SSB",
-      "timeSlotType": "午前",
-      "date": "2026-12-13",
-      "startTime": "08:30:00",
-      "endTime": "12:30:00",
-      "status": "4",
-      "statusText": "抽選受付",
-      "symbol": "△",
-      "available": true,
-      "lotteryAppNum": 61
-    },
-    {
-      "subFacilityId": 630,
-      "subFacilityName": "人工芝SSB",
-      "courtName": "人工芝SSB",
-      "rawSubFacilityName": "ソフトボール場兼少年野球場人工芝第２グラウンド　SSB",
-      "timeSlotType": "午後",
-      "date": "2026-12-13",
-      "startTime": "13:00:00",
-      "endTime": "17:00:00",
-      "status": "4",
-      "statusText": "抽選受付",
-      "symbol": "△",
-      "available": true,
-      "lotteryAppNum": 32
-    },
-    {
-      "subFacilityId": 631,
-      "subFacilityName": "人工芝SSC",
-      "courtName": "人工芝SSC",
-      "rawSubFacilityName": "ソフトボール場兼少年野球場人工芝第３グラウンド SSC",
-      "timeSlotType": "午前",
-      "date": "2026-12-13",
-      "startTime": "08:30:00",
-      "endTime": "12:30:00",
-      "status": "4",
-      "statusText": "抽選受付",
-      "symbol": "△",
-      "available": true,
-      "lotteryAppNum": 61
-    },
-    {
-      "subFacilityId": 631,
-      "subFacilityName": "人工芝SSC",
-      "courtName": "人工芝SSC",
-      "rawSubFacilityName": "ソフトボール場兼少年野球場人工芝第３グラウンド SSC",
-      "timeSlotType": "午後",
-      "date": "2026-12-13",
-      "startTime": "13:00:00",
-      "endTime": "17:00:00",
-      "status": "4",
-      "statusText": "抽選受付",
-      "symbol": "△",
-      "available": true,
-      "lotteryAppNum": 32
-    },
-    {
-      "subFacilityId": 632,
-      "subFacilityName": "天然芝SSD",
-      "courtName": "天然芝SSD",
-      "rawSubFacilityName": "ソフトボール場兼少年野球場天然芝第１グラウンド SSD",
       "timeSlotType": "午前",
       "date": "2026-12-13",
       "startTime": "08:30:00",
@@ -12054,6 +11994,66 @@
       "lotteryAppNum": 63
     },
     {
+      "subFacilityId": 630,
+      "subFacilityName": "人工芝SSB",
+      "courtName": "人工芝SSB",
+      "rawSubFacilityName": "ソフトボール場兼少年野球場人工芝第２グラウンド　SSB",
+      "timeSlotType": "午後",
+      "date": "2026-12-13",
+      "startTime": "13:00:00",
+      "endTime": "17:00:00",
+      "status": "4",
+      "statusText": "抽選受付",
+      "symbol": "△",
+      "available": true,
+      "lotteryAppNum": 32
+    },
+    {
+      "subFacilityId": 631,
+      "subFacilityName": "人工芝SSC",
+      "courtName": "人工芝SSC",
+      "rawSubFacilityName": "ソフトボール場兼少年野球場人工芝第３グラウンド SSC",
+      "timeSlotType": "午前",
+      "date": "2026-12-13",
+      "startTime": "08:30:00",
+      "endTime": "12:30:00",
+      "status": "4",
+      "statusText": "抽選受付",
+      "symbol": "△",
+      "available": true,
+      "lotteryAppNum": 62
+    },
+    {
+      "subFacilityId": 631,
+      "subFacilityName": "人工芝SSC",
+      "courtName": "人工芝SSC",
+      "rawSubFacilityName": "ソフトボール場兼少年野球場人工芝第３グラウンド SSC",
+      "timeSlotType": "午後",
+      "date": "2026-12-13",
+      "startTime": "13:00:00",
+      "endTime": "17:00:00",
+      "status": "4",
+      "statusText": "抽選受付",
+      "symbol": "△",
+      "available": true,
+      "lotteryAppNum": 32
+    },
+    {
+      "subFacilityId": 632,
+      "subFacilityName": "天然芝SSD",
+      "courtName": "天然芝SSD",
+      "rawSubFacilityName": "ソフトボール場兼少年野球場天然芝第１グラウンド SSD",
+      "timeSlotType": "午前",
+      "date": "2026-12-13",
+      "startTime": "08:30:00",
+      "endTime": "12:30:00",
+      "status": "4",
+      "statusText": "抽選受付",
+      "symbol": "△",
+      "available": true,
+      "lotteryAppNum": 64
+    },
+    {
       "subFacilityId": 632,
       "subFacilityName": "天然芝SSD",
       "courtName": "天然芝SSD",
@@ -12066,7 +12066,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 31
+      "lotteryAppNum": 33
     },
     {
       "subFacilityId": 633,
@@ -14166,7 +14166,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 15
+      "lotteryAppNum": 16
     },
     {
       "subFacilityId": 631,
@@ -14481,7 +14481,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 14
+      "lotteryAppNum": 16
     },
     {
       "subFacilityId": 629,
@@ -14571,7 +14571,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 17
+      "lotteryAppNum": 19
     },
     {
       "subFacilityId": 632,
