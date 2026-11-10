@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10 14:41:19 JST",
+  "updatedAt": "2026-11-10 15:11:36 JST",
   "facilityName": "秋ヶ瀬公園",
   "purposes": [
     "軟式野球",
@@ -9201,7 +9201,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 18
+      "lotteryAppNum": 19
     },
     {
       "subFacilityId": 633,
@@ -9381,7 +9381,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 10
+      "lotteryAppNum": 12
     },
     {
       "subFacilityId": 303,
@@ -9441,7 +9441,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 41
+      "lotteryAppNum": 43
     },
     {
       "subFacilityId": 629,
@@ -9471,7 +9471,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 42
+      "lotteryAppNum": 43
     },
     {
       "subFacilityId": 630,
@@ -9501,7 +9501,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 55
+      "lotteryAppNum": 56
     },
     {
       "subFacilityId": 631,
@@ -9531,7 +9531,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 42
+      "lotteryAppNum": 43
     },
     {
       "subFacilityId": 632,
@@ -9621,7 +9621,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 68
+      "lotteryAppNum": 70
     },
     {
       "subFacilityId": 269,
@@ -9651,7 +9651,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 50
+      "lotteryAppNum": 51
     },
     {
       "subFacilityId": 270,
@@ -9696,7 +9696,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 11
+      "lotteryAppNum": 12
     },
     {
       "subFacilityId": 274,
@@ -11721,7 +11721,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 38
+      "lotteryAppNum": 43
     },
     {
       "subFacilityId": 633,
@@ -11901,7 +11901,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 7
+      "lotteryAppNum": 8
     },
     {
       "subFacilityId": 303,
@@ -11931,7 +11931,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 6
+      "lotteryAppNum": 7
     },
     {
       "subFacilityId": 304,
@@ -11961,7 +11961,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 55
+      "lotteryAppNum": 56
     },
     {
       "subFacilityId": 629,
@@ -11991,7 +11991,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 57
+      "lotteryAppNum": 58
     },
     {
       "subFacilityId": 630,
@@ -12021,7 +12021,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 57
+      "lotteryAppNum": 58
     },
     {
       "subFacilityId": 631,
@@ -12081,7 +12081,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 62
+      "lotteryAppNum": 63
     },
     {
       "subFacilityId": 633,
@@ -12141,7 +12141,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 81
+      "lotteryAppNum": 82
     },
     {
       "subFacilityId": 269,
@@ -12171,7 +12171,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 63
+      "lotteryAppNum": 64
     },
     {
       "subFacilityId": 270,
@@ -12201,7 +12201,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 68
+      "lotteryAppNum": 69
     },
     {
       "subFacilityId": 273,
@@ -12231,7 +12231,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 72
+      "lotteryAppNum": 73
     },
     {
       "subFacilityId": 274,
@@ -14211,7 +14211,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 24
+      "lotteryAppNum": 29
     },
     {
       "subFacilityId": 632,
@@ -14226,7 +14226,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 13
+      "lotteryAppNum": 14
     },
     {
       "subFacilityId": 633,
@@ -14361,7 +14361,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 28
+      "lotteryAppNum": 33
     },
     {
       "subFacilityId": 273,
@@ -14376,7 +14376,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 28
+      "lotteryAppNum": 33
     },
     {
       "subFacilityId": 274,
@@ -14421,7 +14421,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 4
+      "lotteryAppNum": 6
     },
     {
       "subFacilityId": 303,
@@ -14511,7 +14511,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 12
+      "lotteryAppNum": 13
     },
     {
       "subFacilityId": 630,
@@ -16941,7 +16941,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 4
+      "lotteryAppNum": 5
     },
     {
       "subFacilityId": 303,
@@ -16971,7 +16971,7 @@
       "statusText": "抽選受付",
       "symbol": "△",
       "available": true,
-      "lotteryAppNum": 3
+      "lotteryAppNum": 4
     },
     {
       "subFacilityId": 304,
