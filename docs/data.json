@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-11-17 09:40:56 JST",
+  "updatedAt": "2026-11-17 10:11:14 JST",
   "facilityName": "秋ヶ瀬公園",
   "purposes": [
     "軟式野球",
     "ソフトボール"
   ],
   "totalSlots": 1440,
-  "availableSlotsCount": 126,
+  "availableSlotsCount": 130,
   "data": [
     {
       "subFacilityId": 303,
@@ -2537,10 +2537,10 @@
       "date": "2026-11-24",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "8",
-      "statusText": "予約済",
-      "symbol": "×",
-      "available": false,
+      "status": "1",
+      "statusText": "空き",
+      "symbol": "○",
+      "available": true,
       "lotteryAppNum": 0
     },
     {
@@ -2552,10 +2552,10 @@
       "date": "2026-11-24",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "8",
-      "statusText": "予約済",
-      "symbol": "×",
-      "available": false,
+      "status": "1",
+      "statusText": "空き",
+      "symbol": "○",
+      "available": true,
       "lotteryAppNum": 0
     },
     {
@@ -2567,10 +2567,10 @@
       "date": "2026-11-24",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "8",
-      "statusText": "予約済",
-      "symbol": "×",
-      "available": false,
+      "status": "1",
+      "statusText": "空き",
+      "symbol": "○",
+      "available": true,
       "lotteryAppNum": 0
     },
     {
@@ -2582,10 +2582,10 @@
       "date": "2026-11-24",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "8",
-      "statusText": "予約済",
-      "symbol": "×",
-      "available": false,
+      "status": "1",
+      "statusText": "空き",
+      "symbol": "○",
+      "available": true,
       "lotteryAppNum": 0
     },
     {
