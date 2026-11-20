@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-21 06:41:34 JST",
+  "updatedAt": "2026-11-21 07:11:18 JST",
   "facilityCategory": "さいたま市公共施設予約システム（少年野球場・ソフトボール場）",
   "targetUrl": "https://saitama.rsv.ws-scs.jp/web/rsvWTransInstSrchBuildAction.do",
   "targetGrounds": [
@@ -19832,9 +19832,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "unavailable",
-      "statusText": "期間外",
-      "symbol": "-",
+      "status": "full",
+      "statusText": "予約あり",
+      "symbol": "×",
       "available": false
     },
     {
