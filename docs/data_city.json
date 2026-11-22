@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-22 11:40:58 JST",
+  "updatedAt": "2026-11-22 12:11:18 JST",
   "facilityCategory": "さいたま市公共施設予約システム（少年野球場・ソフトボール場）",
   "targetUrl": "https://saitama.rsv.ws-scs.jp/web/rsvWTransInstSrchBuildAction.do",
   "targetGrounds": [
@@ -57,9 +57,9 @@
     }
   ],
   "totalSlots": 3416,
-  "availableSlotsCount": 1033,
+  "availableSlotsCount": 1037,
   "weekendHolidaySlots": 1064,
-  "weekendHolidayAvailable": 7,
+  "weekendHolidayAvailable": 11,
   "data": [
     {
       "groundName": "さくら草公園",
@@ -20136,10 +20136,10 @@
       "holidayName": "勤労感謝の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
-      "available": false
+      "status": "available",
+      "statusText": "空き",
+      "symbol": "○",
+      "available": true
     },
     {
       "groundName": "荒川総合運動公園",
@@ -20152,10 +20152,10 @@
       "holidayName": "勤労感謝の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
-      "available": false
+      "status": "available",
+      "statusText": "空き",
+      "symbol": "○",
+      "available": true
     },
     {
       "groundName": "荒川総合運動公園",
@@ -20168,10 +20168,10 @@
       "holidayName": "勤労感謝の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
-      "available": false
+      "status": "available",
+      "statusText": "空き",
+      "symbol": "○",
+      "available": true
     },
     {
       "groundName": "荒川総合運動公園",
@@ -20184,10 +20184,10 @@
       "holidayName": "勤労感謝の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
-      "available": false
+      "status": "available",
+      "statusText": "空き",
+      "symbol": "○",
+      "available": true
     },
     {
       "groundName": "荒川総合運動公園",
