@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-23 22:41:14 JST",
+  "updatedAt": "2026-11-24 06:11:15 JST",
   "facilityCategory": "さいたま市公共施設予約システム（少年野球場・ソフトボール場）",
   "targetUrl": "https://saitama.rsv.ws-scs.jp/web/rsvWTransInstSrchBuildAction.do",
   "targetGrounds": [
@@ -57,9 +57,9 @@
     }
   ],
   "totalSlots": 3416,
-  "availableSlotsCount": 1036,
+  "availableSlotsCount": 1029,
   "weekendHolidaySlots": 1064,
-  "weekendHolidayAvailable": 11,
+  "weekendHolidayAvailable": 4,
   "data": [
     {
       "groundName": "さくら草公園",
@@ -19784,9 +19784,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -19800,10 +19800,10 @@
       "holidayName": "勤労感謝の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "三橋総合公園",
@@ -19816,9 +19816,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -19832,9 +19832,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -19848,9 +19848,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -19864,9 +19864,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -19880,9 +19880,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -19896,9 +19896,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -19912,9 +19912,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -19928,9 +19928,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -19944,9 +19944,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -19960,9 +19960,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -19976,9 +19976,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -19992,9 +19992,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20008,9 +20008,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20024,9 +20024,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20040,9 +20040,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20056,9 +20056,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20072,9 +20072,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20088,9 +20088,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20104,9 +20104,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20120,9 +20120,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20136,9 +20136,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20152,9 +20152,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20168,10 +20168,10 @@
       "holidayName": "勤労感謝の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -20184,9 +20184,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20200,9 +20200,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20216,9 +20216,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20232,9 +20232,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20248,9 +20248,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20264,9 +20264,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20280,9 +20280,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20296,9 +20296,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20312,9 +20312,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20328,10 +20328,10 @@
       "holidayName": "勤労感謝の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -20344,10 +20344,10 @@
       "holidayName": "勤労感謝の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -20360,10 +20360,10 @@
       "holidayName": "勤労感謝の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -20376,9 +20376,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20392,9 +20392,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20408,9 +20408,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20424,9 +20424,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20440,9 +20440,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20456,9 +20456,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20472,9 +20472,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20488,10 +20488,10 @@
       "holidayName": "勤労感謝の日",
       "startTime": "07:00:00",
       "endTime": "09:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "西堀高沼公園",
@@ -20504,9 +20504,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "09:00:00",
       "endTime": "12:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20520,9 +20520,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "12:00:00",
       "endTime": "15:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20536,9 +20536,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "15:00:00",
       "endTime": "18:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20552,9 +20552,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20568,9 +20568,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20584,10 +20584,10 @@
       "holidayName": "勤労感謝の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "西遊馬公園",
@@ -20600,9 +20600,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20616,9 +20616,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20632,9 +20632,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20648,9 +20648,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -20664,9 +20664,9 @@
       "holidayName": "勤労感謝の日",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
