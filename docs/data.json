@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-11-24 14:11:16 JST",
+  "updatedAt": "2026-11-24 14:40:46 JST",
   "facilityName": "秋ヶ瀬公園",
   "purposes": [
     "軟式野球",
     "ソフトボール"
   ],
   "totalSlots": 1440,
-  "availableSlotsCount": 419,
+  "availableSlotsCount": 350,
   "data": [
     {
       "subFacilityId": 303,
@@ -2537,10 +2537,10 @@
       "date": "2026-12-01",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -2552,10 +2552,10 @@
       "date": "2026-12-01",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -2567,10 +2567,10 @@
       "date": "2026-12-01",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -2582,10 +2582,10 @@
       "date": "2026-12-01",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -3257,10 +3257,10 @@
       "date": "2026-12-03",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -3272,10 +3272,10 @@
       "date": "2026-12-03",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -3287,10 +3287,10 @@
       "date": "2026-12-03",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -3302,10 +3302,10 @@
       "date": "2026-12-03",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -3617,10 +3617,10 @@
       "date": "2026-12-04",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -3632,10 +3632,10 @@
       "date": "2026-12-04",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -3647,10 +3647,10 @@
       "date": "2026-12-04",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -3662,10 +3662,10 @@
       "date": "2026-12-04",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -3992,10 +3992,10 @@
       "date": "2026-12-05",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 3
     },
     {
@@ -4007,10 +4007,10 @@
       "date": "2026-12-05",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "8",
+      "statusText": "予約済",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 2
     },
     {
@@ -4022,10 +4022,10 @@
       "date": "2026-12-05",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 1
     },
     {
@@ -4697,10 +4697,10 @@
       "date": "2026-12-07",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -4712,10 +4712,10 @@
       "date": "2026-12-07",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -4877,10 +4877,10 @@
       "date": "2026-12-07",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -4892,10 +4892,10 @@
       "date": "2026-12-07",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -5057,10 +5057,10 @@
       "date": "2026-12-08",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -5072,10 +5072,10 @@
       "date": "2026-12-08",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -5087,10 +5087,10 @@
       "date": "2026-12-08",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -5102,10 +5102,10 @@
       "date": "2026-12-08",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -5417,10 +5417,10 @@
       "date": "2026-12-09",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -5432,10 +5432,10 @@
       "date": "2026-12-09",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -5447,10 +5447,10 @@
       "date": "2026-12-09",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -5462,10 +5462,10 @@
       "date": "2026-12-09",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -5777,10 +5777,10 @@
       "date": "2026-12-10",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -5792,10 +5792,10 @@
       "date": "2026-12-10",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -5807,10 +5807,10 @@
       "date": "2026-12-10",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -5822,10 +5822,10 @@
       "date": "2026-12-10",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -6137,10 +6137,10 @@
       "date": "2026-12-11",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -6152,10 +6152,10 @@
       "date": "2026-12-11",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -6167,10 +6167,10 @@
       "date": "2026-12-11",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -6182,10 +6182,10 @@
       "date": "2026-12-11",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -6542,10 +6542,10 @@
       "date": "2026-12-12",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -7217,10 +7217,10 @@
       "date": "2026-12-14",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -7232,10 +7232,10 @@
       "date": "2026-12-14",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -7247,10 +7247,10 @@
       "date": "2026-12-14",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -7262,10 +7262,10 @@
       "date": "2026-12-14",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -7577,10 +7577,10 @@
       "date": "2026-12-15",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -7592,10 +7592,10 @@
       "date": "2026-12-15",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -7607,10 +7607,10 @@
       "date": "2026-12-15",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -7622,10 +7622,10 @@
       "date": "2026-12-15",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -7937,10 +7937,10 @@
       "date": "2026-12-16",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -7952,10 +7952,10 @@
       "date": "2026-12-16",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -7967,10 +7967,10 @@
       "date": "2026-12-16",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -7982,10 +7982,10 @@
       "date": "2026-12-16",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -8297,10 +8297,10 @@
       "date": "2026-12-17",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -8312,10 +8312,10 @@
       "date": "2026-12-17",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -8327,10 +8327,10 @@
       "date": "2026-12-17",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -8342,10 +8342,10 @@
       "date": "2026-12-17",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -8657,10 +8657,10 @@
       "date": "2026-12-18",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -8672,10 +8672,10 @@
       "date": "2026-12-18",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -8687,10 +8687,10 @@
       "date": "2026-12-18",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -8702,10 +8702,10 @@
       "date": "2026-12-18",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -9062,10 +9062,10 @@
       "date": "2026-12-19",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -9737,10 +9737,10 @@
       "date": "2026-12-21",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -9752,10 +9752,10 @@
       "date": "2026-12-21",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -9767,10 +9767,10 @@
       "date": "2026-12-21",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -9782,10 +9782,10 @@
       "date": "2026-12-21",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -10097,10 +10097,10 @@
       "date": "2026-12-22",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -10112,10 +10112,10 @@
       "date": "2026-12-22",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -10127,10 +10127,10 @@
       "date": "2026-12-22",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -10142,10 +10142,10 @@
       "date": "2026-12-22",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -10457,10 +10457,10 @@
       "date": "2026-12-23",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -10472,10 +10472,10 @@
       "date": "2026-12-23",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -10487,10 +10487,10 @@
       "date": "2026-12-23",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
@@ -10502,10 +10502,10 @@
       "date": "2026-12-23",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "6",
+      "statusText": "点検・不可",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
