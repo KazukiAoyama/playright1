@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-11-24 18:10:50 JST",
+  "updatedAt": "2026-11-24 18:41:03 JST",
   "facilityName": "秋ヶ瀬公園",
   "purposes": [
     "軟式野球",
     "ソフトボール"
   ],
   "totalSlots": 1440,
-  "availableSlotsCount": 326,
+  "availableSlotsCount": 325,
   "data": [
     {
       "subFacilityId": 303,
@@ -11417,10 +11417,10 @@
       "date": "2026-12-25",
       "startTime": "08:30:00",
       "endTime": "12:30:00",
-      "status": "1",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true,
+      "status": "8",
+      "statusText": "予約済",
+      "symbol": "×",
+      "available": false,
       "lotteryAppNum": 0
     },
     {
