@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-25 22:41:28 JST",
+  "updatedAt": "2026-11-26 06:10:44 JST",
   "facilityCategory": "さいたま市公共施設予約システム（少年野球場・ソフトボール場）",
   "targetUrl": "https://saitama.rsv.ws-scs.jp/web/rsvWTransInstSrchBuildAction.do",
   "targetGrounds": [
@@ -57,7 +57,7 @@
     }
   ],
   "totalSlots": 3416,
-  "availableSlotsCount": 989,
+  "availableSlotsCount": 951,
   "weekendHolidaySlots": 1064,
   "weekendHolidayAvailable": 3,
   "data": [
@@ -21576,10 +21576,10 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "さくら草公園",
@@ -21592,10 +21592,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "三橋総合公園",
@@ -21640,10 +21640,10 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "八王子公園",
@@ -21656,10 +21656,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "大間木公園",
@@ -21672,9 +21672,9 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -21688,9 +21688,9 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -21704,9 +21704,9 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -21720,9 +21720,9 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -21736,9 +21736,9 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -21752,9 +21752,9 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -21768,9 +21768,9 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -21784,9 +21784,9 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -21800,10 +21800,10 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "宝来運動公園",
@@ -21816,10 +21816,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "宝来運動公園",
@@ -21832,10 +21832,10 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "宝来運動公園",
@@ -21848,10 +21848,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "浦和総合運動場",
@@ -21864,9 +21864,9 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -21880,10 +21880,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "浦和総合運動場",
@@ -21896,10 +21896,10 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "浦和総合運動場",
@@ -21912,9 +21912,9 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -21928,10 +21928,10 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -21944,10 +21944,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -21960,10 +21960,10 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -21976,10 +21976,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -21992,10 +21992,10 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -22008,10 +22008,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -22024,10 +22024,10 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -22040,10 +22040,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -22056,10 +22056,10 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -22072,10 +22072,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -22088,10 +22088,10 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -22104,10 +22104,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -22120,10 +22120,10 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -22136,10 +22136,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -22152,10 +22152,10 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -22168,10 +22168,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -22184,10 +22184,10 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -22200,10 +22200,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -22216,10 +22216,10 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "荒川総合運動公園",
@@ -22232,9 +22232,9 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -22248,9 +22248,9 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -22264,10 +22264,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "西堀高沼公園",
@@ -22280,10 +22280,10 @@
       "holidayName": "",
       "startTime": "07:00:00",
       "endTime": "09:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "西堀高沼公園",
@@ -22296,9 +22296,9 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "12:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -22312,10 +22312,10 @@
       "holidayName": "",
       "startTime": "12:00:00",
       "endTime": "15:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "西堀高沼公園",
@@ -22328,10 +22328,10 @@
       "holidayName": "",
       "startTime": "15:00:00",
       "endTime": "18:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "西遊馬公園",
@@ -22344,10 +22344,10 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "西遊馬公園",
@@ -22360,10 +22360,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "西遊馬公園",
@@ -22376,10 +22376,10 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "西遊馬公園",
@@ -22392,10 +22392,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "見沼臨時グラウンド",
@@ -22408,9 +22408,9 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -22424,9 +22424,9 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -22440,9 +22440,9 @@
       "holidayName": "",
       "startTime": "09:00:00",
       "endTime": "13:00:00",
-      "status": "full",
-      "statusText": "予約あり",
-      "symbol": "×",
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
       "available": false
     },
     {
@@ -22456,10 +22456,10 @@
       "holidayName": "",
       "startTime": "13:00:00",
       "endTime": "17:00:00",
-      "status": "available",
-      "statusText": "空き",
-      "symbol": "○",
-      "available": true
+      "status": "unavailable",
+      "statusText": "期間外",
+      "symbol": "-",
+      "available": false
     },
     {
       "groundName": "さくら草公園",
